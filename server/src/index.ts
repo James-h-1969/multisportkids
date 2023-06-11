@@ -7,7 +7,10 @@ const PORT = 5000;
 
 const app = express();
 
+app.use(express.json());
+
 app.post("/customer", async (req: Request, res: Response) => {
+    console.log(req.body);
     const newCustomer = new CustomerModel({
         firstName: "James",
         lastName: "Hocking",
@@ -28,4 +31,3 @@ mongoose.connect(
 
 
 
-// Password:RXvQzmuOv01yURjt
