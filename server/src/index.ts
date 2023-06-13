@@ -1,4 +1,5 @@
 import { config } from "dotenv";
+import cors from "cors";
 config();
 
 import express, { Request, Response } from "express";
@@ -11,14 +12,18 @@ const PORT = 5000;
 
 const app = express();
 
+app.use(cors({
+    origin: "*" //this will be the site name so that only it can access the API
+}));
 app.use(express.json());
+
 
 app.post("/customer", async (req: Request, res: Response) => {
     const newCustomer = new CustomerModel({
-        firstName: "James",
-        lastName: "Hocking",
-        email: "jameshocking@gmail.com",
-        password: "Maximoo542"
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        emailAddress: req.body.emailAddress,
+        password: req.body.password
     });
     const createdCustomer = await newCustomer.save();
     res.json(createdCustomer);
