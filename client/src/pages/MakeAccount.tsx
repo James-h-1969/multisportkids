@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./MakeAccount.css";
+import bcrypt from "bcryptjs";
 
 
 
@@ -16,13 +17,14 @@ function MakeAccount() {
 
     async function handleSubmitLogin(e: React.FormEvent){
         e.preventDefault();
+        const hashedPassword = bcrypt.hashSync(passwordInput, bcrypt.genSaltSync());
         await fetch("http://localhost:5000/customer", {
             method: "POST",
             body: JSON.stringify({
                 firstName: firstNameInput,
                 lastName: lastNameInput,
                 emailAddress: emailInput,
-                password: passwordInput
+                password: hashedPassword
             }),
             headers: {
                 "Content-Type": "application/json"
