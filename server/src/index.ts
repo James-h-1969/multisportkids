@@ -6,7 +6,7 @@ import express, { Request, Response } from "express";
 
 import mongoose from "mongoose";
 
-import CustomerModel from "./models/Customer";
+import CustomerModel from "../Models/Customer";
 
 const PORT = 5000;
 
@@ -19,14 +19,18 @@ app.use(express.json());
 
 
 app.post("/customer", async (req: Request, res: Response) => {
-    const newCustomer = new CustomerModel({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        emailAddress: req.body.emailAddress,
-        password: req.body.password
-    });
-    const createdCustomer = await newCustomer.save();
-    res.json(createdCustomer);
+    const existingUser = await CustomerModel.findOne({ req.body.emailAddress });
+    if (!existingUser){
+        const newCustomer = new CustomerModel({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            emailAddress: req.body.emailAddress,
+            password: req.body.password
+        });
+        const createdCustomer = await newCustomer.save();
+        res.json(createdCustomer);
+    }
+
 
 });
 

@@ -87,12 +87,15 @@ function MakeAccount() {
 
     function CheckBothValid(input: String){
         let other = false;
+        let size = 0;
         if (input == "email"){
             other = validPassword;
+            size = passwordInput.length;
         } else {
             other = validEmail;
+            size = emailInput.length;
         }
-        if (other == true){
+        if (other == true && size != 0){
             setOverallValid(true);
         } else {
             setOverallValid(false);
@@ -109,9 +112,16 @@ function MakeAccount() {
             setPasswordMesg("");
             setOverallValid(false);
         }
+
+        if (firstNameInput.length > 0 && lastNameInput.length > 0 && validEmail && validPassword && emailInput.length > 0 && passwordInput.length > 0){
+            setOverallValid(true);
+        } else {
+            setOverallValid(false);
+        }
+        
     
 
-      }, [emailInput]);
+      }, [emailInput, passwordInput, firstNameInput, lastNameInput]);
     
     return (
         <>
