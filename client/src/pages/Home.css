@@ -1,0 +1,27 @@
+.heading{
+    margin-top: 20px;
+    margin-left: 60px;
+}
+
+.home-heading{
+    font-size: 80px;
+}
+
+.home-heading .blue{
+    color: rgb(70, 118, 142);
+}
+
+.description {
+    margin-left: 60px;
+    margin-top: 30px;
+}
+
+.description-text {
+    font-size: 30px;
+}
+
+.home-desc-button{
+    margin-left: 60px;
+    margin-top: 40px;
+}
+

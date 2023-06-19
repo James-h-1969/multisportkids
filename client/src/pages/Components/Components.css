@@ -1,0 +1,68 @@
+/* HEADER STYLING */
+.heading{
+    padding-top: 120px;
+}
+
+.heading-text{
+    font-size: 90px;
+    text-align: right;
+}
+
+.heading-description{
+    font-size: 20px;
+}
+
+.description{
+    margin-right: 40%; 
+}
+
+/*  NAVBAR */
+.navbar-custom {
+    height: 100px; /* Adjust the height as needed */
+    font-size: 18px; 
+}
+
+.nav-link {
+    margin-right: 1rem; /* Adjust the margin value as needed */
+}
+
+/*   UPCOMING CAMPS   */
+
+.upcoming-box{
+    background-color: rgb(222, 222, 231);
+    width: 80%;
+    margin-left: 10%;
+    height: 75%;
+    position: relative;
+    top: 100px;
+    border-radius: 50px;
+}
+
+.camp-background-box{
+    margin-top: 80px;
+    height: 800px;
+    background-image: url(../assets/banner.jpg);
+    background-size: cover;
+}
+
+.camp-title{
+    top: 40px;
+    position: relative;
+    margin-left: 60%;
+}
+
+.camp-titles{
+    font-size: 24px;
+    position: relative;
+    top: 70px;
+    margin-left: 10%;
+}
+
+.camp-date{
+    margin-left: 10%;
+}
+
+.camp-week{
+    margin-left: 30%;
+}
+  
