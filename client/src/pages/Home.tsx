@@ -13,7 +13,7 @@ function Home(){
                 <a><span className="description-text">AFL Holiday Camps, classes, and personal coaching</span></a>
             </div>
             <div className="home-desc-button">
-                <LinkButton to="/private" color="#46768E" />
+                <LinkButton to="/private" color="#46768E" textcolor="white" text="Book now" />
             </div>
         </>
     )

@@ -16,6 +16,9 @@
     margin-right: 40%; 
 }
 
+
+
+
 /*  NAVBAR */
 .navbar-custom {
     height: 100px; /* Adjust the height as needed */
@@ -25,6 +28,11 @@
 .nav-link {
     margin-right: 1rem; /* Adjust the margin value as needed */
 }
+
+
+
+
+
 
 /*   UPCOMING CAMPS   */
 
@@ -43,6 +51,7 @@
     height: 800px;
     background-image: url(../assets/banner.jpg);
     background-size: cover;
+    width: 100%;
 }
 
 .camp-title{
@@ -65,4 +74,149 @@
 .camp-week{
     margin-left: 30%;
 }
+
+.campbox-box{
+    background-color: rgb(70, 118, 142);
+    width: 90%;
+    position: relative;
+    margin-left: 5%;
+    height: 90px;
+    margin-top: 20px;
+    top: 80px;
+    border-radius: 20px;
+}
   
+.campbox-values{
+    font-size: 30px;
+    color: aliceblue;
+    padding-top: 20px;
+    padding-left: 60px;
+}
+
+.campbox-week{
+    position: absolute;
+    left: 45%;
+}
+
+.campbox-date{
+    position: absolute;
+    left: 60%;
+}
+
+.campbox-button{
+    position: absolute;
+    left: 85%;
+    margin-top: -45px;
+}
+
+.camp-location{
+    margin-top: 50px;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+.camp-loc-heading{
+    font-size: 60px;
+}
+
+.camp-loc-desc{
+    font-size: 30px;
+}
+
+.location-box{
+    margin-top: 40px;
+    background-color: rgb(222, 222, 231);
+    color: rgb(70, 118, 142);
+    position: relative;
+    width: 70%;
+    left: 15%;
+    height: 100px;
+    padding-top: 25px;
+    border-radius: 20px;
+}
+
+.beach-button{
+    margin-left: 75%;
+    top: -50px;
+    position: relative;
+}
+
+.north-button{
+    margin-right: 75%;
+    top: -50px;
+    position: relative;
+}
+
+.beach-heading{
+    margin-right: 50%;
+    position: relative;
+}
+
+.north-heading{
+    margin-left: 65%;
+    position: relative;
+}
+
+
+/*    PRIVATE SESSIONS       */
+.private-location-box{
+    background-color: rgb(222, 222, 231);
+    padding: 40px;
+    margin-top: 60px;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 30px;
+}
+
+.location-button{
+    align-items: right;
+    position: relative;
+    margin-left: 80%;
+}
+
+.step1{
+    position: absolute;
+    color: rgb(70, 118, 142);
+}
+
+.private-timetable-box{
+    background-color: rgb(222, 222, 231);
+    padding: 40px;
+    margin-top: 60px;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 30px;
+    height: 500px;
+}
+
+
+
+/* Components.css */
+.private-timetable-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timetable-box {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Set the number of columns to 7 */
+  gap: 0px;
+}
+
+.row {
+    text-align: center;
+}
+
+.column{
+display: flex; 
+}
+
+.cell{
+    margin-left: 20px;
+    padding-top: 60px;
+    margin-bottom: 80px;
+    background-color: rgb(70, 118, 142);
+    position: relative;
+    width: 60px;
+}
