@@ -227,9 +227,28 @@
     background-color: rgb(222, 222, 231);
     flex: 1;
     text-align: center;
-    width: 40%;
-    margin-left: 7%;
+    width: 70%;
     margin-top: 80px;
-    height: 600px;
+    height: 800px;
     border-radius: 30px;
+    margin: 40px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.merch-text{
+    margin-top: 5%;
+}
+
+.merch-img{
+    margin-top: 50px;
+}
+
+.merch-price{
+    font-size: 50px;
+}
+
+.merch-size-title{
+    position: relative;
+    padding-right: 100px;
 }
