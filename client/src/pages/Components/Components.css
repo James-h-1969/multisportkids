@@ -209,7 +209,7 @@
 }
 
 .column{
-display: flex; 
+    display: flex; 
 }
 
 .cell{
@@ -219,4 +219,17 @@ display: flex;
     background-color: rgb(70, 118, 142);
     position: relative;
     width: 60px;
+}
+
+
+/*  MERCH  */
+.merch-item-box{
+    background-color: rgb(222, 222, 231);
+    flex: 1;
+    text-align: center;
+    width: 40%;
+    margin-left: 7%;
+    margin-top: 80px;
+    height: 600px;
+    border-radius: 30px;
 }
