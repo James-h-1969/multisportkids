@@ -229,7 +229,7 @@
     text-align: center;
     width: 70%;
     margin-top: 80px;
-    height: 800px;
+    height: 850px;
     border-radius: 30px;
     margin: 40px;
     margin-left: 60px;
@@ -252,3 +252,15 @@
     position: relative;
     padding-right: 100px;
 }
+
+.merch-quantity{
+    width: 400px;
+    padding-left: 150px;
+    display: flex;
+    padding-top: 15px;
+}
+
+.merch-add{
+    padding-top: 30px;
+}
+

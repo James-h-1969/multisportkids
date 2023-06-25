@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, DropdownButton, ButtonGroup, Dropdown } from "react-bootstrap";
+import { Button, DropdownButton, ButtonGroup, Dropdown, InputGroup, FormControl, Container } from "react-bootstrap";
 
 interface MerchItemProps{
     name: string,
@@ -10,12 +10,15 @@ interface MerchItemProps{
 
 const MerchItem: React.FC<MerchItemProps> = ({name, price, image}) => {
     const [selectedOption, setSelectedOption] = useState("Choose size");
+    const [value, setValue] = useState(0);
 
     function handleOptionSelect(eventkey: string | null){
         if (eventkey){
             setSelectedOption(eventkey);
         }
     }
+
+
     return(
         <div className="merch-item-box">
             <div className="merch-img">{image}</div>
@@ -37,9 +40,19 @@ const MerchItem: React.FC<MerchItemProps> = ({name, price, image}) => {
                     </DropdownButton>
                 </div>
                 <div className="merch-quantity">
-
+                    <a><span className="merch-size-title">Quantity</span></a>
+                    <InputGroup>
+                        <FormControl
+                            type="number"
+                            value={value}
+                            onChange={(e) => setValue(parseInt(e.target.value))}
+                            style={{}}
+                        />
+                    </InputGroup>
                 </div>
-                <Button style={{backgroundColor: "#46768E"}}>Add to cart</Button>
+                <div className="merch-add">
+                    <Button size="lg" style={{backgroundColor: "#46768E"}}>Add to cart</Button>
+                </div>
             </div>
         </div>
     )
