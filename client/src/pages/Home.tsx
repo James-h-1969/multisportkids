@@ -1,5 +1,7 @@
 import LinkButton from "./Components/LinkButton";
 import NavBar from "./Components/NavBar";
+import HomeDeals from "./Components/HomeComponents/HomeDeals";
+import HomeLocation from "./Components/HomeComponents/HomeLocation";
 import "./Home.css";
 
 function Home(){
@@ -15,6 +17,13 @@ function Home(){
             <div className="home-desc-button">
                 <LinkButton to="/private" color="#46768E" textcolor="white" text="Book now" />
             </div>
+            <div className="home-deals">
+                <HomeDeals />
+            </div>
+            <div className="home-location">
+                <HomeLocation />
+            </div>
+            
         </>
     )
 }

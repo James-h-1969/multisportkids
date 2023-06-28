@@ -111,7 +111,6 @@
 
 .camp-location{
     margin-top: 50px;
-    margin-bottom: 100px;
     text-align: center;
 }
 
@@ -264,3 +263,112 @@
     padding-top: 30px;
 }
 
+/*    MAIN PAGE   */
+.individual-page-box{
+    background-color: rgb(222, 222, 231);
+    margin-top: 50px;
+    width: 80%;
+    left: 10%;
+    position: relative;
+    height: 500px;
+    border-radius: 60px;
+}
+
+.page-box{
+    padding-top: 30px;
+    margin-top: 100px;
+    padding-bottom: 100px;
+}
+
+.holiday-box-heading{
+    position: relative;
+    margin-left: 70px;
+    top: 70px;
+    font-size: 60px;
+    color: rgb(70, 118, 142);
+}
+
+.private-box-heading{
+    position: relative;
+    margin-left: 50%;
+    top: 50px;
+    font-size: 60px;
+    color: rgb(70, 118, 142);
+}
+
+.dev-box-heading{
+    position: relative;
+    margin-left: 70px;
+    top: 50px;
+    font-size: 60px;
+    color: rgb(70, 118, 142);
+}
+
+.holiday-box-box{
+    width: 30%;
+    padding-top: 110px;
+    margin-left: 100px;
+    text-align: center;
+}
+
+.holiday-button{
+    padding-top: 60px;
+}
+
+.private-box-box{
+    width: 30%;
+    padding-top: 110px;
+    margin-left: 56%;
+    text-align: center;
+}
+
+.homelocation-box{
+    height: 700px;
+    margin-top: 60px;
+    margin-left: 200px;
+}
+
+.location-heading{
+    font-size: 60px;
+    padding-top: 50px;
+}
+
+.spec-location-box{
+    background-color: rgb(70, 118, 142);
+    width: 95%;
+    margin-top: 50px;
+    height: 400px;
+    border-radius: 30px;
+    margin-left: -70px;
+    padding: 30px;
+    padding-left: 70px;
+}   
+
+.location-options{
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+
+}
+
+.home-location-heading{
+    font-size: 50px;
+    color: white;
+}
+
+.button-loc{
+    position: relative;
+    margin-top: 20px;
+}
+
+.loc-address{
+    color: white;
+    margin-left: 70%;
+    top: 20px;
+    font-size: 2.5vh;
+}
+
+.loc-image{
+    padding-left: 70%;
+    margin-top: -310px;
+}
