@@ -5,6 +5,7 @@ import MerchItem from "./Components/MerchItem";
 import "./Merch.css";
 import hoodie from "./assets/AFLkids hoodie.jpg";
 import shirt from "./assets/AFLkids playing shirt.jpg";
+import Footer from "./Components/Footer";
 
 function Merch(){
     return (
@@ -15,6 +16,7 @@ function Merch(){
                 <MerchItem name="Hoodie" price="$35" image={<img src={hoodie}/>}/>
                 <MerchItem name="Training Shirt" price="$25" image={<img src={shirt}/>}/>
             </div>
+            <Footer />
         </>
     )
 }

@@ -12,7 +12,8 @@ interface MyLinkButtonProps {
 const LinkButton: React.FC<MyLinkButtonProps> = ({ to, color, textcolor, text}) => {
   const buttonStyle = {
     backgroundColor: color,
-    color: textcolor
+    color: textcolor,
+    border: "none",
   };
 
   return (

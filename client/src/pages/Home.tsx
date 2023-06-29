@@ -2,6 +2,7 @@ import LinkButton from "./Components/LinkButton";
 import NavBar from "./Components/NavBar";
 import HomeDeals from "./Components/HomeComponents/HomeDeals";
 import HomeLocation from "./Components/HomeComponents/HomeLocation";
+import Footer from "./Components/Footer";
 import "./Home.css";
 
 function Home(){
@@ -23,7 +24,7 @@ function Home(){
             <div className="home-location">
                 <HomeLocation />
             </div>
-            
+            <div><Footer /></div>
         </>
     )
 }

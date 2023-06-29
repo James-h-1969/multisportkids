@@ -1,6 +1,14 @@
+@font-face {
+    font-family: 'Rubik';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../fonts/Rubik-Regular.ttf') format('truetype'),
+} 
+
 .heading{
     margin-top: 20px;
     margin-left: 60px;
+    font-family: "Rubik";
 }
 
 .home-heading{
@@ -14,6 +22,7 @@
 .description {
     margin-left: 60px;
     margin-top: 30px;
+    font-family: "Rubik";
 }
 
 .description-text {
@@ -23,6 +32,7 @@
 .home-desc-button{
     margin-left: 60px;
     margin-top: 40px;
+    font-family: "Rubik";
 }
 
 .home-deals{

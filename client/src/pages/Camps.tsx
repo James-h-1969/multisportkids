@@ -4,6 +4,7 @@ import Header from "./Components/Header";
 import banner from "./assets/banner.jpg";
 import UpComingCamps from "./Components/CampComponents/UpcomingCamps";
 import CampLocation from "./Components/CampComponents/CampLocations";
+import Footer from "./Components/Footer";
 import "./Camps.css";
 
 function Camps(){
@@ -14,7 +15,7 @@ function Camps(){
             <Header title="Holiday Camps" description={text}/>
             <UpComingCamps />
             <CampLocation />
-            
+            <Footer />
         </>
     )
 }

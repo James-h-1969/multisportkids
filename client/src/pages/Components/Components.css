@@ -1,3 +1,26 @@
+/*****   FONTS  *********/
+@font-face {
+    font-family: 'Rubik';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../fonts/Rubik-Regular.ttf') format('truetype'),
+} 
+
+@font-face {
+    font-family: 'Rubik';
+    font-weight: bold;
+    font-style: normal;
+    src: url('../fonts/Rubik-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-weight: 300;
+    font-style: normal;
+    src: url("../fonts/Rubik-Light.ttf") format('truetype'),
+  }
+
+
 /* HEADER STYLING */
 .heading{
     padding-top: 120px;
@@ -188,6 +211,16 @@
     height: 500px;
 }
 
+.private-session-type-box{
+    background-color: rgb(222, 222, 231);
+    height: 500px;
+    margin-top: 60px;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 30px;
+    padding: 40px;
+}
+
 
 
 /* Components.css */
@@ -323,7 +356,7 @@
 }
 
 .homelocation-box{
-    height: 700px;
+    height: 800px;
     margin-top: 60px;
     margin-left: 200px;
 }
@@ -372,3 +405,34 @@
     padding-left: 70%;
     margin-top: -310px;
 }
+
+/**    FOOTER  **/
+.footer {
+    background-color: rgb(222, 222, 231);
+    height: 600px;
+    margin-top: 100px;
+    text-align: center;
+    padding-top: 40px;
+    font-family: 'Rubik', sans-serif;
+  }
+  
+  .footer-headings {
+    padding-top: 30px;
+  }
+  
+  .club-logo {
+    padding: 10px;
+  }
+  
+  .clubs-logos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sponsors{
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  
