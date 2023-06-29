@@ -29,6 +29,7 @@
 .heading-text{
     font-size: 90px;
     text-align: right;
+    font-weight: bold;
 }
 
 .heading-description{
@@ -233,8 +234,8 @@
 
 .timetable-box {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* Set the number of columns to 7 */
-  gap: 0px;
+  grid-template-columns: repeat(7, 1fr); 
+  margin-top: 80px;
 }
 
 .row {
@@ -247,11 +248,26 @@
 
 .cell{
     margin-left: 20px;
-    padding-top: 60px;
-    margin-bottom: 80px;
+    height: 100px;
+    margin-bottom: 20px;
     background-color: rgb(70, 118, 142);
     position: relative;
     width: 60px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.cell-deactivate{
+    margin-left: 20px;
+    height: 100px;
+    margin-bottom: 20px;
+    background-color: rgb(124, 124, 126);
+    position: relative;
+    width: 60px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
 }
 
 .session-type-deactive{
@@ -296,6 +312,28 @@
 .private-add{
     text-align: center;
     margin-top: 60px;
+}
+
+.currently-chosen-box{
+    background-color: rgb(70, 118, 142);
+    position: absolute;
+    left: 55%;
+    margin-top: 300px;
+    height: 130px;
+    width: 35%;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.available-time-box{
+    background-color: rgb(124, 124, 126);
+    position: absolute;
+    left: 55%;
+    margin-top: 80px;
+    height: 190px;
+    width: 35%;
+    border-radius: 20px;
+    padding: 20px;
 }
 
 /*  MERCH  */
