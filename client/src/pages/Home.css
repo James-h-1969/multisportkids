@@ -9,10 +9,12 @@
     margin-top: 20px;
     margin-left: 60px;
     font-family: "Rubik";
+    font-weight: bold;
 }
 
 .home-heading{
     font-size: 80px;
+    font-weight: bold;
 }
 
 .home-heading .blue{
@@ -23,6 +25,7 @@
     margin-left: 60px;
     margin-top: 30px;
     font-family: "Rubik";
+    font-weight: bold;
 }
 
 .description-text {
@@ -33,6 +36,7 @@
     margin-left: 60px;
     margin-top: 40px;
     font-family: "Rubik";
+    font-weight: bold;
 }
 
 .home-deals{

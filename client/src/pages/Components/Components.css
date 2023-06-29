@@ -3,7 +3,7 @@
     font-family: 'Rubik';
     font-weight: normal;
     font-style: normal;
-    src: url('../fonts/Rubik-Regular.ttf') format('truetype'),
+    src: url('../fonts/Rubik-Regular.ttf') format('truetype');
 } 
 
 @font-face {
@@ -15,9 +15,9 @@
 
 @font-face {
     font-family: 'Rubik';
-    font-weight: 300;
+    font-weight: lighter;
     font-style: normal;
-    src: url("../fonts/Rubik-Light.ttf") format('truetype'),
+    src: url("../fonts/Rubik-LightItalic.ttf") format('truetype');
   }
 
 
@@ -199,6 +199,7 @@
 .step1{
     position: absolute;
     color: rgb(70, 118, 142);
+    font-weight: bold;
 }
 
 .private-timetable-box{
@@ -219,11 +220,11 @@
     margin-right: 5%;
     border-radius: 30px;
     padding: 40px;
+    display: flex;
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
 }
 
-
-
-/* Components.css */
 .private-timetable-box {
   display: flex;
   flex-direction: column;
@@ -253,6 +254,49 @@
     width: 60px;
 }
 
+.session-type-deactive{
+    background-color: rgb(124, 124, 126);
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    margin-top: 100px;
+    cursor: pointer;
+    margin-right: 10px;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.session-type-active{
+    background-color: rgb(70, 118, 142);
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    margin-top: 100px;
+    cursor: pointer;
+    margin-right: 10px;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.private-session-type{
+    font-weight: bold;
+    font-size: 60px;
+}
+
+.private-session-price{
+    font-size: 80px;
+}
+
+.kid-quantity{
+    width: 30%;
+    padding-top: 10px;
+    margin-left: 37%;
+}
+
+.private-add{
+    text-align: center;
+    margin-top: 60px;
+}
 
 /*  MERCH  */
 .merch-item-box{
@@ -418,6 +462,7 @@
   
   .footer-headings {
     padding-top: 30px;
+    font-weight: bold;
   }
   
   .club-logo {
