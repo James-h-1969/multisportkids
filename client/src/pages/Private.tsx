@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Row, Col} from "react-bootstrap";
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
 import PrivateLocation from "./Components/PrivateComponents/PrivateLocation";
@@ -14,12 +15,19 @@ function Private(){
         <>
             <NavBar />
             <Header title="Private Sessions" description={desc}/>
-            <PrivateLocation />
-            <PrivateTimetable />
-            <PrivateSessionType />
-            <div className="private-add">
-                    <Button size="lg" style={{backgroundColor: "#46768E"}}>Add to cart</Button>
+            
+            <div className="d-flex flex-direction-row align-items-center">     
+                <Row>
+                    <PrivateLocation />
+                </Row>
+                <Row>
+                    <PrivateLocation />
+                </Row>
+                {/* <PrivateTimetable />
+                <PrivateSessionType />  */}
             </div>
+            
+
             <Footer />
         </>
     )

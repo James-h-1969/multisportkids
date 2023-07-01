@@ -14,21 +14,22 @@ function PrivateLocation() {
   };
 
   return (
-    <div className='private-location-box'>
-      <h1><span className='step1'>Step 1: Choose Location</span></h1>
-      <div className="location-button">
-        <DropdownButton
-          as={ButtonGroup}
-          size="lg"
-          title={selectedOption}
-          onSelect={handleOptionSelect}
-          variant="secondary"
-        >
-          <Dropdown.Item eventKey="Northern Beaches">Northern Beaches</Dropdown.Item>
-          <Dropdown.Item eventKey="North Shore">North Shore</Dropdown.Item>
-        </DropdownButton>
-      </div>
-    </div>
+
+      <div className="private-location-box">
+        <h1><span className='step1'>Step 1: Choose Location</span></h1>
+        <div className="location-button">
+          <DropdownButton
+            as={ButtonGroup}
+            size="lg"
+            title={selectedOption}
+            onSelect={handleOptionSelect}
+            variant="secondary"
+          >
+            <Dropdown.Item eventKey="Northern Beaches">Northern Beaches</Dropdown.Item>
+            <Dropdown.Item eventKey="North Shore">North Shore</Dropdown.Item>
+          </DropdownButton>
+        </div>
+      </div>    
   );
 }
 

@@ -53,6 +53,10 @@
     margin-right: 1rem; /* Adjust the margin value as needed */
 }
 
+.cart-button{
+    color: red;
+}
+
 
 
 
@@ -184,17 +188,12 @@
 /*    PRIVATE SESSIONS       */
 .private-location-box{
     background-color: rgb(222, 222, 231);
-    padding: 40px;
-    margin-top: 60px;
-    margin-left: 5%;
-    margin-right: 5%;
-    border-radius: 30px;
+    border-radius: 50px;
 }
 
 .location-button{
     align-items: right;
     position: relative;
-    margin-left: 80%;
 }
 
 .step1{
@@ -205,10 +204,7 @@
 
 .private-timetable-box{
     background-color: rgb(222, 222, 231);
-    padding: 40px;
     margin-top: 60px;
-    margin-left: 5%;
-    margin-right: 5%;
     border-radius: 30px;
     height: 500px;
 }
@@ -217,13 +213,12 @@
     background-color: rgb(222, 222, 231);
     height: 500px;
     margin-top: 60px;
-    margin-left: 5%;
-    margin-right: 5%;
     border-radius: 30px;
     padding: 40px;
     display: flex;
     font-family: 'Rubik', sans-serif;
     font-weight: bold;
+    max-width: 100%;
 }
 
 .private-timetable-box {
@@ -393,6 +388,8 @@
     padding-top: 30px;
     margin-top: 100px;
     padding-bottom: 100px;
+    font-weight: bold;
+    font-family: "Rubik", sans-serif;
 }
 
 .holiday-box-heading{
@@ -401,6 +398,7 @@
     top: 70px;
     font-size: 60px;
     color: rgb(70, 118, 142);
+    font-weight: bold;
 }
 
 .private-box-heading{
@@ -409,6 +407,7 @@
     top: 50px;
     font-size: 60px;
     color: rgb(70, 118, 142);
+    font-weight: bold;
 }
 
 .dev-box-heading{
@@ -417,6 +416,7 @@
     top: 50px;
     font-size: 60px;
     color: rgb(70, 118, 142);
+    font-weight: bold;
 }
 
 .holiday-box-box{

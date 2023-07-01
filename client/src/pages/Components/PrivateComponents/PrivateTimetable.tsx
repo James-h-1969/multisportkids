@@ -5,7 +5,7 @@ function PrivateTimetable(){
     const [timetableState, settimetableState] = useState([-1,-1]);
 
     const dummyTimetable = {
-        week1:{
+        0:{
             Monday: {
                 date: "20/6/23", 
                 times: []
@@ -35,7 +35,7 @@ function PrivateTimetable(){
                 times: []
             },
         },
-        week2:{
+        1:{
             Monday: {
                 date: "27/6/23", 
                 times: []
@@ -65,7 +65,7 @@ function PrivateTimetable(){
                 times: []
             },
         },
-        week3:{
+        2:{
             Monday: {
                 date: "4/7/23", 
                 times: []
@@ -132,12 +132,10 @@ function PrivateTimetable(){
             </div>
           </div>
           <div className="available-time-box">
-                Date:
-                Time:
+                <h1><span className="available-times">Available times</span></h1>
           </div>
           <div className="currently-chosen-box">
-                Date:
-                Time:
+   
           </div>
         </div>
       );

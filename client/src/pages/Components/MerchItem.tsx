@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, DropdownButton, ButtonGroup, Dropdown, InputGroup, FormControl, Container } from "react-bootstrap";
+import { Button, DropdownButton, ButtonGroup, Dropdown, InputGroup, FormControl, Container, Card } from "react-bootstrap";
 
 interface MerchItemProps{
     name: string,
     price: string,
-    image: React.ReactElement;
+    image: string;
 }
 
 
@@ -18,20 +18,29 @@ const MerchItem: React.FC<MerchItemProps> = ({name, price, image}) => {
         }
     }
 
+    function updateAmount(change: number){
+        let newValue = value + change;
+        if (newValue >= 0){
+            setValue(newValue);
+        }
+    }   
 
     return(
-        <div className="merch-item-box">
-            <div className="merch-img">{image}</div>
-            <div className="merch-text">
-                <h1>{name}</h1>
-                <div className="merch-price">{price}</div>
+        <Card>
+            <Card.Img variant="top" src={image} style={{height:'400px', objectFit:"cover"}}/>
+            <Card.Body className="d-flex flex-column">
+                <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
+                    <span className="fs-2">{name}</span>
+                    <span className="ms-2 text-muted">{price}</span>
+                </Card.Title>
                 <div className="merch-size">
-                    <a><span className="merch-size-title">Size</span></a>
-                    <DropdownButton
+                     <a><span className="merch-size-title">Size</span></a>
+                     <DropdownButton
                         as={ButtonGroup}
                         title={selectedOption}
                         onSelect={handleOptionSelect}
                         variant="secondary"
+                        style={{width:"200px"}}
                         >
                         <Dropdown.Item eventKey="Small">Small</Dropdown.Item>
                         <Dropdown.Item eventKey="Medium">Medium</Dropdown.Item>
@@ -39,22 +48,17 @@ const MerchItem: React.FC<MerchItemProps> = ({name, price, image}) => {
                         <Dropdown.Item eventKey="Extra Large">Extra Large</Dropdown.Item>
                     </DropdownButton>
                 </div>
-                <div className="merch-quantity">
+                <div className="d-flex align-items-center justify-content-between mt-3 ms-3 pe-4" style={{gap:".5rem"}}>
                     <a><span className="merch-size-title">Quantity</span></a>
-                    <InputGroup>
-                        <FormControl
-                            type="number"
-                            value={value}
-                            onChange={(e) => setValue(parseInt(e.target.value))}
-                            style={{}}
-                        />
-                    </InputGroup>
+                    <Button onClick={() => updateAmount(-1)}>-</Button>
+                        <span className="fs-3">{value}</span>
+                    <Button onClick={() => updateAmount(1)}>+</Button>
                 </div>
-                <div className="merch-add">
-                    <Button size="lg" style={{backgroundColor: "#46768E"}}>Add to cart</Button>
-                </div>
-            </div>
-        </div>
+                <Button className="mt-3">
+                    Add to cart
+                </Button>
+            </Card.Body>
+        </Card>
     )
 }
 
