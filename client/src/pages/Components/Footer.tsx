@@ -1,12 +1,12 @@
 import "./Components.css";
 import LinkButton from "./LinkButton";
-import tigers from "../assets/Tigers.png";
-import stives from "../assets/stives.jpeg";
-import swans from "../assets/swans.png";
-import lions from "../assets/Lions.jpeg";
-import bombers from "../assets/bombers.jpeg";
-import ontop from "../assets/ontop.png";
-import code5 from "../assets/code5.png";
+import tigers from "/assets/Tigers.png";
+import stives from "/assets/stives.jpeg";
+import swans from "/assets/swans.png";
+import lions from "/assets/Lions.jpeg";
+import bombers from "/assets/bombers.jpeg";
+import ontop from "/assets/ontop.png";
+import code5 from "/assets/code5.png";
 
 
 

@@ -1,7 +1,7 @@
 import "../Components.css";
 import HomeSpecLocation from "./HomeSpecLocation";
-import weldon from "../../assets/weldon.png";
-import accron from "../../assets/accron.png";
+import weldon from "/assets/weldon.png";
+import accron from "/assets/accron.png";
 
 function HomeLocation(){
     return(

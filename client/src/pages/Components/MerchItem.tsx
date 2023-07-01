@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { Button, DropdownButton, ButtonGroup, Dropdown, InputGroup, FormControl, Container, Card } from "react-bootstrap";
+import { useCart } from "../context/cartContext";
+import objectHash from "object-hash";
 
 interface MerchItemProps{
     name: string,
     price: string,
-    image: string;
+    image: string,
+    id: number,
 }
 
 
-const MerchItem: React.FC<MerchItemProps> = ({name, price, image}) => {
+const MerchItem: React.FC<MerchItemProps> = ({name, price, image, id}) => {
     const [selectedOption, setSelectedOption] = useState("Choose size");
     const [value, setValue] = useState(0);
+    const { addToCart, removeFromCart } = useCart();
 
     function handleOptionSelect(eventkey: string | null){
         if (eventkey){
@@ -54,9 +58,13 @@ const MerchItem: React.FC<MerchItemProps> = ({name, price, image}) => {
                         <span className="fs-3">{value}</span>
                     <Button onClick={() => updateAmount(1)}>+</Button>
                 </div>
-                <Button className="mt-3">
-                    Add to cart
-                </Button>
+                {
+                    (value > 0 && selectedOption != "Choose size") ?
+                    <Button className="mt-3" onClick={() => addToCart(id, value)}>
+                        Add to cart
+                    </Button>:<></>
+                }
+
             </Card.Body>
         </Card>
     )

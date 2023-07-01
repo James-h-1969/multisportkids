@@ -1,0 +1,16 @@
+[
+    {
+        "id":1,
+        "name": "Hoodie",
+        "priceString": "$34.99",
+        "priceNum": 34.99,
+        "imgUrl": "/assets/AFLkids hoodie.jpg"
+    },
+    {
+        "id":2,
+        "name": "Training Shirt",
+        "priceString": "$24.99",
+        "priceNum": 24.99,
+        "imgUrl": "/assets/AFLkids playing shirt.jpg"
+    }
+]

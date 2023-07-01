@@ -1,8 +1,8 @@
 import React from "react";
 import LinkButton from "./../LinkButton";
-import campPhoto from "../../assets/camps.jpg";
-import privatePhoto from "../../assets/flag.jpg";
-import devPhoto from "../../assets/development.jpg";
+import campPhoto from "/assets/camps.jpg";
+import privatePhoto from "/assets/flag.jpg";
+import devPhoto from "/assets/development.jpg";
 
 
 
