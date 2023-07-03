@@ -186,28 +186,41 @@
 
 
 /*    PRIVATE SESSIONS       */
+
 .private-location-box{
     background-color: rgb(222, 222, 231);
-    border-radius: 50px;
+    border-radius: 15px;
 }
 
-.location-button{
-    align-items: right;
+
+.private-timetable-box {
+    background-color: rgb(222, 222, 231);
+    border-radius: 30px;
+}
+
+.timetable-box {
     position: relative;
 }
 
-.step1{
-    position: absolute;
-    color: rgb(70, 118, 142);
-    font-weight: bold;
+
+
+
+.cell{
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
 }
 
-.private-timetable-box{
-    background-color: rgb(222, 222, 231);
-    margin-top: 60px;
-    border-radius: 30px;
-    height: 500px;
+.current-day{
+    background-color: rgb(70, 118, 142);
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
+
+
 
 .private-session-type-box{
     background-color: rgb(222, 222, 231);
@@ -219,50 +232,6 @@
     font-family: 'Rubik', sans-serif;
     font-weight: bold;
     max-width: 100%;
-}
-
-.private-timetable-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.timetable-box {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr); 
-  margin-top: 80px;
-}
-
-.row {
-    text-align: center;
-}
-
-.column{
-    display: flex; 
-}
-
-.cell{
-    margin-left: 20px;
-    height: 100px;
-    margin-bottom: 20px;
-    background-color: rgb(70, 118, 142);
-    position: relative;
-    width: 60px;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.cell-deactivate{
-    margin-left: 20px;
-    height: 100px;
-    margin-bottom: 20px;
-    background-color: rgb(124, 124, 126);
-    position: relative;
-    width: 60px;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: center;
 }
 
 .session-type-deactive{

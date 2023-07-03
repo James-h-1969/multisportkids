@@ -9,28 +9,25 @@ import Footer from "./Components/Footer";
 import {Button} from "react-bootstrap"; 
 import "./Components/Components.css";
 
-function Private(){
-    const desc = "Get one of our best coaches for personalised assistance. Tailored help to get the most out of your AFL kid."
+function Private() {
+    const desc = "Get one of our best coaches for personalised assistance. Tailored help to get the most out of your AFL kid.";
+    
     return (
-        <>
-            <NavBar />
-            <Header title="Private Sessions" description={desc}/>
-            
-            <div className="d-flex flex-direction-row align-items-center">     
-                <Row>
-                    <PrivateLocation />
-                </Row>
-                <Row>
-                    <PrivateLocation />
-                </Row>
-                {/* <PrivateTimetable />
-                <PrivateSessionType />  */}
+      <>
+        <NavBar />
+        <Header title="Private Sessions" description={desc}/>
+        
+        <div>
+            <div className="pt-5">
+              <PrivateLocation />
             </div>
-            
-
-            <Footer />
-        </>
+            <PrivateTimetable /> 
+            {/* <PrivateSessionType />  */}
+        </div>
+        
+        <Footer />
+      </>
     )
-}
+  }
 
-export default Private;
+  export default Private;
