@@ -22,10 +22,9 @@ function Private() {
               <PrivateLocation />
             </div>
             <PrivateTimetable /> 
-            {/* <PrivateSessionType />  */}
+            <PrivateSessionType />
         </div>
         
-        <Footer />
       </>
     )
   }
