@@ -4,12 +4,19 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import '../Components.css';
 
-function PrivateLocation() {
+type PrivateLocationProps = {
+  showTimetable: () => void;
+  step1: (location:string) => void;
+}
+
+function PrivateLocation({showTimetable, step1}:PrivateLocationProps) {
   const [selectedOption, setSelectedOption] = useState('Choose location');
 
   const handleOptionSelect = (eventKey: string | null) => {
+    showTimetable();
     if (eventKey) {
       setSelectedOption(eventKey);
+      step1(eventKey);
     }
   };
 

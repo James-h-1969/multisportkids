@@ -27,9 +27,9 @@ export function getDates(isCurrent:boolean){
         dayOfWeek = firstOfMonth.getDay();  
     }
     for (let i =  1; i < 35 + 1 || i < dayOfWeek + 1 + daysOfMonth[currMonth]; i++){
-        let toAdd = "";
+        let toAdd = "invalid";
         if ((i-dayOfWeek) > daysOfMonth[currMonth] || i < dayOfWeek + 1){
-            toAdd = "";
+            toAdd = "invalid";
         } else {
             toAdd = (i-dayOfWeek).toString();
         }

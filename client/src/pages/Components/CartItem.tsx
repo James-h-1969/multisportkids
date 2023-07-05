@@ -28,7 +28,7 @@ export function CartItem({id, quantity}: CartItemProps){
                 </div>
             </div>
             <div>
-                ${item.priceNum * quantity}
+                ${(item.priceNum * quantity).toFixed(2)}
             </div>
             <Button variant="outline-danger" size="sm" onClick={() => removeFromCart(item.id)}>x</Button>
         </Stack>

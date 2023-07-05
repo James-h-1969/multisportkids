@@ -23,6 +23,7 @@ function NavBar() {
               <Nav.Link className="nav-link-custom" href="/private">Private Coaching</Nav.Link>
               <Nav.Link className="nav-link-custom" href="/development">Development Plans</Nav.Link>
               <Nav.Link className="nav-link-custom" href="/merch">Merch</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="/contact">Contact</Nav.Link>
             </Nav>
           </Navbar.Collapse>
           { (cartQuantity > 0) ? 

@@ -4,16 +4,23 @@ import "../Components.css";
 import { Button } from "react-bootstrap";
 import { ArrowRight, ArrowLeft } from "react-bootstrap-icons";
 
-function PrivateTimetable(){
+type PrivateTimetableProps = {
+    showTypes: (show:boolean) => void;
+    step2: (date:string, time:string) => void;
+}
+
+function PrivateTimetable({showTypes, step2}:PrivateTimetableProps){
     const [timetableState, settimetableState] = useState([-1,-1]);
     const [isCurrentMonth, setisCurrentMonth] = useState(true);
     const [timetableDates, setTimetableDates] = useState(getDates(isCurrentMonth));
     const [currentTimes, setCurrentTimes] = useState({});
+    const [selectedTime, setSelectedTime] = useState("");
  
     const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
     const timeAvailable = ["7:00am", "9:00am", "11:00am", "1:00pm", "3:00pm", "5:00pm"];
 
     const handleClick = (week:number, day:number) => {
+        showTypes(false);
         getTimes(day, week);
         let currentDate = parseInt(timetableDates[week][day][0]);
         if (currentDate <= getCurrentDayNum() && isCurrentMonth){
@@ -33,6 +40,8 @@ function PrivateTimetable(){
         let newDates = getDates(nextState);
         setTimetableDates(newDates);
         settimetableState([-1, -1]);
+        setSelectedTime("");
+        showTypes(false);
     }
 
     function getDate(){
@@ -66,6 +75,12 @@ function PrivateTimetable(){
         setCurrentTimes({});
     }
 
+    function handleTimeClick(time:string){
+        setSelectedTime(time);
+        showTypes(true);
+        step2(getDate(), time);
+    }
+
 
     return (
         <div className='private-timetable-box p-4 m-5 d-flex justify-content-between'>
@@ -90,7 +105,9 @@ function PrivateTimetable(){
                     {week.map((day, daynum) => (
                         <div className="d-flex m-4 text-center row" style={{ width: "30px", height: "30px" }} onClick={() => handleClick(weeknum, daynum)}>
                             <div className={day[1] === "currentDay" && isCurrentMonth ? "current-day rounded-circle" : "" || (daynum == timetableState[1] && weeknum == timetableState[0]) ? "activeDay rounded-circle": "" || parseInt(timetableDates[weeknum][daynum][0]) <= getCurrentDayNum() && isCurrentMonth ? "text-muted":"cell"}>
-                                <a> <span className="fs-6 d-flex align-items-center justify-content-center" style={{ height: "100%", width: "100%" }}>{day[0]}</span></a>
+                                <div className={day[0] === "invalid" ? "":"show-shadow rounded-circle"}>
+                                    <a> <span className="fs-6 d-flex align-items-center justify-content-center" style={{ height: "100%", width: "100%" }}>{day[0] === "invalid"? "":day[0]}</span></a>   
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -131,13 +148,15 @@ function PrivateTimetable(){
                             timeAvailable.map((time) => (
                                 <div className="mt-4 d-flex justify-content-between" style={{height:"30px"}}>
                                     <span>{time}</span>
-                                    <span>{currentTimes ? (currentTimes[time as keyof typeof currentTimes] ? <div className="p-2" style={{backgroundColor:"#EBEBEB", cursor:"pointer", borderRadius:"15px"}}>Select Time</div> : "") : ""}</span>
+                                    <span>{currentTimes ? (currentTimes[time as keyof typeof currentTimes] ? <div className="p-2" onClick={() => handleTimeClick(time)} style={{backgroundColor:"#EBEBEB", cursor:"pointer", borderRadius:"15px"}}>Select Time</div> : "") : ""}</span>
                                 </div>
                             ))
                         }
                     </div>
                 </div>}
-                
+                <div className="pt-4">
+                    {selectedTime ? <><span className="text-muted">Selected:</span> <span style={{fontSize:"27px", paddingLeft:"200px"}}>{selectedTime}{" "}{getDate()}</span></>:<></>}
+                </div>
           </div>
           
         </div>

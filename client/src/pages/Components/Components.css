@@ -207,6 +207,7 @@
     justify-content: center;
     text-align: center;
     cursor: pointer;
+    border-radius: 100%;
 }
 
 .current-day{
@@ -225,40 +226,41 @@
 }
 
 
-.private-session-type-box{
-    background-color: rgb(222, 222, 231);
-    height: 500px;
-    margin-top: 60px;
-    border-radius: 30px;
-    padding: 40px;
-    display: flex;
-    font-family: 'Rubik', sans-serif;
-    font-weight: bold;
-    max-width: 100%;
-}
+
 
 .session-type-deactive{
     background-color: rgb(124, 124, 126);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    padding-bottom: 70px;
 }
 
 .session-type-active{
     background-color: rgb(70, 118, 142);
-
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    padding-bottom: 70px;
 }
 
 .private-session-type{
-    font-weight: bold;
+    font-weight: lighter;
     font-size: 60px;
 }
 
 .private-session-price{
     font-size: 80px;
+    font-weight: bold;
 }
 
 .kid-quantity{
-    width: 30%;
-    padding-top: 10px;
-    margin-left: 37%;
+    position: absolute;
+    right: 170px;
+    width: 60px;
+    margin-top: 240px;
 }
 
 .private-add{
