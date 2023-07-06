@@ -21,10 +21,10 @@ function Home(){
             <div className="home-deals">
                 <HomeDeals />
             </div>
-            <div className="home-location">
+            {/* <div className="home-location">
                 <HomeLocation />
-            </div>
-            <div><Footer /></div>
+            </div> */}
+            {/* <div><Footer /></div> */}
         </>
     )
 }

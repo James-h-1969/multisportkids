@@ -14,6 +14,7 @@ const LinkButton: React.FC<MyLinkButtonProps> = ({ to, color, textcolor, text}) 
     backgroundColor: color,
     color: textcolor,
     border: "none",
+    fontWeight: "bold",
   };
 
   return (
