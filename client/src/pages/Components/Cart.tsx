@@ -10,6 +10,30 @@ type CartProps = {
 
 export function Cart({isOpen}:CartProps){
     const { closeCart, cartItems } = useCart();
+
+    async function handleCheckoutButton(){
+        closeCart();
+        fetch('http://localhost:3000/create-checkout-session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                items: [
+                    { id: 1, quantity: 3},
+                    { id: 2, quantity: 1}
+                ]
+            })
+        }).then(res => {
+            if (res.ok) return res.json()
+            return res.json().then(json => Promise.reject(json))
+        }) .then(({ url }) => {
+            window.location = url;
+        }).catch(e => {
+            console.error(e.error);
+        })
+    }
+
     return (
     <Offcanvas show={isOpen} placement="end" onHide={closeCart}>
         <Offcanvas.Header closeButton>
@@ -30,7 +54,7 @@ export function Cart({isOpen}:CartProps){
                     }, 0).toFixed(2)}
                 </div>
                 <Link to="/checkout">
-                    <Button variant="secondary" className="w-100" onClick={() => closeCart()}>
+                    <Button variant="secondary" className="w-100" onClick={() => handleCheckoutButton()}>
                         Checkout
                     </Button>
                 </Link>
