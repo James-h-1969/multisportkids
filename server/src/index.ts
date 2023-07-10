@@ -14,8 +14,16 @@ app.use(express.json());
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 const storeItems = new Map([
-    [1, { priceInCents: 2499, name:"AFLkids Training Shirt" }],
-    [2, { priceInCents: 3499, name: "AFLkids Hoodie"}]
+    [1, { priceInCents: 3499, name:"Hoodie" }],
+    [2, { priceInCents: 2499, name: "Training Shirt"}],
+    [3, { priceInCents: 8000, name: "1 on 1 Private"}],
+    [4, { priceInCents: 11000, name: "2 on 1 Private"}],
+    [5, { priceInCents: 14000, name: "3 on 1 Private"}],
+    [6, { priceInCents: 17000, name: "4 on 1 Private"}],
+    [7, { priceInCents: 20000, name: "5 on 1 Private"}],
+    [8, { priceInCents: 23000, name: "6 on 1 Private"}],
+    [9, { priceInCents: 26000, name: "7 on 1 Private"}],
+    [10, { priceInCents: 29000, name: "8 on 1 Private"}]
 ])
 
 interface Item {

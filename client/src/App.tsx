@@ -5,7 +5,6 @@ import { Route, Routes } from 'react-router-dom';
 import Private from './pages/Private';
 import Development from './pages/Development';
 import Merch from './pages/Merch';
-import Cart from './pages/Cart';
 import Contact from './pages/Contact';
 import { CartProvider } from "./pages/context/cartContext";
 import Checkout from './pages/Components/Checkout';
@@ -21,7 +20,6 @@ function App() {
             <Route path="/private" element={<Private />} />
             <Route path="/development" element={<Development />} />
             <Route path="/merch" element={<Merch />} />
-            <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/checkout" element={<Checkout />} />
           </Routes>

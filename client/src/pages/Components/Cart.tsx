@@ -2,10 +2,14 @@ import { Button, Offcanvas, Stack } from "react-bootstrap";
 import { useCart } from "../context/cartContext";
 import {CartItem} from "./CartItem";
 import storeItems from "../data/items.json"
-import { Link } from "react-router-dom";
 
 type CartProps = {
     isOpen: boolean;
+}
+
+interface CartItem {
+    id: number;
+    quantity: number;
 }
 
 export function Cart({isOpen}:CartProps){
@@ -13,16 +17,17 @@ export function Cart({isOpen}:CartProps){
 
     async function handleCheckoutButton(){
         closeCart();
+        
         fetch('http://localhost:3000/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                items: [
-                    { id: 1, quantity: 3},
-                    { id: 2, quantity: 1}
-                ]
+                items: cartItems.filter(item => item.quantity !== null).map(item => ({
+                  id: item.id,
+                  quantity: item.quantity
+                }))
             })
         }).then(res => {
             if (res.ok) return res.json()
@@ -53,11 +58,10 @@ export function Cart({isOpen}:CartProps){
                         return total + (item?.priceNum || 0)  * cartItem.quantity;
                     }, 0).toFixed(2)}
                 </div>
-                <Link to="/checkout">
-                    <Button variant="secondary" className="w-100" onClick={() => handleCheckoutButton()}>
-                        Checkout
-                    </Button>
-                </Link>
+                <Button variant="secondary" className="w-100" onClick={() => handleCheckoutButton()}>
+                    Checkout
+                </Button>
+
             </Stack>
         </Offcanvas.Body>
     </Offcanvas>
