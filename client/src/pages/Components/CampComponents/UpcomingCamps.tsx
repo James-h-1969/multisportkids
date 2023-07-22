@@ -1,25 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import Campbox from "./Campbox";
 
 function UpcomingCamps() {
-  const currentCamps = {
-    camp1: {
-      location: "Northern Beaches",
-      week: 1,
-      date: "17/1/23"
-    },
-    camp2: {
-      location: "North Shore",
-      week: 1,
-      date: "18/1/23"
-    },
-    camp3: {
-      location: "Northern Beaches",
-      week: 2,
-      date: "23/1/23"
-    },
-  };
+  const [camps, setCamps] = useState([]);
+  
+  useEffect(() => {
+    async function fetchCamps() {
+      const response = await fetch("http://localhost:3000/camps");
+      const newCamps = await response.json();
+      setCamps(newCamps);
+      console.log(newCamps);
+    }
+    fetchCamps();
+  }, [])
 
   return (
       <div className="camp-background-box">
@@ -39,8 +33,8 @@ function UpcomingCamps() {
             </a>
           </div>
           <div>
-            {Object.values(currentCamps).map((value, index) => (
-              <Campbox location={value.location} date={value.date} week={value.week} />
+            {camps.map((value, index) => (
+              <Campbox location={value.Location} />
             ))}
           </div>
         </div>

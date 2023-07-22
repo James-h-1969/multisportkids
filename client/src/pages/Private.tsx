@@ -8,6 +8,7 @@ import PrivateSessionType from "./Components/PrivateComponents/PrivateSessionTyp
 import AddSession from "./Components/PrivateComponents/AddSession";
 import Footer from "./Components/Footer";
 import {Button} from "react-bootstrap"; 
+import PrivatePlans from "./Components/PrivateComponents/PrivatePlans";
 import "./Components/Components.css";
 
 function Private() {
@@ -81,6 +82,7 @@ function Private() {
       <>
         <NavBar />
         <Header title="Private Sessions" description={desc}/>
+        <PrivatePlans />
         <PrivateLocation showTimetable={showTimetable} step1={step1}/>
         {stepStates[1] ? <PrivateTimetable showTypes={showType} step2={step2}/> :<></>}
         {stepStates[2] ? <PrivateSessionType showAdd={showAdd} step3={step3}/>:<></>}

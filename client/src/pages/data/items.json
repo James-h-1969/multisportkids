@@ -57,16 +57,18 @@
     }, 
     {
         "id":9,
-        "name": "7 on 1 Private",
-        "priceString": "$260.00",
-        "priceNum": 260.00,
-        "imgUrl": "/assets/camps.jpg"
-    },
+        "name": "1 on 1 Private Plan",
+        "priceString": "$375.00",
+        "priceNum": 375.00,
+        "imgUrl": "/assets/1on1.png"
+    }, 
     {
         "id":10,
-        "name": "8 on 1 Private",
-        "priceString": "$290.00",
-        "priceNum": 290.00,
+        "name": "Group Private Plan",
+        "priceString": "$1000.00",
+        "priceNum": 1000.00,
         "imgUrl": "/assets/camps.jpg"
-    } 
+    }
+
+
 ]

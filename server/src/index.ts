@@ -1,5 +1,7 @@
 import { config } from "dotenv";
 import cors from "cors";
+import mongoose from "mongoose";
+import Camp from "../Models/Camp"
 config();
 
 import express, { Request, Response } from "express";
@@ -11,6 +13,30 @@ app.use(cors({
 }));
 app.use(express.json());
 
+const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
+    app.listen(3000);
+});
+
+app.get("/camps", async (req: Request, res: Response) => {
+    //TODO: fetch all camps and send to user
+    const camps = await Camp.find();
+    res.json(camps);
+})
+
+app.post("/camps", async (req: Request, res: Response) => {
+    const newCamp = new Camp({
+        name: "Northern Beaches Holiday Camp",
+        ages: "Ages 9-13",
+        date: "26th and 27th of September",
+        times: "9am-1pm",
+        Price: 130.00,
+        Location: "Weldon Oval",
+    });
+    const createdCamp = await newCamp.save();
+    res.json(createdCamp);
+})
+
+
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 const storeItems = new Map([
@@ -21,9 +47,7 @@ const storeItems = new Map([
     [5, { priceInCents: 14000, name: "3 on 1 Private"}],
     [6, { priceInCents: 17000, name: "4 on 1 Private"}],
     [7, { priceInCents: 20000, name: "5 on 1 Private"}],
-    [8, { priceInCents: 23000, name: "6 on 1 Private"}],
-    [9, { priceInCents: 26000, name: "7 on 1 Private"}],
-    [10, { priceInCents: 29000, name: "8 on 1 Private"}]
+    [8, { priceInCents: 23000, name: "6 on 1 Private"}]
 ])
 
 interface Item {
@@ -50,7 +74,7 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
                 };
             }),
             success_url: `${process.env.SERVER_URL}/success`,
-            cancel_url: `${process.env.SERVER_URL}/cancel`,
+            cancel_url: `http://localhost:3000/`,
         });
         res.json({ url: session.url });
     } catch (e: any) {
@@ -58,7 +82,7 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
     }
 });
 
-app.listen(3000);
+
 
 
 

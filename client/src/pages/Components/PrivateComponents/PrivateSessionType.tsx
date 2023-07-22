@@ -36,7 +36,7 @@ function PrivateSessionType({showAdd, step3}:PrivateSessionTypeProps){
     }
 
     function updateDropDown(val:number){
-        if (val == 0 || val > 8){
+        if (val == 0 || val > 6){
             return;
         }
         setamountofKids(val);

@@ -15,7 +15,6 @@ function Camps(){
             <Header title="Holiday Camps" description={text}/>
             <UpComingCamps />
             <CampLocation />
-            <Footer />
         </>
     )
 }
