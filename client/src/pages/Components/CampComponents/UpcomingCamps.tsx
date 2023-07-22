@@ -2,8 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import Campbox from "./Campbox";
 
+type CampType = {
+  name: String,
+  ages: String,
+  date: String,
+  times: String,
+  Price: Number,
+  Location: String,
+}
+
 function UpcomingCamps() {
-  const [camps, setCamps] = useState([]);
+  const [camps, setCamps] = useState<CampType[]>([]);
   
   useEffect(() => {
     async function fetchCamps() {
@@ -16,27 +25,12 @@ function UpcomingCamps() {
   }, [])
 
   return (
-      <div className="camp-background-box">
-        <div className="upcoming-box">
-          <h1>
-            <span className="camp-title">Upcoming Camps</span>
-          </h1>
-          <div className="camp-titles">
-            <a>
-              <span className="camp-location">Location</span>
-            </a>
-            <a>
-              <span className="camp-week">Week</span>
-            </a>
-            <a>
-              <span className="camp-date">Date</span>
-            </a>
-          </div>
-          <div>
+      <div className="m-5 pb-5 pt-4" style={{backgroundColor:"rgb(222, 222, 231)", borderRadius:"20px"}}>
+        <div className="">
+            <span className="fs-1 ps-5" style={{fontFamily:"Rubik", fontWeight:"bold"}}>Upcoming Camps</span>
             {camps.map((value, index) => (
-              <Campbox location={value.Location} />
+              <Campbox Location={value.Location} name={value.name} ages={value.ages} date={value.date} times={value.times} Price={value.Price}/>
             ))}
-          </div>
         </div>
       </div>
   );
