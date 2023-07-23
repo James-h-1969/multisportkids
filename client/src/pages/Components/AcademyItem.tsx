@@ -66,7 +66,7 @@ export default function AcademyItem({name, time, start, Location, dates}:Academy
     }
 
     return(
-        <Card className="mb-5" style={{width: "500px"}}>
+        <Card className="mb-5 ms-5" style={{width: "500px"}}>
             <Card.Body className="d-flex flex-column">
                 <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
                     <span className="fs-2">{name}</span>

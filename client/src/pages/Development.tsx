@@ -21,7 +21,7 @@ function Development(){
             <div className="m-2 p-2 ms-5 me-5">
                 Preparation sessions run by ex-Swans Academy players who utilise drills and skills used previously in Academy tryouts. All kids will be given a graded in a range of skills replicating the high-pressure environment and process of the academy.  
             </div>
-            <div className="d-flex justify-content-around mt-5">
+            <div className="d-flex mt-5">
                 <AcademyItem name="Northern Beaches Preparation" Location="Frank Grey Oval" start="29/7/23" time="Saturday 9:00am" dates={northTimes}/>
                 <AcademyItem name="St Ives Preparation" Location="Accron Oval" start="31/7/23" time="Monday 6:00pm" dates={stIvesTimes}/>
             </div>
