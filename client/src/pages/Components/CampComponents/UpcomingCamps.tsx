@@ -26,7 +26,7 @@ function UpcomingCamps() {
 
   return (
       <div className="m-5 pb-5 pt-4" style={{backgroundColor:"rgb(222, 222, 231)", borderRadius:"20px"}}>
-        <div className="">
+        <div className="mt-3">
             <span className="fs-1 ps-5" style={{fontFamily:"Rubik", fontWeight:"bold"}}>Upcoming Camps</span>
             {camps.map((value, index) => (
               <Campbox Location={value.Location} name={value.name} ages={value.ages} date={value.date} times={value.times} Price={value.Price}/>

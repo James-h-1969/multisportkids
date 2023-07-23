@@ -23,6 +23,7 @@ app.get("/camps", async (req: Request, res: Response) => {
     res.json(camps);
 })
 
+//code to add any new camps in
 app.post("/camps", async (req: Request, res: Response) => {
     const newCamp = new Camp({
         name: "North Shore Holiday Camp",
