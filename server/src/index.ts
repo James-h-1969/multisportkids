@@ -26,12 +26,14 @@ app.get("/camps", async (req: Request, res: Response) => {
 //code to add any new camps in
 app.post("/camps", async (req: Request, res: Response) => {
     const newCamp = new Camp({
-        name: "North Shore Holiday Camp",
+        name: "Northern Beaches Holiday Camp",
         ages: "Ages 9-13",
         date: "26th and 27th of September",
         times: "9am-1pm",
         Price: 130.00,
-        Location: "Accron Oval",
+        Location: "Weldon Oval",
+        address: "Curl Curl NSW 2099",
+        locPic: "/assets/weldon.png"
     });
     const createdCamp = await newCamp.save();
     res.json(createdCamp);

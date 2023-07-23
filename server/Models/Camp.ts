@@ -9,6 +9,8 @@ const CampSchema = new Schema({
     times: String,
     Price: Number,
     Location: String,
+    address: String,
+    locPic: String
 })
 
 const CampModel = mongoose.model("Camp", CampSchema);

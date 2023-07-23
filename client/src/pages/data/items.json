@@ -68,7 +68,15 @@
         "priceString": "$1000.00",
         "priceNum": 1000.00,
         "imgUrl": "/assets/camps.jpg"
+    },
+    {
+        "id":11,
+        "name": "Holiday Camp",
+        "priceString": "$130.00",
+        "priceNum": 130.00,
+        "imgUrl": "/assets/camps.jpg"
     }
+
 
 
 ]
