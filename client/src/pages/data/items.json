@@ -75,6 +75,20 @@
         "priceString": "$130.00",
         "priceNum": 130.00,
         "imgUrl": "/assets/camps.jpg"
+    },
+    {
+        "id":12,
+        "name": "1 Academy Prep Session",
+        "priceString": "$40.00",
+        "priceNum": 40.00,
+        "imgUrl": "/assets/camps.jpg"
+    },
+    {
+        "id":13,
+        "name": "4 Academy Prep Sessions",
+        "priceString": "$130.00",
+        "priceNum": 130.00,
+        "imgUrl": "/assets/camps.jpg"
     }
 
 

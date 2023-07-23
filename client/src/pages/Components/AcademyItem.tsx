@@ -1,25 +1,68 @@
 import { Button, Card } from "react-bootstrap";
 import { useState } from 'react';
+import { useCart } from "../context/cartContext";
 
 type AcademyItemProps = {
     name:string,
     time:string,
     start:string,
-    location:string,
+    Location:string,
     dates:string[]
 }
 
 
-export default function AcademyItem({name, time, start, location, dates}:AcademyItemProps){
+export default function AcademyItem({name, time, start, Location, dates}:AcademyItemProps){
     const [plan, setPlan] = useState(0);
-    const [timesChosen, setTimesChosen] = useState("");
+    const [timesChosen, setTimesChosen] = useState<string[]>([]);
+    const { addToCart } = useCart();
 
     function handleClick(Givenplan:number){
+        const emptyTimes: string[] = [];
         if (plan === Givenplan){
             setPlan(0);
+            setTimesChosen(emptyTimes);
             return;
         }
+        setTimesChosen(emptyTimes);
         setPlan(Givenplan);
+    }
+
+    function isDateActive(date:string){
+        if (timesChosen?.find((item:string) => item === date) == null){
+            return false;
+        }
+        return true;
+    }
+
+    function handleTimeClick(date:string){
+        if (isDateActive(date)) {
+            const newTimes = timesChosen.filter((item:string) => item !== date); 
+            setTimesChosen(newTimes);
+        }
+        else {
+            if (timesChosen.length >= plan){
+                if (plan === 0){
+                    return;
+                }
+                if (plan === 1){
+
+                }
+                const newTimes = [date]
+                setTimesChosen(newTimes);
+                return;
+            }
+            const newTimes = timesChosen.length < 1 ? [date] : [...timesChosen, date];
+            setTimesChosen(newTimes);
+        }
+    }
+
+    function handleCartClick(plan:number){
+        if (plan === 1){
+            addToCart(12, 1);
+        } else {
+            addToCart(13, 1);
+        }
+        location.reload();
     }
 
     return(
@@ -41,7 +84,7 @@ export default function AcademyItem({name, time, start, location, dates}:Academy
                         Location:
                     </span>
                     <span className="text-muted">
-                        {location}
+                        {Location}
                     </span> 
                 </div>
                 <span className="mt-3">Select Amount of sessions:</span>
@@ -59,13 +102,17 @@ export default function AcademyItem({name, time, start, location, dates}:Academy
                             <span>
                                 {date}
                             </span>
-                            <div className="p-2" style={{backgroundColor:"rgb(222, 222, 231)", borderRadius:"10px", cursor:"pointer"}}>
-                                Choose Date
-                            </div>
+                            {!isDateActive(date) ? 
+                                <div className="p-2" style={{backgroundColor:"rgb(222, 222, 231)", borderRadius:"10px", cursor:"pointer"}} onClick={() => handleTimeClick(date)}>
+                                    Choose Date
+                                </div>
+                            :   <div className="p-2" style={{backgroundColor:"#46768E", borderRadius:"10px", cursor:"pointer"}} onClick={() => handleTimeClick(date)}>
+                                    Date Chosen
+                                </div>}
                         </div>
                     ))}
                 </div>
-                <Button className="mt-3">
+                <Button className="mt-3" disabled={!(timesChosen.length === plan && plan !== 0)} onClick={() => handleCartClick(plan)}>
                     Add to cart
                 </Button>
             </Card.Body>

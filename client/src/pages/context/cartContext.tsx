@@ -43,7 +43,6 @@ export function CartProvider( {children}:cartProviderProps ){
     function addToCart (id: number, addingQuantity: number){
         setCartItems((currItems) => {
             if (currItems?.find((item) => item.id === id) == null){
-                console.log("here");
                 return [...currItems, {id, quantity: addingQuantity}]
             } else {
                 return currItems?.map(item => {
