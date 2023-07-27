@@ -32,8 +32,8 @@ app.get("/PrivateTimes", async (req: Request, res: Response) => {
 app.post("/PrivateTimes", async (req: Request, res: Response) => {
     const newCoach = new Coach({
         name: "Tom O'leary",
-        dates: ["29/7/23", "6/8/23"],
-        times: ["6:00pm", "7:00am"],
+        dates: ["10/8/23", "19/8/23"],
+        times: ["9:00am", "9:00am"],
         location: "North Shore"
     });
     const createdCoach = await newCoach.save();

@@ -14,7 +14,7 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
     const [timetableState, settimetableState] = useState([-1,-1]);
     const [isCurrentMonth, setisCurrentMonth] = useState(true);
     const [timetableDates, setTimetableDates] = useState(getDates(isCurrentMonth));
-    const [currentTimes, setCurrentTimes] = useState({});
+    const [currentTimes, setCurrentTimes] = useState<string[]>([]);
     const [selectedTime, setSelectedTime] = useState("");
     const [availableDates, setAvailableDates] = useState({});
  
@@ -23,25 +23,29 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
 
     const handleClick = (week:number, day:number) => {
         showTypes(false);
-        getTimes(day, week);
         let dateChosen = parseInt(timetableDates[week][day][0]);
         if (dateChosen <= getCurrentDayNum() && isCurrentMonth){
+            settimetableState([-1, -1]);
             return;
         }
         let datesAvailable = Object.keys(availableDates);
+        let toSet = false;
         datesAvailable.forEach((date) => {
             let brokenDate = date.split("/");
             let monthdays = isCurrentMonth ? getMonthNum() : getMonthNum() + 1;
             if (parseInt(brokenDate[0]) == dateChosen && monthdays == parseInt(brokenDate[1])) {
-                let newCoords = [week, day];
-                settimetableState(newCoords);
-                return;
+                toSet = true;
             } 
-        })       
-        if (week == timetableState[0] && day == timetableState[1]){ //reset it
-            settimetableState([-1, -1]);
-            return;
-        }
+        })  
+        if (toSet){
+            let newCoords = [week, day];
+            settimetableState(newCoords);
+            getTimes(day, week);
+            return
+        }     
+        settimetableState([-1, -1]);
+
+
 
     }
 
@@ -113,25 +117,13 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
         fetchCoaches();
       }, [location])
 
-    const testDay = {
-        month: 6,
-        day: 10,
-        times: {
-            "7:00am":true,
-            "9:00am":false,
-            "11:00am":false,
-            "1:00pm":false,
-            "3:00pm":true,
-            "5:00pm":true,
-        }
-    }
 
     function getTimes(day:number, week:number){
-        if (parseInt(timetableDates[week][day][0]) == 10 && getMonthNum() == 6){
-            setCurrentTimes(testDay.times);
-            return;
-        }
-        setCurrentTimes({});
+        const selectedDate = parseInt(timetableDates[week][day][0]);
+        const asDate = `${selectedDate}/${isCurrentMonth ? getMonthNum() : getMonthNum() + 1}/23`;
+        const values: {[dates:string]: CoachObject} = availableDates;
+        const times = values[asDate].CoachTimes;
+        setCurrentTimes(times);
     }
 
     function handleTimeClick(time:string){
@@ -222,7 +214,7 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
                                 timeAvailable.map((time) => (
                                     <div className="mt-4 d-flex justify-content-between" style={{height:"30px"}}>
                                         <span>{time}</span>
-                                        <span>{currentTimes ? (currentTimes[time as keyof typeof currentTimes] ? <div className="p-2" onClick={() => handleTimeClick(time)} style={{backgroundColor:"#EBEBEB", cursor:"pointer", borderRadius:"15px"}}>Select Time</div> : "") : ""}</span>
+                                        {currentTimes.includes(time) && <Button style={{backgroundColor:"#46768E", color:"white", border:"transparent", paddingBottom:"20px"}} onClick={() => handleTimeClick(time)}>Select Time</Button>}
                                     </div>
                                 ))
                             }
