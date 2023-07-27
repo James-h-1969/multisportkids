@@ -17,8 +17,18 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
     const [currentTimes, setCurrentTimes] = useState<string[]>([]);
     const [selectedTime, setSelectedTime] = useState("");
     const [availableDates, setAvailableDates] = useState({});
+    const [currentCoaches, setCurrentCoaches] = useState<string[]>([]);
  
     const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
+    const colorsList = [
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "blue",
+        "indigo",
+        "violet"
+    ]      
     const timeAvailable = ["7:00am", "9:00am", "11:00am", "1:00pm", "3:00pm", "5:00pm"];
 
     const handleClick = (week:number, day:number) => {
@@ -75,6 +85,10 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
         location: string
     }
 
+    type CoachTimes = {
+        times: Array<string>
+    }
+
 
 
     interface CoachObject {
@@ -123,7 +137,9 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
         const asDate = `${selectedDate}/${isCurrentMonth ? getMonthNum() : getMonthNum() + 1}/23`;
         const values: {[dates:string]: CoachObject} = availableDates;
         const times = values[asDate].CoachTimes;
+        const coaches = values[asDate].Coachname;
         setCurrentTimes(times);
+        setCurrentCoaches(coaches);
     }
 
     function handleTimeClick(time:string){
@@ -214,10 +230,22 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
                                 timeAvailable.map((time) => (
                                     <div className="mt-4 d-flex justify-content-between" style={{height:"30px"}}>
                                         <span>{time}</span>
-                                        {currentTimes.includes(time) && <Button style={{backgroundColor:"#46768E", color:"white", border:"transparent", paddingBottom:"20px"}} onClick={() => handleTimeClick(time)}>Select Time</Button>}
+                                        {currentTimes.includes(time) && 
+                                        <div>
+                                            
+                                            <Button style={{backgroundColor:"#46768E", color:"white", border:"transparent"}} onClick={() => handleTimeClick(time)}>Select Time</Button>
+                                        </div>
+                                        }
                                     </div>
                                 ))
                             }
+                        </div>
+                        <div className="d-flex">
+                            {currentCoaches.map((coach, indx) => (
+                                <div className="p-2 m-2" style={{backgroundColor:colorsList[indx], borderRadius:"10px", fontWeight:"bold"}}>
+                                    {coach}
+                                </div>
+                            ))}
                         </div>
                     </div>}
                     <div className="pt-4">

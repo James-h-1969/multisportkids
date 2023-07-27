@@ -3,10 +3,23 @@ import Header from "./Components/Header"
 import insta from "/assets/instagram.png";
 import facebook from "/assets/facebook.png"
 import { Image, Button } from "react-bootstrap";
+import TeamCard from "./Components/ContactComponents/TeamCard";
+import { useState } from "react";
+import CoachInfo from "./Components/ContactComponents/CoachInfo";
 
 
 
 export default function Contact() {
+    const [playerShowing, setplayerShowing] = useState("");
+
+    function changeActive(name:string){
+        if (name == playerShowing){
+            setplayerShowing("");
+            return;
+        }
+        setplayerShowing(name);
+    }
+
     return(
         <>
             <NavBar />
@@ -38,6 +51,14 @@ export default function Contact() {
                         Our goal at AFLKids is to help players reach their full potential through experienced and accredited AFL coaches, striving for excellence at a junior level.  Through video analysis, goal setting strategies and mental advice, AFLKids goes above and beyond in order to take players to the next level.
                     </div>
                     <div className="mt-4" style={{fontWeight:"bold"}}>Our Team</div>
+                    <div className="d-flex justify-content-around">
+                        <div className="d-flex justify-content-around text-align-center pt-3 flex-column">
+                            <TeamCard name="Tom O'Leary" changePlayer={changeActive} player={playerShowing}/>
+                            <TeamCard name="William Smit" changePlayer={changeActive}  player={playerShowing}/>
+                            <TeamCard name="Kale Gablia" changePlayer={changeActive}  player={playerShowing}/>
+                        </div>
+                        {playerShowing === "" ? <div className="pt-5" style={{width:"40%", fontWeight:"lighter"}}>Choose a team member to learn more</div>: <CoachInfo/>}
+                    </div>
                 </div>
             </div>
         </>
