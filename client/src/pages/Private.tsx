@@ -14,6 +14,7 @@ import "./Components/Components.css";
 function Private() {
     const desc = "Get one of our best coaches for personalised assistance. Tailored help to get the most out of your AFL kid.";
     const [stepStates, setStepStates] = useState([true, false, false, false]);
+    const [location, setLocation] = useState("");
     const [overallSession, setOverallSession] = useState({
         id: 0,
         location:"",
@@ -84,7 +85,7 @@ function Private() {
         <Header title="Private Sessions" description={desc}/>
         <PrivatePlans />
         <PrivateLocation showTimetable={showTimetable} step1={step1}/>
-        {stepStates[1] ? <PrivateTimetable showTypes={showType} step2={step2}/> :<></>}
+        {stepStates[1] ? <PrivateTimetable showTypes={showType} step2={step2} location={overallSession.location}/> :<></>}
         {stepStates[2] ? <PrivateSessionType showAdd={showAdd} step3={step3}/>:<></>}
         {stepStates[3] ? <AddSession time={overallSession.time} date={overallSession.date} id={overallSession.id} location={overallSession.location} price={overallSession.price}/>:<></>}
 

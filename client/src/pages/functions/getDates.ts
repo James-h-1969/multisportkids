@@ -56,7 +56,7 @@ export function getDates(isCurrent:boolean){
 
 export function getMonthNum(){
     const currentDate = new Date();
-    return currentDate.getMonth();
+    return currentDate.getMonth() + 1;
 }
 
 export function getMonthName(isCurrent:boolean){
