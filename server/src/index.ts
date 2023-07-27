@@ -31,10 +31,10 @@ app.get("/PrivateTimes", async (req: Request, res: Response) => {
 
 app.post("/PrivateTimes", async (req: Request, res: Response) => {
     const newCoach = new Coach({
-        name: "Luca Schopen",
-        dates: ["2/8/23", "3/8/23"],
+        name: "Tom O'leary",
+        dates: ["29/7/23", "6/8/23"],
         times: ["6:00pm", "7:00am"],
-        location: "Northern Beaches"
+        location: "North Shore"
     });
     const createdCoach = await newCoach.save();
     res.json(createdCoach);

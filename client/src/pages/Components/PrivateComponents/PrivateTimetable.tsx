@@ -35,10 +35,9 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
             if (parseInt(brokenDate[0]) == dateChosen && monthdays == parseInt(brokenDate[1])) {
                 let newCoords = [week, day];
                 settimetableState(newCoords);
+                return;
             } 
-        })
-
-        
+        })       
         if (week == timetableState[0] && day == timetableState[1]){ //reset it
             settimetableState([-1, -1]);
             return;
@@ -141,6 +140,20 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
         step2(getDate(), time);
     }
 
+    function isAvailableDate(day:number, week:number){
+        let dateChosen = parseInt(timetableDates[week][day][0]);
+        let datesAvailable = Object.keys(availableDates);
+        let isavailable = false;
+        datesAvailable.forEach((date) => {
+            let brokenDate = date.split("/");
+            let monthdays = isCurrentMonth ? getMonthNum() : getMonthNum() + 1;
+            if (parseInt(brokenDate[0]) == dateChosen && monthdays == parseInt(brokenDate[1])) {
+                isavailable = true;
+            } 
+        })
+        return isavailable;
+    }
+
 
     return (
         <>
@@ -165,7 +178,7 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
                         <div className="d-flex justify-content-around" style={{}}>
                         {week.map((day, daynum) => (
                             <div className="d-flex m-4 text-center row" style={{ width: "30px", height: "30px" }} onClick={() => handleClick(weeknum, daynum)}>
-                                <div className={day[1] === "currentDay" && isCurrentMonth ? "current-day rounded-circle" : "" || (daynum == timetableState[1] && weeknum == timetableState[0]) ? "activeDay rounded-circle": "" || parseInt(timetableDates[weeknum][daynum][0]) <= getCurrentDayNum() && isCurrentMonth ? "text-muted":""}>
+                                <div className={day[1] === "currentDay" && isCurrentMonth ? "current-day rounded-circle" : "" || isAvailableDate(daynum, weeknum) ? "box-red rounded-circle":""}>
                                     <div className={day[0] === "invalid" ? "":"show-shadow rounded-circle"}>
                                         <a> <span className="fs-6 d-flex align-items-center justify-content-center" style={{ height: "100%", width: "100%" }}>{day[0] === "invalid"? "":day[0]}</span></a>   
                                     </div>
@@ -182,7 +195,7 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
                         Current Day
                     </div>
                     <div className="d-flex">
-                        <div className="rounded-circle me-4" style={{backgroundColor:"#EBEBEB", width:"20px", height:"20px"}}>
+                        <div className="rounded-circle me-4" style={{backgroundColor:"#6c757d", width:"20px", height:"20px"}}>
                         </div>
                         Available Days
                     </div>
