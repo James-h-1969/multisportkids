@@ -21,7 +21,6 @@ function UpcomingCamps() {
       const response = await fetch("http://localhost:3000/camps");
       const newCamps = await response.json();
       setCamps(newCamps);
-      console.log(newCamps);
     }
     fetchCamps();
   }, [])

@@ -64,8 +64,8 @@ const MerchItem: React.FC<MerchItemProps> = ({name, price, image, id}) => {
                 </div>
                 {
                     (value > 0 && selectedOption != "Choose size") ?
-                    <Button className="mt-3" onClick={() => handleAddingCart()}>
-                        Add to cart
+                    <Button className="mt-3" onClick={() => handleAddingCart()} disabled={true}>
+                        Coming Soon
                     </Button>:<></>
                 }
 

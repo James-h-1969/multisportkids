@@ -1,7 +1,8 @@
 import { config } from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
-import Camp from "../Models/Camp"
+import Camp from "../Models/Camp";
+import Coach from "../Models/Coach";
 config();
 
 import express, { Request, Response } from "express";
@@ -21,6 +22,21 @@ app.get("/camps", async (req: Request, res: Response) => {
     //TODO: fetch all camps and send to user
     const camps = await Camp.find();
     res.json(camps);
+})
+
+app.get("/PrivateTimes", async (req: Request, res: Response) => {
+    const coaches = await Coach.find();
+    res.json(coaches);
+})
+
+app.post("/PrivateTimes", async (req: Request, res: Response) => {
+    const newCoach = new Coach({
+        name: "Tom O'leary",
+        dates: ["27/7/23", "28/7/23"],
+        times: ["7:00am 8:00am 9:00pm", "7:00am"]
+    });
+    const createdCoach = await newCoach.save();
+    res.json(createdCoach);
 })
 
 //code to add any new camps in

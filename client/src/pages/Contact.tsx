@@ -2,7 +2,9 @@ import NavBar from "./Components/NavBar"
 import Header from "./Components/Header"
 import insta from "/assets/instagram.png";
 import facebook from "/assets/facebook.png"
-import { Image } from "react-bootstrap";
+import { Image, Button } from "react-bootstrap";
+
+
 
 export default function Contact() {
     return(

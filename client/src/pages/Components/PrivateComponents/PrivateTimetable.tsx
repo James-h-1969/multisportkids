@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState, useEffect } from "react";
 import { getDates, getMonthName, getMonthNum, getYear, getCurrentDayNum } from "../../functions/getDates";
 import "../Components.css";
 import { Button } from "react-bootstrap";
@@ -52,6 +52,17 @@ function PrivateTimetable({showTypes, step2}:PrivateTimetableProps){
         let month = isCurrentMonth ? getMonthNum().toString(): (getMonthNum() + 1).toString();
         return `${date}  /  ${month} / 2023`;
     }
+
+    useEffect(() => {
+        let newCoaches = [];
+        async function fetchCoaches() {
+          const response = await fetch("http://localhost:3000/PrivateTimes");
+          newCoaches = await response.json();
+          console.log(newCoaches)
+        }
+        fetchCoaches();
+        
+      }, [])
 
     const testDay = {
         month: 6,
