@@ -67,7 +67,12 @@ const storeItems = new Map([
     [5, { priceInCents: 14000, name: "3 on 1 Private"}],
     [6, { priceInCents: 17000, name: "4 on 1 Private"}],
     [7, { priceInCents: 20000, name: "5 on 1 Private"}],
-    [8, { priceInCents: 23000, name: "6 on 1 Private"}]
+    [8, { priceInCents: 23000, name: "6 on 1 Private"}],
+    [9, { priceInCents: 37500, name: "1 on 1 Private Plan"}],
+    [10, { priceInCents: 100000, name: "Group Private Plan"}],
+    [11, { priceInCents: 13000, name: "Holiday Camp"}],
+    [12, { priceInCents: 4000, name: "1 Academy Prep Session"}],
+    [13, { priceInCents: 13000, name: "4 Academy Prep Sessions"}]
 ])
 
 interface Item {
@@ -93,16 +98,8 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
                     quantity: item.quantity
                 };
             }),
-            success_url: 'your-server-success-handler', // Replace this with your server route or function
+            success_url: 'http://localhost:5173/success', // Replace this with your server route or function
             cancel_url: 'http://localhost:3000/',
-            billing_address_collection: 'required', // This will prompt for the phone number
-            // or use 'auto' to let Stripe automatically determine whether to prompt for phone number
-            // billing_address_collection: 'auto',
-            // Or if you need additional address fields (like name) in addition to phone number
-            // billing_address_collection: 'required',
-            // shipping_address_collection: {
-            //     allowed_countries: ['US', 'CA'],
-            // },
         });
         res.json({ url: session.url });
     } catch (e: any) {

@@ -11,15 +11,23 @@ type CartContext = {
     openCart: () => void;
     closeCart: () => void;
     getItemQuantity: (id: number) => number;
-    addToCart: (id: number, addingQuantity: number) => void;
+    addToCart: (id: number, addingQuantity: number, details:details) => void;
     removeFromCart: (id: number) => void;
     cartItems: CartItem[];
     cartQuantity: number;
 }
 
+type details = {
+    childName: string,
+    childAge: string,
+    childComments: string,
+    childClub: string
+}
+
 type CartItem = {
     id: number;
     quantity: number;
+    details?: details
 }
 
 const CartContext = createContext({} as CartContext);
@@ -40,10 +48,10 @@ export function CartProvider( {children}:cartProviderProps ){
         return cartItems?.find(item => item.id === id)?.quantity || 0;
     }
 
-    function addToCart (id: number, addingQuantity: number){
+    function addToCart (id: number, addingQuantity: number, details:details){
         setCartItems((currItems) => {
             if (currItems?.find((item) => item.id === id) == null){
-                return [...currItems, {id, quantity: addingQuantity}]
+                return [...currItems, {id, quantity: addingQuantity, details:details}]
             } else {
                 return currItems?.map(item => {
                     if(item.id === id){

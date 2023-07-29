@@ -1,5 +1,5 @@
 import LinkButton from "../LinkButton";
-import { Image, Button } from "react-bootstrap";
+import { Image, Button, Form } from "react-bootstrap";
 import development from "/assets/development.jpg";
 import { useState } from "react";
 import { useCart } from "../../context/cartContext";
@@ -19,11 +19,23 @@ type CampboxProps = {
 function Campbox ({name, Location, ages, date, times, Price, address, locPic}: CampboxProps) {
     const [isBooking, setIsBooking] = useState(false);
     const { addToCart } = useCart();
+    const [childName, setChildName] = useState('');
+    const [childAge, setChildAge] = useState('');
+    const [club, setClub] = useState('');
+    const [comments, setComments] = useState('');
 
     function handleAddingCart(){
-        addToCart(11, 1);
+        const Customdetails = {
+            childName: childName,
+            childAge: childAge,
+            childComments: comments,
+            childClub: club
+        }
+        addToCart(11, 1, Customdetails);
         location.reload();
     }
+
+    const isButtonDisabled = !(childName && childAge && club && comments);
     
     return(
         <div className="m-5" style={{backgroundColor:"rgb(70, 118, 142)", fontFamily:"Rubik", borderRadius:"15px"}}>
@@ -67,10 +79,50 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic}: C
                                 (3) The player takes the field at their own risk<br />
                                     (a) We have a no-tackle policy, but accidental or touch contact can still occur.<br />
                                     (b) by booking with AFLKids, AFLKids are not liable for any injury.<br />
-                                    <Button className="mt-5"  style={{backgroundColor:"white", color:"black", width:"50%"}} onClick={() => handleAddingCart()}>
-                                        Add to cart
-                                    </Button>
-                            </div>
+                                    <Form className="mt-5">
+                                        <Form.Group className="d-flex mb-3" controlId="formBasicEmail">
+                                            <Form.Label style={{ width: "50%" }}>Child name</Form.Label>
+                                            <Form.Control
+                                            placeholder="Enter name"
+                                            value={childName}
+                                            onChange={(e) => setChildName(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
+                                            <Form.Label style={{ width: "50%" }}>Child Age</Form.Label>
+                                            <Form.Control
+                                            placeholder="Enter Age"
+                                            value={childAge}
+                                            onChange={(e) => setChildAge(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
+                                            <Form.Label style={{ width: "50%" }}>Club</Form.Label>
+                                            <Form.Control
+                                            placeholder="Enter Club"
+                                            value={club}
+                                            onChange={(e) => setClub(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
+                                            <Form.Label style={{ width: "50%" }}>Comments for Coach</Form.Label>
+                                            <Form.Control
+                                            placeholder="Enter Comments"
+                                            value={comments}
+                                            onChange={(e) => setComments(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                        <Button
+                                            className="mt-5"
+                                            style={{ backgroundColor: "white", color: "black", width: "50%" }}
+                                            onClick={() => handleAddingCart()}
+                                            disabled={isButtonDisabled}
+                                        >
+                                            Add to cart
+                                        </Button>
+                                    </Form>
+  
+                           </div>
                         </div>
                     </div>
                 </div>
