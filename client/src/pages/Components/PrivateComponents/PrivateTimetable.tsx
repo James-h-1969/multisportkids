@@ -16,6 +16,7 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
     const [timetableDates, setTimetableDates] = useState(getDates(isCurrentMonth));
     const [currentTimes, setCurrentTimes] = useState<string[]>([]);
     const [selectedTime, setSelectedTime] = useState("");
+    const [selectedCoach, setSelectedCoach] = useState("");
     const [availableDates, setAvailableDates] = useState({});
     const [currentCoaches, setCurrentCoaches] = useState<string[]>([]);
  
@@ -54,9 +55,6 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
             return
         }     
         settimetableState([-1, -1]);
-
-
-
     }
 
     function changeMonth(){
@@ -88,8 +86,6 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
     type CoachTimes = {
         times: Array<string>
     }
-
-
 
     interface CoachObject {
         Coachname: string[];
@@ -142,8 +138,9 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
         setCurrentCoaches(coaches);
     }
 
-    function handleTimeClick(time:string){
+    function handleTimeClick(time:string, coach:string){
         setSelectedTime(time);
+        setSelectedCoach(coach);
         showTypes(true);
         step2(getDate(), time);
     }
@@ -160,6 +157,16 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
             } 
         })
         return isavailable;
+    }
+
+    function findIndexesOfTimes(time:string){
+        const indexes = [];
+        for (let i = 0; i < currentTimes.length; i++) {
+          if (currentTimes[i] === time) {
+            indexes.push(i);
+          }
+        }
+        return indexes;
     }
 
 
@@ -230,12 +237,26 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
                                 timeAvailable.map((time) => (
                                     <div className="mt-4 d-flex justify-content-between" style={{height:"30px"}}>
                                         <span>{time}</span>
-                                        {currentTimes.includes(time) && 
-                                        <div>
-                                            
-                                            <Button style={{backgroundColor:"#46768E", color:"white", border:"transparent"}} onClick={() => handleTimeClick(time)}>Select Time</Button>
-                                        </div>
-                                        }
+                                        {currentTimes.includes(time) ? 
+                                        <div className="d-flex align-items-center">
+                                            {Array.from({ length: currentTimes.filter((val) => time === val).length }, (_, index) => (
+                                                <div
+                                                onClick={() => handleTimeClick(time, currentCoaches[findIndexesOfTimes(time)[index]])}
+                                                key={index}
+                                                className="rounded-circle me-2"
+                                                style={{
+                                                    backgroundColor: colorsList[findIndexesOfTimes(time)[index]],
+                                                    borderColor: currentCoaches[findIndexesOfTimes(time)[index]] === selectedCoach ? "white":"transparent",
+                                                    border: "solid transparent",
+                                                    width: '30px',
+                                                    height: '30px',
+                                                    cursor: 'pointer'
+                                                }}
+                                                ></div>
+                                            ))}
+                                            <div>Choose coach</div>
+                                        </div>:
+                                        <></>}
                                     </div>
                                 ))
                             }
@@ -249,7 +270,9 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
                         </div>
                     </div>}
                     <div className="pt-4">
-                        {selectedTime ? <><span className="text-muted">Selected:</span> <span style={{fontSize:"27px", paddingLeft:"200px"}}>{selectedTime}{" "}{getDate()}</span></>:<></>}
+                        {selectedTime ? <><span className="text-muted">Selected:</span> <span style={{fontSize:"27px", paddingLeft:"200px"}}>{selectedTime}{" "}{getDate()}</span>
+                        <div><span className="text-muted">Coach:</span> <span style={{fontSize:"27px", paddingLeft:"220px"}}>{selectedCoach}</span></div>
+                        </>:<></>}
                     </div>
                </div>            
             </div>           
