@@ -55,6 +55,7 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
             return
         }     
         settimetableState([-1, -1]);
+        setSelectedTime("");
     }
 
     function changeMonth(){

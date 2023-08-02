@@ -6,7 +6,7 @@ import { useCart } from "../../context/cartContext";
 
 
 type CampboxProps = {
-    name: String,
+    name: string,
     ages: String,
     date: String,
     times: String,
@@ -29,7 +29,8 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic}: C
             childName: childName,
             childAge: childAge,
             childComments: comments,
-            childClub: club
+            childClub: club,
+            purchaseName: name,
         }
         addToCart(11, 1, Customdetails);
         location.reload();

@@ -21,7 +21,8 @@ type details = {
     childName: string,
     childAge: string,
     childComments: string,
-    childClub: string
+    childClub: string,
+    purchaseName: string
 }
 
 type CartItem = {

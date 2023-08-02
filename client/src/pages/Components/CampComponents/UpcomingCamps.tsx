@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import Campbox from "./Campbox";
 
 type CampType = {
-  name: String,
+  name: string,
   ages: String,
   date: String,
   times: String,

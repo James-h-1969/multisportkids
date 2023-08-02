@@ -12,6 +12,73 @@ const app = express();
 app.use(cors({
     origin: "*" //this will be the site name so that only it can access the API
 }));
+
+type details = {
+    childName: string,
+    childAge: string,
+    childComments: string,
+    childClub: string,
+    purchaseName: string
+}
+
+interface Item {
+    id: number;
+    quantity: number;
+    details?: details
+}
+
+
+// This is your Stripe CLI webhook secret for testing your endpoint locally.
+const endpointSecret = "whsec_42762b3164b7a9048eeca1a3577cc35181d4da78a77b9a95f0d2b23496c2c561";
+app.post('/webhook', express.raw({ type: 'application/json' }), async (request: Request, response: Response) => {
+    const sig = request.headers['stripe-signature'];
+    try {
+      const event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
+      console.log("Webhook verified.");
+  
+      const data = event.data.object;
+      const eventType = event.type;
+
+    //   for (const key in stuff) {
+    //     if (Object.hasOwnProperty.call(metadata, key)) {
+    //       const value = metadata[key];
+    //       console.log(`${key}: ${value}`);
+    //     }
+    //   }
+  
+      // Handle the event
+      if (eventType === "payment_intent.succeeded") {
+        // const metadata = event.data.object.metadata;
+        // const cartItems = JSON.parse(metadata.cartItems); // Convert the JSON string back to an array
+        const { metadata } = event.data.object;
+        const cartItems = metadata.cartItems;
+        const JSONStuff = JSON.parse(cartItems);
+        JSONStuff.forEach((val:Item) => {
+            
+        });
+        
+        //client
+        
+        //customer
+
+        //update database  
+
+      }
+  
+      // Return a 200 response to acknowledge receipt of the event
+      response.status(200).send('Received').end();
+    } catch (err) {
+      if (err instanceof Error) {
+        console.log(`Webhook Error: ${err.message}`);
+        response.status(400).send(`Webhook Error: ${err.message}`);
+      } else {
+        // Handle other types of errors or non-Error objects
+        console.error('Unexpected error occurred:', err);
+        response.status(500).send('Unexpected error occurred.');
+      }
+    }
+  });
+
 app.use(express.json());
 
 const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
@@ -75,13 +142,11 @@ const storeItems = new Map([
     [13, { priceInCents: 13000, name: "4 Academy Prep Sessions"}]
 ])
 
-interface Item {
-    id: number;
-    quantity: number;
-}
+
 
 app.post('/create-checkout-session', async (req: Request, res: Response) => {
     try {
+        let items = JSON.stringify(req.body.items);
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             mode: 'payment',
@@ -99,19 +164,15 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
                 };
             }),
             success_url: 'http://localhost:5173/success', // Replace this with your server route or function
-            cancel_url: 'http://localhost:3000/',
+            cancel_url: 'http://localhost:5173/',
+            payment_intent_data: {
+                metadata: {
+                  cartItems: items
+                },
+              },
         });
         res.json({ url: session.url });
     } catch (e: any) {
         res.status(500).json({ error: e.message });
     }
 });
-
-
-
-
-
-
-
-
-

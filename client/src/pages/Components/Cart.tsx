@@ -7,9 +7,18 @@ type CartProps = {
     isOpen: boolean;
 }
 
+type details = {
+    childName: string,
+    childAge: string,
+    childComments: string,
+    childClub: string,
+    purchaseName: string
+}
+
 interface CartItem {
     id: number;
     quantity: number;
+    details?: details
 }
 
 export function Cart({isOpen}:CartProps){
@@ -17,7 +26,6 @@ export function Cart({isOpen}:CartProps){
 
     async function handleCheckoutButton(){
         closeCart();
-        
         fetch('http://localhost:3000/create-checkout-session', {
             method: 'POST',
             headers: {
@@ -26,7 +34,8 @@ export function Cart({isOpen}:CartProps){
             body: JSON.stringify({
                 items: cartItems.filter(item => item.quantity !== null).map(item => ({
                   id: item.id,
-                  quantity: item.quantity
+                  quantity: item.quantity,
+                  details: item.details
                 }))
             })
         }).then(res => {
