@@ -9,6 +9,10 @@ import express, { Request, Response } from "express";
 
 const app = express();
 
+const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
+    app.listen(3000);
+});
+
 app.use(cors({
     origin: "*" //this will be the site name so that only it can access the API
 }));
@@ -38,14 +42,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
   
       const data = event.data.object;
       const eventType = event.type;
-
-    //   for (const key in stuff) {
-    //     if (Object.hasOwnProperty.call(metadata, key)) {
-    //       const value = metadata[key];
-    //       console.log(`${key}: ${value}`);
-    //     }
-    //   }
-  
+ 
       // Handle the event
       if (eventType === "payment_intent.succeeded") {
         // const metadata = event.data.object.metadata;
@@ -53,16 +50,19 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         const { metadata } = event.data.object;
         const cartItems = metadata.cartItems;
         const JSONStuff = JSON.parse(cartItems);
-        JSONStuff.forEach((val:Item) => {
-            
+
+        //update database
+        JSONStuff.forEach(async (val:Item) => {
+            if (val.id == 11){
+                const filter =  { name: val.details?.purchaseName };
+                const update = { $push: {kids: val.details }};
+                try {
+                    const updatedCamp = await Camp.findOneAndUpdate(filter, update, { new:true, runValidators:true});
+                  } catch (error) {
+                    console.error("Error updating camp:", error);
+                }
+            }
         });
-        
-        //client
-        
-        //customer
-
-        //update database  
-
       }
   
       // Return a 200 response to acknowledge receipt of the event
@@ -81,9 +81,6 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
 
 app.use(express.json());
 
-const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
-    app.listen(3000);
-});
 
 app.get("/camps", async (req: Request, res: Response) => {
     //TODO: fetch all camps and send to user
@@ -110,14 +107,15 @@ app.post("/PrivateTimes", async (req: Request, res: Response) => {
 //code to add any new camps in
 app.post("/camps", async (req: Request, res: Response) => {
     const newCamp = new Camp({
-        name: "Northern Beaches Holiday Camp",
+        name: "North Shore Holiday Camp",
         ages: "Ages 9-13",
         date: "26th and 27th of September",
         times: "9am-1pm",
         Price: 130.00,
         Location: "Weldon Oval",
         address: "Curl Curl NSW 2099",
-        locPic: "/assets/weldon.png"
+        locPic: "/assets/weldon.png",
+        kids: [],
     });
     const createdCamp = await newCamp.save();
     res.json(createdCamp);
