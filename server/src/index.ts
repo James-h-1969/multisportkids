@@ -3,19 +3,21 @@ import cors from "cors";
 import mongoose from "mongoose";
 import Camp from "../Models/Camp";
 import Coach from "../Models/Coach";
+import Academy from "../Models/Academy";
 config();
 
 import express, { Request, Response } from "express";
 
 const app = express();
 
-const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
-    app.listen(3000);
-});
 
 app.use(cors({
     origin: "*" //this will be the site name so that only it can access the API
 }));
+
+const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
+    app.listen(3000);
+});
 
 type details = {
     childName: string,
@@ -53,8 +55,8 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
 
         //update database
         JSONStuff.forEach(async (val:Item) => {
-            if (val.id == 11){
-                const filter =  { name: val.details?.purchaseName };
+            if (val.id == 11){ //holiday camp
+                const filter =  { name: val.details?.purchaseName[0] };
                 const update = { $push: {kids: val.details }};
                 try {
                     const updatedCamp = await Camp.findOneAndUpdate(filter, update, { new:true, runValidators:true});
@@ -62,6 +64,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                     console.error("Error updating camp:", error);
                 }
             }
+
         });
       }
   
@@ -81,7 +84,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
 
 app.use(express.json());
 
-
+// GET REQUESTS //
 app.get("/camps", async (req: Request, res: Response) => {
     //TODO: fetch all camps and send to user
     const camps = await Camp.find();
@@ -93,6 +96,14 @@ app.get("/PrivateTimes", async (req: Request, res: Response) => {
     res.json(coaches);
 })
 
+app.get("/academy", async (req: Request, res: Response) => {
+    //TODO: fetch all camps and send to user
+    const academy = await Academy.find();
+    res.json(academy);
+})
+
+
+// POST REQUESTS //
 app.post("/PrivateTimes", async (req: Request, res: Response) => {
     const newCoach = new Coach({
         name: "Goat Worker",
@@ -104,7 +115,6 @@ app.post("/PrivateTimes", async (req: Request, res: Response) => {
     res.json(createdCoach);
 })
 
-//code to add any new camps in
 app.post("/camps", async (req: Request, res: Response) => {
     const newCamp = new Camp({
         name: "North Shore Holiday Camp",
@@ -119,6 +129,18 @@ app.post("/camps", async (req: Request, res: Response) => {
     });
     const createdCamp = await newCamp.save();
     res.json(createdCamp);
+})
+
+app.post("/academy", async (req: Request, res: Response) => {
+    const newAcademy = new Academy({
+        name: "St Ives Preparation",
+        time: "Monday 9:00am",
+        start: "29/7/23",
+        Location: "Accron Oval",
+        dates: ["29/7/23", "5/8/23", "12/8/23", "19/8/23"]
+    });
+    const createdAcad = await newAcademy.save();
+    res.json(createdAcad);
 })
 
 

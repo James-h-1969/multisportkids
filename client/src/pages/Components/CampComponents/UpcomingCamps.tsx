@@ -10,7 +10,7 @@ type CampType = {
   Price: Number,
   Location: String,
   address:String,
-  locPic:string
+  locPic:string,
 }
 
 function UpcomingCamps() {

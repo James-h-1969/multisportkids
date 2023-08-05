@@ -4,9 +4,18 @@ import HomeDeals from "./Components/HomeComponents/HomeDeals";
 import HomeLocation from "./Components/HomeComponents/HomeLocation";
 import HomeQuotes from "./Components/HomeComponents/HomeQuotes";
 import Footer from "./Components/Footer";
+import { Button } from "react-bootstrap";
 import "./Home.css";
 
 function Home(){
+
+    function addAcademy(){
+        fetch("http://localhost:3000/academy",
+        {
+            method:"POST"
+        })
+    }
+
     return (
         <>
             <NavBar />
@@ -27,6 +36,7 @@ function Home(){
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="white" fill-opacity="1" d="M0,192L80,197.3C160,203,320,213,480,197.3C640,181,800,139,960,133.3C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
                 </div>
             </div>
+            {/* <Button onClick={addAcademy}>Add academy</Button> */}
             {/* <div className="home-location">
                 <HomeLocation />
             </div> */}

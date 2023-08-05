@@ -18,11 +18,11 @@ type CartContext = {
 }
 
 type details = {
-    childName: string,
-    childAge: string,
-    childComments: string,
-    childClub: string,
-    purchaseName: string
+    childName: String,
+    childAge: String,
+    childComments: String,
+    childClub: String,
+    purchaseName: String[]
 }
 
 type CartItem = {

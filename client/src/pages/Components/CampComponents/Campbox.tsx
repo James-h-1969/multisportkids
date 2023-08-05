@@ -30,7 +30,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic}: C
             childAge: childAge,
             childComments: comments,
             childClub: club,
-            purchaseName: name,
+            purchaseName: [name],
         }
         addToCart(11, 1, Customdetails);
         location.reload();

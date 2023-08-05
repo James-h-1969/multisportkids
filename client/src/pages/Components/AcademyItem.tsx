@@ -1,19 +1,23 @@
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 import { useState } from 'react';
 import { useCart } from "../context/cartContext";
 
 type AcademyItemProps = {
     name:string,
-    time:string,
-    start:string,
-    Location:string,
-    dates:string[]
+    time:String,
+    start:String,
+    Location:String,
+    dates:String[]
 }
 
 
 export default function AcademyItem({name, time, start, Location, dates}:AcademyItemProps){
     const [plan, setPlan] = useState(0);
-    const [timesChosen, setTimesChosen] = useState<string[]>([]);
+    const [timesChosen, setTimesChosen] = useState<String[]>([]);
+    const [childName, setChildName] = useState('');
+    const [childAge, setChildAge] = useState('');
+    const [club, setClub] = useState('');
+    const [comments, setComments] = useState('');
     const { addToCart } = useCart();
 
     function handleClick(Givenplan:number){
@@ -27,25 +31,22 @@ export default function AcademyItem({name, time, start, Location, dates}:Academy
         setPlan(Givenplan);
     }
 
-    function isDateActive(date:string){
-        if (timesChosen?.find((item:string) => item === date) == null){
+    function isDateActive(date:String){
+        if (timesChosen?.find((item:String) => item === date) == null){
             return false;
         }
         return true;
     }
 
-    function handleTimeClick(date:string){
+    function handleTimeClick(date:String){
         if (isDateActive(date)) {
-            const newTimes = timesChosen.filter((item:string) => item !== date); 
+            const newTimes = timesChosen.filter((item:String) => item !== date); 
             setTimesChosen(newTimes);
         }
         else {
             if (timesChosen.length >= plan){
                 if (plan === 0){
                     return;
-                }
-                if (plan === 1){
-
                 }
                 const newTimes = [date]
                 setTimesChosen(newTimes);
@@ -56,14 +57,24 @@ export default function AcademyItem({name, time, start, Location, dates}:Academy
         }
     }
 
-    function handleCartClick(plan:number){
+    function handleCartClick(){
+        const times = timesChosen.join(" ");
+        const Customdetails = {
+            childName: childName,
+            childAge: childAge,
+            childComments: comments,
+            childClub: club,
+            purchaseName: [name, times]
+        }
         if (plan === 1){
-            addToCart(12, 1);
+            addToCart(12, 1, Customdetails);
         } else {
-            addToCart(13, 1);
+            addToCart(13, 1, Customdetails);
         }
         location.reload();
     }
+
+    const isButtonDisabled = !(childName && childAge && club && comments && plan == timesChosen.length);
 
     return(
         <Card className="mb-5 ms-5" style={{width: "500px"}}>
@@ -112,9 +123,48 @@ export default function AcademyItem({name, time, start, Location, dates}:Academy
                         </div>
                     ))}
                 </div>
-                <Button className="mt-3" disabled={!(timesChosen.length === plan && plan !== 0)} onClick={() => handleCartClick(plan)}>
-                    Add to cart
-                </Button>
+                <Form className="mt-5">
+                    <Form.Group className="d-flex mb-3" controlId="formBasicEmail">
+                        <Form.Label style={{ width: "50%" }}>Child name</Form.Label>
+                        <Form.Control
+                        placeholder="Enter name"
+                        value={childName}
+                        onChange={(e) => setChildName(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
+                        <Form.Label style={{ width: "50%" }}>Child Age</Form.Label>
+                        <Form.Control
+                        placeholder="Enter Age"
+                        value={childAge}
+                        onChange={(e) => setChildAge(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
+                        <Form.Label style={{ width: "50%" }}>Club</Form.Label>
+                        <Form.Control
+                        placeholder="Enter Club"
+                        value={club}
+                        onChange={(e) => setClub(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
+                        <Form.Label style={{ width: "50%" }}>Comments for Coach</Form.Label>
+                        <Form.Control
+                        placeholder="Enter Comments"
+                        value={comments}
+                        onChange={(e) => setComments(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Button
+                        className="mt-5"
+                        style={{ color: "black", width: "100%" }}
+                        onClick={() => handleCartClick()}
+                        disabled={isButtonDisabled}
+                    >
+                        Add to cart
+                    </Button>
+                </Form>
             </Card.Body>
         </Card>
     )

@@ -4,6 +4,7 @@ import campPhoto from "/assets/camps.jpg";
 import privatePhoto from "/assets/flag.jpg";
 import devPhoto from "/assets/development.jpg";
 import { Carousel, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 
 
@@ -21,7 +22,9 @@ function HomeDeals(){
                     <Carousel.Caption style={{ paddingBottom:"40px"}}>
                     <h3><span style={{fontWeight:"bold", fontSize:"40px"}}>Holiday Camps</span></h3>
                     <p><span style={{fontWeight:"lighter", fontSize:"20px"}}>Our camps combine a mix of skill drills and games to create a fun environment for AFL kids.</span></p>
-                    <Button variant="secondary" style={{fontWeight:"bold"}}>View Holiday Camps</Button>
+                    <Link to="/camps">
+                        <Button variant="secondary" style={{fontWeight:"bold"}}>View Holiday Camps</Button>
+                    </Link>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item interval={1000}>
@@ -45,9 +48,11 @@ function HomeDeals(){
                     style={{content:"cover", height:"700px", width:"900px", margin:"0 auto", paddingBottom:"230px"}}
                     />
                     <Carousel.Caption>
-                    <h3><span style={{fontWeight:"bold", fontSize:"40px"}}>Development Programs</span></h3>
+                    <h3><span style={{fontWeight:"bold", fontSize:"40px"}}>Academy Preparation</span></h3>
                     <p><span style={{fontWeight:"lighter", fontSize:"20px"}}>Enhance the skills of AFL kids within your club over multiple weeks from some of our best coaches.</span></p>
-                    <Button variant="secondary" style={{fontWeight:"bold"}}>View Development Programs</Button>
+                    <Link to="/development">
+                        <Button variant="secondary" style={{fontWeight:"bold"}}>View Academy Preparation</Button>
+                    </Link>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
