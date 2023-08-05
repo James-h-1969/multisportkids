@@ -63,7 +63,30 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                   } catch (error) {
                     console.error("Error updating camp:", error);
                 }
+            } else if (val.id == 12) { //1 academy
+                const nameToChange = val.details?.purchaseName[0];
+                const dateToChange = val.details?.purchaseName[1];
+                const filter =  { name: nameToChange,  [`dates.${dateToChange}`]: { $exists: true } };
+                const update = { $push: {[`dates.${dateToChange}`]: val.details }};
+                try{
+                    const updatedAcademy = await Academy.findOneAndUpdate(filter, update, { new:true, runValidators:true})
+                } catch (error) {
+                    console.error("Error updating Academy:", error);
+                }
+            } else if (val.id == 13) { //4 academy
+                const nameToChange = val.details?.purchaseName[0];
+                const datesToChange = val.details?.purchaseName[1].split(" ");
+                datesToChange?.forEach(async (date) => {
+                    const filter =  { name: nameToChange,  [`dates.${date}`]: { $exists: true } };
+                    const update = { $push: {[`dates.${date}`]: val.details }};
+                    try{
+                        const updatedAcademy = await Academy.findOneAndUpdate(filter, update, { new:true, runValidators:true})
+                    } catch (error) {
+                        console.error("Error updating Academy:", error);
+                    }
+                })
             }
+            
 
         });
       }
@@ -137,8 +160,13 @@ app.post("/academy", async (req: Request, res: Response) => {
         time: "Monday 9:00am",
         start: "29/7/23",
         Location: "Accron Oval",
-        dates: ["29/7/23", "5/8/23", "12/8/23", "19/8/23"]
-    });
+        dates: {
+            "29/7/23": [],
+            "5/8/23": [],
+            "12/8/23": [],
+            "19/8/23": []
+        }
+    })
     const createdAcad = await newAcademy.save();
     res.json(createdAcad);
 })

@@ -8,7 +8,7 @@ type AcademyType = {
     time:String,
     start:String,
     Location:String,
-    dates: String[],
+    dates: Object,
 }
 
 function Development(){
@@ -32,7 +32,7 @@ function Development(){
             <div className="d-flex mt-5">
                 {academy.map((val,indx) => (
                     <>
-                    <AcademyItem name={val.name} Location={val.Location} start={val.start} time={val.time} dates={val.dates}/>
+                    <AcademyItem name={val.name} Location={val.Location} start={val.start} time={val.time} dates={Object.keys(val.dates)}/>
                     </>
                 ) )}
             </div>
