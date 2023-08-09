@@ -25,40 +25,24 @@ export default function AddSession(props:AddSessionProps){
     const [showWarning, setShowWarning] = useState(false);
 
     async function isTokenRight(token:string, id:number){
-        if (id == 3){
-            let newHash = bcrypt.hash(token, 10);
-            const response = await fetch('http://localhost:3000/checkTokens', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id: 3, token: newHash }),
-              });
-            const data = await response.json();
-            if (response.ok) {
-                return true; // Token is valid
-            } else {
-                return false; // Invalid token
-            }
+        let newHash = await bcrypt.hash(token, 10);
+        const response = await fetch('http://localhost:3000/checkTokens', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: id, token: token }),
+            });
+        const data = await response.json();
+        if (response.ok) {
+            return true; // Token is valid
         } else {
-            let newHash = bcrypt.hash(token, 10);
-            const response = await fetch('http://localhost:3000/checkTokens', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id: 4, token: newHash }),
-              });
-            const data = await response.json();
-            if (response.ok) {
-                return true; // Token is valid
-            } else {
-                return false; // Invalid token
-            }
+            return false; // Invalid token
         }
         return false;
     }
-    
+
+    //m4SBLJeg
 
     async function handleAddingCart(){
 
@@ -67,29 +51,33 @@ export default function AddSession(props:AddSessionProps){
         Newdate[Newdate.length - 1] = Newdate[Newdate.length - 1].slice(2);
         let Newerdate = Newdate.join("");
 
+
+        let ID = props.id;
+
+        if (token.length > 0){
+            let isValid = await isTokenRight(token, props.id);
+            if (isValid){
+                if (props.id == 3){
+                    ID = 14;
+                } else {
+                    ID = 15;
+                }
+            } else {
+                setShowWarning(true);
+                return
+            }
+        }
+
+
+        
         const Customdetails = {
             childName: childName,
             childAge: childAge,
             childComments: comments,
             childClub: club,
-            purchaseName: [props.name, Newerdate, props.time]
+            purchaseName: [props.name, Newerdate, props.time, token]
         }
 
-        let ID = props.id;
-
-        // if (token.length > 0){
-        //     let isValid = await isTokenRight(token, props.id);
-        //     if (isValid){
-        //         if (props.id == 3){
-        //             ID = 14;
-        //         } else {
-        //             ID = 15;
-        //         }
-        //     } else {
-        //         setShowWarning(true);
-        //         return
-        //     }
-        // }
         addToCart(ID, 1, Customdetails);
         location.reload();
     }

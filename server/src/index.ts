@@ -5,7 +5,7 @@ import Camp from "../Models/Camp";
 import Coach from "../Models/Coach";
 import Academy from "../Models/Academy";
 import Tokens from "../Models/Tokens";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 config();
 
 import express, { Request, Response } from "express";
@@ -47,14 +47,16 @@ function generateRandomToken(length = 10) {
 
 async function generateHashedTokens() {
     const hashedTokens:Array<string> = [];
+    const nonhashedTokens:Array<string> = [];
   
     for (let i = 0; i < 5; i++) {
       const token = generateRandomToken(8);
-      const hashedToken = await bcrypt.hash(token, 10); // Use your desired salt rounds
+      nonhashedTokens.push(token);
+      const hashedToken = bcrypt.hashSync(token, 10); // Use your desired salt rounds
       hashedTokens.push(hashedToken);
     }
   
-    return hashedTokens;
+    return [hashedTokens, nonhashedTokens];
   }
 
 
@@ -122,20 +124,24 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                 } catch (error) {
                     console.error("Error updating Coach:", error);
                 }
-            } else if (val.id == 9 || val.id == 10){
+            } else if (val.id == 9 || val.id == 10){ //buying plans
                 //create 5 tokens
-                const newTokens = await generateHashedTokens();
+                let generatedTokens = await generateHashedTokens();
+                const newTokens = generatedTokens[1];
+                const hashedTokens = generatedTokens[0];
+                console.log(newTokens);
                 //add them onto corresponding database
                 const typeOfToken = (val.id == 9) ? "singleTokens":"groupTokens";
                 let filter = { };
-                newTokens.forEach(async (token) => {
+                hashedTokens.forEach(async (token) => {
                     let update = { $push: { [typeOfToken]: token } };
                     const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
-                })
+                })          
+            } else if (val.id == 14 || val.id == 15){ //using tokens,
+                //remove tokens from backend
                 
+                //handle like a normal private session
             }
-            
-
         });
       }
   
@@ -218,20 +224,23 @@ app.post("/checkTokens", async (req: Request, res: Response) => {
         let searching = [""];
 
         if (id == 3){
-            searching = ActualTokens.singleTokens
+            searching = ActualTokens.singleTokens;
         } else {
-            searching = ActualTokens.groupTokens
+            searching = ActualTokens.groupTokens;
         }
-    
-        // Compare the user-provided token with each hashed token in the array
-        const matchFound = searching.some(async (hashedToken) => {
-            return await bcrypt.compare(userProvidedToken, hashedToken);
-        });
-    
+        
+        let matchFound = false;
+        for (let i = 0; i < searching.length; i++){
+            let isMatch = await bcrypt.compareSync(userProvidedToken, searching[i]);
+            if (isMatch){
+                matchFound = true;
+            }     
+        }
+        
         if (matchFound) {
           return res.json({ message: 'Token is valid.' });
         } else {
-          return res.status(401).json({ error: 'Invalid token.' });
+            return res.status(401).json({ error: 'Invalid token.' });
         }
       } catch (error) {
         console.error('Error verifying token:', error);
@@ -272,7 +281,10 @@ const storeItems = new Map([
     [10, { priceInCents: 100000, name: "Group Private Plan"}],
     [11, { priceInCents: 13000, name: "Holiday Camp"}],
     [12, { priceInCents: 4000, name: "1 Academy Prep Session"}],
-    [13, { priceInCents: 13000, name: "4 Academy Prep Sessions"}]
+    [13, { priceInCents: 13000, name: "4 Academy Prep Sessions"}],
+    [14, { priceInCents: 50, name: "1 on 1 Private (Plan)"}],
+    [15, { priceInCents: 50, name: "Group Private (Plan)"}]
+
 ])
 
 
