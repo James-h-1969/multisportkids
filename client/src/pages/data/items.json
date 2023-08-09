@@ -89,6 +89,20 @@
         "priceString": "$130.00",
         "priceNum": 130.00,
         "imgUrl": "/assets/camps.jpg"
+    },
+    {
+        "id":14,
+        "name": "Private Plan Session",
+        "priceString": "$0.00",
+        "priceNum": 0.00,
+        "imgUrl": "/assets/camps.jpg"
+    }, 
+    {
+        "id":15,
+        "name": "Group Plan Session",
+        "priceString": "$0.00",
+        "priceNum": 0.00,
+        "imgUrl": "/assets/camps.jpg"
     }
 
 

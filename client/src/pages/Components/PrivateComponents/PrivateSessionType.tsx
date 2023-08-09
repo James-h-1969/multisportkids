@@ -7,8 +7,8 @@ type PrivateSessionTypeProps = {
 }
 
 function PrivateSessionType({showAdd, step3}:PrivateSessionTypeProps){
-    const [isActive, setisActive] = useState([true, false, false, false, false]);
-    const [activeIndex, setactiveIndex] = useState(0);
+    const [isActive, setisActive] = useState([false, false, false, false, false]);
+    const [activeIndex, setactiveIndex] = useState(-1);
     const [amountofKids, setamountofKids] = useState(1);
 
     const handleClick = (index:number, kids:number) => {

@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import Camp from "../Models/Camp";
 import Coach from "../Models/Coach";
 import Academy from "../Models/Academy";
+import Tokens from "../Models/Tokens";
+import bcrypt from "bcrypt";
 config();
 
 import express, { Request, Response } from "express";
@@ -32,6 +34,28 @@ interface Item {
     quantity: number;
     details?: details
 }
+
+function generateRandomToken(length = 10) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let token = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      token += characters[randomIndex];
+    }
+    return token;
+}
+
+async function generateHashedTokens() {
+    const hashedTokens:Array<string> = [];
+  
+    for (let i = 0; i < 5; i++) {
+      const token = generateRandomToken(8);
+      const hashedToken = await bcrypt.hash(token, 10); // Use your desired salt rounds
+      hashedTokens.push(hashedToken);
+    }
+  
+    return hashedTokens;
+  }
 
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
@@ -85,6 +109,26 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                         console.error("Error updating Academy:", error);
                     }
                 })
+            } else if (val.id >= 3 || val.id <= 8) { //private session
+                const coachName = val.details?.purchaseName[0];
+                const dateDel = val.details?.purchaseName[1];
+                const timeDel = val.details?.purchaseName[2];
+ 
+                const filter = { name: coachName, dates: dateDel };
+                const update = { $pull: { dates: dateDel, times: timeDel }};
+                try{
+                    const updatedCoach = await Coach.findOneAndUpdate(filter, update, { new:true, runValidators:true})
+                } catch (error) {
+                    console.error("Error updating Coach:", error);
+                }
+            } else if (val.id == 9 || val.id == 10){
+                //create 5 tokens
+                const newTokens = await generateHashedTokens();
+                //add them onto corresponding database
+                const typeOfToken = (val.id == 9) ? "singleTokens":"GroupTokens";
+                    let filter = { };
+                    let update = { $push: { typeOfToken: { $each: newTokens } } };
+                    const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
             }
             
 
@@ -152,6 +196,43 @@ app.post("/camps", async (req: Request, res: Response) => {
     });
     const createdCamp = await newCamp.save();
     res.json(createdCamp);
+});
+
+type hashedTokensType = {
+    singleTokens: Array<string>;
+    groupTokens: Array<string>
+}
+
+app.post("/checkTokens", async (req: Request, res: Response) => {
+    try {
+        const userProvidedToken = req.body.token
+        const id = req.body.id;
+    
+        // Find all documents in the collection and get an array of hashed tokens
+        const allHashedTokens:Array<hashedTokensType> = await Tokens.find();
+        const ActualTokens:hashedTokensType = allHashedTokens[0];
+        let searching = [""];
+
+        if (id == 3){
+            searching = ActualTokens.singleTokens
+        } else {
+            searching = ActualTokens.groupTokens
+        }
+    
+        // Compare the user-provided token with each hashed token in the array
+        const matchFound = searching.some(async (hashedToken) => {
+            return await bcrypt.compare(userProvidedToken, hashedToken);
+        });
+    
+        if (matchFound) {
+          return res.json({ message: 'Token is valid.' });
+        } else {
+          return res.status(401).json({ error: 'Invalid token.' });
+        }
+      } catch (error) {
+        console.error('Error verifying token:', error);
+        return res.status(500).json({ error: 'Internal server error.' });
+      }
 })
 
 app.post("/academy", async (req: Request, res: Response) => {

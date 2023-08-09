@@ -6,7 +6,7 @@ import { ArrowRight, ArrowLeft } from "react-bootstrap-icons";
 
 type PrivateTimetableProps = {
     showTypes: (show:boolean) => void;
-    step2: (date:string, time:string) => void;
+    step2: (date:string, time:string, coach:string) => void;
     location: string;
 }
 
@@ -22,14 +22,17 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
  
     const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
     const colorsList = [
-        "red",
-        "orange",
-        "yellow",
-        "green",
-        "blue",
-        "indigo",
-        "violet"
-    ]      
+        "#77A6CC", // Light Blue
+        "#5C8DBF", // Sky Blue
+        "#46768E", // Steel Blue (base color)
+        "#345E82", // Deep Blue
+        "#1F4875", // Sapphire Blue
+        "#153B68", // Royal Blue
+        "#0B285C"  // Navy Blue
+      ];
+      
+      
+                
     const timeAvailable = ["7:00am", "9:00am", "11:00am", "1:00pm", "3:00pm", "5:00pm"];
 
     const handleClick = (week:number, day:number) => {
@@ -143,7 +146,7 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
         setSelectedTime(time);
         setSelectedCoach(coach);
         showTypes(true);
-        step2(getDate(), time);
+        step2(getDate(), time, coach);
     }
 
     function isAvailableDate(day:number, week:number){
@@ -193,10 +196,10 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
                     {timetableDates.map((week, weeknum) => (
                         <div className="d-flex justify-content-around" style={{}}>
                         {week.map((day, daynum) => (
-                            <div className="d-flex m-4 text-center row" style={{ width: "30px", height: "30px" }} onClick={() => handleClick(weeknum, daynum)}>
+                            <div className="d-flex m-4 text-center row" style={{ width: "30px", height: "30px"}} onClick={() => handleClick(weeknum, daynum)}>
                                 <div className={day[1] === "currentDay" && isCurrentMonth ? "current-day rounded-circle" : "" || isAvailableDate(daynum, weeknum) ? "box-red rounded-circle":""}>
                                     <div className={day[0] === "invalid" ? "":"show-shadow rounded-circle"}>
-                                        <a> <span className="fs-6 d-flex align-items-center justify-content-center" style={{ height: "100%", width: "100%" }}>{day[0] === "invalid"? "":day[0]}</span></a>   
+                                        <a> <span className="fs-6 d-flex align-items-start justify-content-center" style={{ height: "100%", width: "100%" }}>{day[0] === "invalid"? "":day[0]}</span></a>   
                                     </div>
                                 </div>
                             </div>

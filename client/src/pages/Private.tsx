@@ -21,6 +21,7 @@ function Private() {
         date:"",
         time:"",
         price: 0,
+        coachName: "",
     })
 
     function showTimetable(){
@@ -43,11 +44,12 @@ function Private() {
         }));
     }
 
-    function step2(date:string, time:string){
+    function step2(date:string, time:string, coach:string){
         setOverallSession((prevState) => ({
             ...prevState,
             date:date,
-            time:time
+            time:time,
+            coachName:coach,
         }));
     }
 
@@ -87,7 +89,7 @@ function Private() {
         <PrivateLocation showTimetable={showTimetable} step1={step1}/>
         {stepStates[1] ? <PrivateTimetable showTypes={showType} step2={step2} location={overallSession.location}/> :<></>}
         {stepStates[2] ? <PrivateSessionType showAdd={showAdd} step3={step3}/>:<></>}
-        {stepStates[3] ? <AddSession time={overallSession.time} date={overallSession.date} id={overallSession.id} location={overallSession.location} price={overallSession.price}/>:<></>}
+        {stepStates[3] ? <AddSession time={overallSession.time} date={overallSession.date} id={overallSession.id} location={overallSession.location} price={overallSession.price} name={overallSession.coachName}/>:<></>}
 
       </>
     )

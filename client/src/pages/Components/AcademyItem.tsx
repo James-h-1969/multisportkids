@@ -77,7 +77,7 @@ export default function AcademyItem({name, time, start, Location, dates}:Academy
     const isButtonDisabled = !(childName && childAge && club && comments && plan == timesChosen.length);
 
     return(
-        <Card className="mb-5 ms-5" style={{width: "500px"}}>
+        <Card className="mb-5 ms-5 p-3" style={{width: "500px", backgroundColor:"#46768E"}}>
             <Card.Body className="d-flex flex-column">
                 <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
                     <span className="fs-2">{name}</span>
@@ -100,10 +100,10 @@ export default function AcademyItem({name, time, start, Location, dates}:Academy
                 </div>
                 <span className="mt-3">Select Amount of sessions:</span>
                 <div className="d-flex justify-content-around fs-5 mt-2">
-                    <div className="p-4" style={{backgroundColor: plan != 1 ? "rgb(222, 222, 231)":"#46768E", borderRadius:"20px", cursor:"pointer"}} onClick={() => handleClick(1)}>
+                    <div className="p-4" style={{backgroundColor: plan != 1 ? "rgb(222, 222, 231)":"grey", borderRadius:"20px", cursor:"pointer"}} onClick={() => handleClick(1)}>
                         1 session - $40
                     </div>
-                    <div className="p-4" style={{backgroundColor: plan != 4 ? "rgb(222, 222, 231)":"#46768E",borderRadius:"20px", cursor:"pointer"}} onClick={() => handleClick(4)}>
+                    <div className="p-4" style={{backgroundColor: plan != 4 ? "rgb(222, 222, 231)":"grey",borderRadius:"20px", cursor:"pointer"}} onClick={() => handleClick(4)}>
                         4 sessions - $130
                     </div>
                 </div>
@@ -117,7 +117,7 @@ export default function AcademyItem({name, time, start, Location, dates}:Academy
                                 <div className="p-2" style={{backgroundColor:"rgb(222, 222, 231)", borderRadius:"10px", cursor:"pointer"}} onClick={() => handleTimeClick(date)}>
                                     Choose Date
                                 </div>
-                            :   <div className="p-2" style={{backgroundColor:"#46768E", borderRadius:"10px", cursor:"pointer"}} onClick={() => handleTimeClick(date)}>
+                            :   <div className="p-2" style={{backgroundColor:"grey", borderRadius:"10px", cursor:"pointer"}} onClick={() => handleTimeClick(date)}>
                                     Date Chosen
                                 </div>}
                         </div>
@@ -158,7 +158,7 @@ export default function AcademyItem({name, time, start, Location, dates}:Academy
                     </Form.Group>
                     <Button
                         className="mt-5"
-                        style={{ color: "black", width: "100%" }}
+                        style={{ backgroundColor:"white", color: "black", width: "100%" }}
                         onClick={() => handleCartClick()}
                         disabled={isButtonDisabled}
                     >

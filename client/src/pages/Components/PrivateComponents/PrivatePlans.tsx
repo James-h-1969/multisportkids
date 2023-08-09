@@ -13,7 +13,7 @@ export default function PrivatePlans(){
             <div className="d-flex p-2 merch-box" style={{marginLeft:"50px", marginTop:"50px"}}>
                 <Row className="g-3 ml-1" xs={1} lg={2} >
                     <Col>
-                        <PlanItem name="1 on 1 Private Plan" price="$375" image={Oneon1} desc={indDesc} id={9}/>
+                        <PlanItem name="1 on 1 Private Plan" price="$375 overall" image={Oneon1} desc={indDesc} id={9}/>
                     </Col>
                     <Col>
                         <PlanItem name="Group Private Plan" price="$200 per week" image={Banner} desc={groupDesc} id={10}/>
