@@ -150,15 +150,17 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                     const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
                 })  
                 //add them to email details.   
+                const tokenString = newTokens.join(", ");
+                const subject = (val.id == 9) ? "AFLKIDS 5x 1 on 1 Session Tokens":"AFLKIDS 5x Group Session Tokens";
                 const params = {
                     Destination: {
                         ToAddresses: ["jameshocking542@gmail.com"]
                     },
                     Message: {
                         Body: {
-                            Text: { Data: "Testing 123" }
+                            Text: { Data: `Thanks for purchasing! Use these five codes at any point in the next 6 months by inputting when you are booking a session. Keep them and cross off each one as you use it. They are ${tokenString}` }
                         },
-                        Subject: { Data: "This is a test" }
+                        Subject: { Data: subject }
                     },
                     Source: senderEmail
                 };
