@@ -5,7 +5,9 @@ import Camp from "../Models/Camp";
 import Coach from "../Models/Coach";
 import Academy from "../Models/Academy";
 import Tokens from "../Models/Tokens";
+import Product from "../Models/Product";
 import bcrypt from "bcryptjs";
+// import store from "../data/items.json";
 const AWS = require('aws-sdk');
 config();
 
@@ -87,11 +89,12 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
  
       // Handle the event
       if (eventType === "payment_intent.succeeded") {
-        // const metadata = event.data.object.metadata;
-        // const cartItems = JSON.parse(metadata.cartItems); // Convert the JSON string back to an array
-        const { metadata, email } = event.data.object;
+
+        const { metadata, receipt_email } = event.data.object;
         const cartItems = metadata.cartItems;
         const JSONStuff = JSON.parse(cartItems);
+
+        let email = receipt_email;
 
         //update database
         JSONStuff.forEach(async (val:Item) => {
@@ -158,7 +161,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                     },
                     Message: {
                         Body: {
-                            Text: { Data: `Thanks for purchasing! Use these five codes at any point in the next 6 months by inputting when you are booking a session. Keep them and cross off each one as you use it. They are ${tokenString}` }
+                            Html: { Data: `Thanks for purchasing! <br /><br />Use these five codes at any point in the next 6 months by inputting when you are booking a session. Keep them and cross off each one as you use it. <br />They are <br /><br />${tokenString}<br /><br /> Thanks, <br />AFLKIDS` }
                         },
                         Subject: { Data: subject }
                     },
@@ -216,7 +219,37 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                 // }
             }
         });
+        const theyBoughtPromises = JSONStuff.map(async (val: Item) => {
+            let item = await Product.findOne({ id: val.id });
+            let details = JSON.stringify(val.details);
+            return `${item?.name} : ${details}`;
+        });
+        
+        const theyBoughtArray = await Promise.all(theyBoughtPromises);
+        const theyBought = theyBoughtArray.join(",<br /><br />");
+  
+        const params = {
+          Destination: {
+              ToAddresses: ["jameshocking542@gmail.com"]
+          },
+          Message: {
+              Body: {
+                  Html: { Data: `${email} just purchased <br /><br />${theyBought}<br /><br />Good stuff.` }
+              },
+              Subject: { Data: "AFLKIDS PURCHASE!" }
+          },
+          Source: senderEmail
+        };
+    
+        try {
+            const result = await ses.sendEmail(params).promise();
+            console.log(`Email sent to ${email}. Message ID: ${result.MessageId}`);
+        } catch (error) {
+            console.error(`Error sending email to ${email}:`, error);
+        }
+      
       }
+    
   
       // Return a 200 response to acknowledge receipt of the event
       response.status(200).send('Received').end();
@@ -256,13 +289,22 @@ app.get("/academy", async (req: Request, res: Response) => {
 // POST REQUESTS //
 app.post("/PrivateTimes", async (req: Request, res: Response) => {
     const newCoach = new Coach({
-        name: "Goat Worker",
-        dates: ["10/8/23", "25/8/23"],
-        times: ["1:00pm", "9:00am"],
+        name: "Kale Gablia",
+        dates: ["11/8/23", "15/8/23", "17/8/23", "22/8/23", "24/8/23", "25/8/23", "25/8/23"],
+        times: ["7:00am", "7:00am", "7:00am", "7:00am", "7:00am", "7:00am", "9:00am"],
         location: "North Shore"
     });
     const createdCoach = await newCoach.save();
     res.json(createdCoach);
+})
+
+app.post("/product", async (req: Request, res: Response) => {
+    const newProduct = new Product({
+        id: 15,
+        name: "Group Private (Plan)"
+    });
+    const createdProduct = await newProduct.save();
+    res.json(createdProduct);
 })
 
 app.post("/camps", async (req: Request, res: Response) => {

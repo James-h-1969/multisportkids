@@ -20,6 +20,28 @@ export default function Contact() {
         setplayerShowing(name);
     }
 
+    const playerInfo = {
+        "Tom O'Leary":{
+            role: "Founder/Sydney Coach",
+            position: "Midfielder/Small Forward",
+            phone: "+61 448 408 920",
+            quote: "I want to inspire and develop the next generation of excellent people on and off the field"
+        },
+        "William Smit":{
+            role: "Northern Beaches Head Coach",
+            position: "Winger/Small Forward",
+            phone: "+61 426 585 152",
+            quote: "I want to give back to the game that has given me so much"
+        },
+        "Kale Gablia":{
+            role: "North Shore Head Coach",
+            position: "Key/Small Forward",
+            phone: "+61 431 036 199",
+            quote: "I have built up an interest coaching different teams over the years and would love to gain but also pass on experience through 1:1's"
+        },
+
+    }
+
     return(
         <>
             <NavBar />
@@ -57,7 +79,7 @@ export default function Contact() {
                             <TeamCard name="William Smit" changePlayer={changeActive}  player={playerShowing}/>
                             <TeamCard name="Kale Gablia" changePlayer={changeActive}  player={playerShowing}/>
                         </div>
-                        {playerShowing === "" ? <div className="pt-5" style={{width:"40%", fontWeight:"lighter"}}>Choose a team member to learn more</div>: <CoachInfo/>}
+                        {playerShowing === "" ? <div className="pt-5" style={{width:"70%", fontWeight:"lighter"}}>Choose a team member to learn more</div>: <CoachInfo role={playerInfo[playerShowing as keyof typeof playerInfo].role} position={playerInfo[playerShowing as keyof typeof playerInfo].position} phone={playerInfo[playerShowing as keyof typeof playerInfo].phone} quote={playerInfo[playerShowing as keyof typeof playerInfo].quote}/>}
                     </div>
                 </div>
             </div>

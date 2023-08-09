@@ -10,7 +10,7 @@ import "./Home.css";
 function Home(){
 
     function addAcademy(){
-        fetch("http://localhost:3000/academy",
+        fetch("http://localhost:3000/PrivateTimes",
         {
             method:"POST"
         })

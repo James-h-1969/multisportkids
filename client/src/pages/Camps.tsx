@@ -11,7 +11,13 @@ function Camps(){
     return (
         <>
             <NavBar />
+
             <Header title="Holiday Camps" description={text}/>
+            <div className="" style={{position:"absolute", left:"63%", top:"18%"}}>
+            <video controls width="360" height="200">
+
+            </video>
+            </div>
             <UpComingCamps />
         </>
     )

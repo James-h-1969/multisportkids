@@ -29,7 +29,15 @@ const MerchItem: React.FC<MerchItemProps> = ({name, price, image, id}) => {
     }   
 
     function handleAddingCart(){
-        addToCart(id, value);
+        const Customdetails = {
+            childName: "",
+            childAge: "",
+            childComments: "",
+            childClub: "",
+            purchaseName: [name]
+        }
+
+        addToCart(id, value, Customdetails);
         location.reload();
     }
 

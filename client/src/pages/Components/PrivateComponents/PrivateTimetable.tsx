@@ -33,7 +33,7 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
       
       
                 
-    const timeAvailable = ["7:00am", "9:00am", "11:00am", "1:00pm", "3:00pm", "5:00pm"];
+    const timeAvailable = ["7:00am", "9:00am", "11:00am", "1:00pm", "3:00pm", "4:00pm"];
 
     const handleClick = (week:number, day:number) => {
         showTypes(false);
