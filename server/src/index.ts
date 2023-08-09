@@ -6,7 +6,16 @@ import Coach from "../Models/Coach";
 import Academy from "../Models/Academy";
 import Tokens from "../Models/Tokens";
 import bcrypt from "bcryptjs";
+const AWS = require('aws-sdk');
 config();
+
+const SES_CONFIG = {
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: "ap-southeast-2"
+};
+const ses = new AWS.SES(SES_CONFIG);
+const senderEmail = 'jameshocking542@gmail.com'; // Replace with your sender email address
 
 import express, { Request, Response } from "express";
 
@@ -20,6 +29,11 @@ app.use(cors({
 const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
     app.listen(3000);
 });
+
+type hashedTokensType = {
+    singleTokens: Array<string>;
+    groupTokens: Array<string>
+}
 
 type details = {
     childName: string,
@@ -75,10 +89,9 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
       if (eventType === "payment_intent.succeeded") {
         // const metadata = event.data.object.metadata;
         // const cartItems = JSON.parse(metadata.cartItems); // Convert the JSON string back to an array
-        const { metadata } = event.data.object;
+        const { metadata, email } = event.data.object;
         const cartItems = metadata.cartItems;
         const JSONStuff = JSON.parse(cartItems);
-        
 
         //update database
         JSONStuff.forEach(async (val:Item) => {
@@ -129,18 +142,76 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                 let generatedTokens = await generateHashedTokens();
                 const newTokens = generatedTokens[1];
                 const hashedTokens = generatedTokens[0];
-                console.log(newTokens);
                 //add them onto corresponding database
                 const typeOfToken = (val.id == 9) ? "singleTokens":"groupTokens";
                 let filter = { };
                 hashedTokens.forEach(async (token) => {
                     let update = { $push: { [typeOfToken]: token } };
                     const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
-                })          
-            } else if (val.id == 14 || val.id == 15){ //using tokens,
-                //remove tokens from backend
+                })  
+                //add them to email details.   
+                const params = {
+                    Destination: {
+                        ToAddresses: ["jameshocking542@gmail.com"]
+                    },
+                    Message: {
+                        Body: {
+                            Text: { Data: "Testing 123" }
+                        },
+                        Subject: { Data: "This is a test" }
+                    },
+                    Source: senderEmail
+                };
+            
+                try {
+                    const result = await ses.sendEmail(params).promise();
+                    console.log(`Email sent to ${email}. Message ID: ${result.MessageId}`);
+                } catch (error) {
+                    console.error(`Error sending email to ${email}:`, error);
+                }
                 
-                //handle like a normal private session
+            } else if (val.id == 14 || val.id == 15){ //using tokens
+                //ir3ffJN3
+                //remove tokens from backend
+                const token = val.details?.purchaseName[3];
+                console.log(token);
+                const typeOfToken = (val.id == 14) ? "singleTokens":"groupTokens";
+                
+                let filter = {};
+
+                const allHashedTokens:Array<hashedTokensType> = await Tokens.find();
+                const ActualTokens:hashedTokensType = allHashedTokens[0];
+                let searching = [""];
+        
+                if (val.id == 14){
+                    searching = ActualTokens.singleTokens;
+                } else {
+                    searching = ActualTokens.groupTokens;
+                }
+                
+                let index = 0;
+                for (let i = 0; i < searching.length; i++){
+                    let isMatch = await bcrypt.compareSync(token?token:"", searching[i]);
+                    if (isMatch){
+                        index = i;
+                    }     
+                }
+
+                const update = { $pull: { [typeOfToken]: searching[index] } };
+                const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
+
+                // //handle like a normal private session
+                // const coachName = val.details?.purchaseName[0];
+                // const dateDel = val.details?.purchaseName[1];
+                // const timeDel = val.details?.purchaseName[2];
+ 
+                // filter = { name: coachName, dates: dateDel };
+                // update = { $pull: { dates: dateDel, times: timeDel }};
+                // try{
+                //     const updatedCoach = await Coach.findOneAndUpdate(filter, update, { new:true, runValidators:true})
+                // } catch (error) {
+                //     console.error("Error updating Coach:", error);
+                // }
             }
         });
       }
@@ -207,11 +278,6 @@ app.post("/camps", async (req: Request, res: Response) => {
     const createdCamp = await newCamp.save();
     res.json(createdCamp);
 });
-
-type hashedTokensType = {
-    singleTokens: Array<string>;
-    groupTokens: Array<string>
-}
 
 app.post("/checkTokens", async (req: Request, res: Response) => {
     try {
