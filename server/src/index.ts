@@ -76,6 +76,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         const { metadata } = event.data.object;
         const cartItems = metadata.cartItems;
         const JSONStuff = JSON.parse(cartItems);
+        
 
         //update database
         JSONStuff.forEach(async (val:Item) => {
@@ -109,7 +110,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                         console.error("Error updating Academy:", error);
                     }
                 })
-            } else if (val.id >= 3 || val.id <= 8) { //private session
+            } else if (val.id >= 3 && val.id <= 8) { //private session
                 const coachName = val.details?.purchaseName[0];
                 const dateDel = val.details?.purchaseName[1];
                 const timeDel = val.details?.purchaseName[2];
@@ -125,10 +126,13 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                 //create 5 tokens
                 const newTokens = await generateHashedTokens();
                 //add them onto corresponding database
-                const typeOfToken = (val.id == 9) ? "singleTokens":"GroupTokens";
-                    let filter = { };
-                    let update = { $push: { typeOfToken: { $each: newTokens } } };
+                const typeOfToken = (val.id == 9) ? "singleTokens":"groupTokens";
+                let filter = { };
+                newTokens.forEach(async (token) => {
+                    let update = { $push: { [typeOfToken]: token } };
                     const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
+                })
+                
             }
             
 
