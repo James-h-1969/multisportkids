@@ -6,7 +6,11 @@ import Coach from "../Models/Coach";
 import Academy from "../Models/Academy";
 import Tokens from "../Models/Tokens";
 import Product from "../Models/Product";
+import Parent from "../Models/Parent";
 import bcrypt from "bcryptjs";
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
+
 // import store from "../data/items.json";
 const AWS = require('aws-sdk');
 config();
@@ -19,10 +23,10 @@ const SES_CONFIG = {
 const ses = new AWS.SES(SES_CONFIG);
 const senderEmail = 'jameshocking542@gmail.com'; // Replace with your sender email address
 
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 
 const app = express();
-
+app.use(cookieParser());
 
 app.use(cors({
     origin: "*" //this will be the site name so that only it can access the API
@@ -31,6 +35,66 @@ app.use(cors({
 const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
     app.listen(3000);
 });
+
+interface UserData {
+    username: string;
+    password: string;
+}
+
+declare namespace Express {
+    interface Request {
+    user?: UserData; // Assuming you have an interface named UserData for your user data
+    }
+}
+
+const SECRET_KEY = 'your-secret-key';
+
+// Simulate user data
+const users: Record<string, UserData> = {
+  manager: { username: 'Tom Oleary', password: 'Bombers30!' },
+};
+
+app.post('/login', (req:Request, res:Response) => {
+  const { username, password } = req.body;
+
+  // Simulate user authentication (replace with actual logic)
+  const user = users[username];
+  if (user && user.password === password) {
+    const token = jwt.sign({ username }, SECRET_KEY);
+    res.cookie('token', token, { httpOnly: true, secure: true });
+    res.status(200).json({ message: 'Login successful' });
+  } else {
+    res.status(401).json({ message: 'Authentication failed' });
+  }
+});
+
+app.post('/logout', (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({ message: 'Logout successful' });
+});
+
+// Middleware to check for authentication
+const authenticate = (req: Request, res: Response, next: NextFunction) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ message: 'Authentication required' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY) as { username: string };
+    const user = users[decoded.username];
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+};
+
+app.get('/protected', authenticate, (req, res) => {
+  res.status(200).json({ message: 'You have manager access' });
+});
+
+
 
 type hashedTokensType = {
     singleTokens: Array<string>;
@@ -86,18 +150,43 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
   
       const data = event.data.object;
       const eventType = event.type;
+
+
  
       // Handle the event
       if (eventType === "payment_intent.succeeded") {
 
-        const { metadata, receipt_email } = event.data.object;
+        const customerId = data.customer;
+        const customer = await stripe.customers.retrieve(customerId);
+  
+
+        const { metadata, receipt_email } = data;
         const cartItems = metadata.cartItems;
         const JSONStuff = JSON.parse(cartItems);
 
         let email = receipt_email;
 
         //update database
+        const kidsChecked: Array<String> = [];
+        const agesChecked: Array<String> = [];
+        const detailsChecked: Array<String> = [];
+        const clubChecked: Array<String> = [];
+        const events: Array<String> = []
+
         JSONStuff.forEach(async (val:Item) => {
+            console.log(val);
+            if (val.details != null){ //there is a child
+                const kidName: String = val.details?.childName;
+                console.log(kidName);
+                if (!kidsChecked.includes(kidName)){
+                    kidsChecked.push(kidName);
+                    agesChecked.push(val.details?.childAge);
+                    detailsChecked.push(val.details?.childComments);
+                    clubChecked.push(val.details?.childClub);
+                    events.push(val.details?.purchaseName[0]);
+                }
+            }
+     
             if (val.id == 11){ //holiday camp
                 const filter =  { name: val.details?.purchaseName[0] };
                 const update = { $push: {kids: val.details }};
@@ -219,6 +308,23 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                 // }
             }
         });
+       //search for parent name
+       const existingParent = await Parent.findOne({ name: customer.name });
+       if (!existingParent){
+           const addingParent = await Parent.create({ 
+            parentname: customer.name, 
+            email: customer.email, 
+            phone: "0433833966",
+            childNames: kidsChecked,
+            childAge: agesChecked,
+            childComments: detailsChecked,
+            childEvents: events,
+            childClubs: clubChecked
+         });
+       } else {
+            console.log("parent already exists")
+       }
+
         const theyBoughtPromises = JSONStuff.map(async (val: Item) => {
             let item = await Product.findOne({ id: val.id });
             let details = JSON.stringify(val.details);
@@ -388,23 +494,30 @@ const storeItems = new Map([
     [7, { priceInCents: 20000, name: "5 on 1 Private"}],
     [8, { priceInCents: 23000, name: "6 on 1 Private"}],
     [9, { priceInCents: 37500, name: "1 on 1 Private Plan"}],
-    [10, { priceInCents: 100000, name: "Group Private Plan"}],
-    [11, { priceInCents: 13000, name: "Holiday Camp"}],
+    [10, { priceInCents: 50000, name: "Group Private Plan"}],
+    [11, { priceInCents: 15000, name: "Holiday Camp"}],
     [12, { priceInCents: 4000, name: "1 Academy Prep Session"}],
     [13, { priceInCents: 13000, name: "4 Academy Prep Sessions"}],
     [14, { priceInCents: 50, name: "1 on 1 Private (Plan)"}],
-    [15, { priceInCents: 50, name: "Group Private (Plan)"}]
+    [15, { priceInCents: 50, name: "Group Private (Plan)"}],
+    [16, { priceInCents: 10000, name: "Holiday Camp (1 day)"}]
 
 ])
 
 
-
 app.post('/create-checkout-session', async (req: Request, res: Response) => {
     try {
+        const customerName = req.body.customerName;
+        const customerEmail = req.body.customerEmail;
+        const customer = await stripe.customers.create({
+            email: customerEmail,
+            name: customerName
+        });
         let items = JSON.stringify(req.body.items);
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             mode: 'payment',
+            customer: customer.id,
             line_items: (req.body.items as Item[]).map(item => {
                 const storeItem = storeItems.get(item.id);
                 return {
@@ -431,3 +544,4 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
         res.status(500).json({ error: e.message });
     }
 });
+

@@ -1,7 +1,8 @@
-import { Button, Offcanvas, Stack } from "react-bootstrap";
+import { Button, Offcanvas, Stack, Form } from "react-bootstrap";
 import { useCart } from "../context/cartContext";
 import {CartItem} from "./CartItem";
 import storeItems from "../data/items.json"
+import { useState } from "react";
 
 type CartProps = {
     isOpen: boolean;
@@ -23,6 +24,8 @@ interface CartItem {
 
 export function Cart({isOpen}:CartProps){
     const { closeCart, cartItems } = useCart();
+    const [ emailAddress, setEmailAdress ] = useState("");
+    const [ customerName, setCustomerName ] = useState("");
 
     async function handleCheckoutButton(){
         closeCart();
@@ -36,8 +39,11 @@ export function Cart({isOpen}:CartProps){
                   id: item.id,
                   quantity: item.quantity,
                   details: item.details
-                }))
-            })
+                })),
+                customerName: customerName,   // Include customer name in the request
+                customerEmail: emailAddress   // Include customer email in the request
+            }),
+        
         }).then(res => {
             if (res.ok) return res.json()
             return res.json().then(json => Promise.reject(json))
@@ -67,7 +73,23 @@ export function Cart({isOpen}:CartProps){
                         return total + (item?.priceNum || 0)  * cartItem.quantity;
                     }, 0).toFixed(2)}
                 </div>
-                <Button variant="secondary" className="w-100" onClick={() => handleCheckoutButton()}>
+                <Form>
+                    <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
+                            <Form.Control
+                            placeholder="Enter Parent Name"
+                            value={customerName}
+                            onChange={(e) => setCustomerName(e.target.value)}
+                            />
+                    </Form.Group>
+                            <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
+                            <Form.Control
+                            placeholder="Enter Email Address"
+                            value={emailAddress}
+                            onChange={(e) => setEmailAdress(e.target.value)}
+                            />
+                    </Form.Group>
+                </Form>
+                <Button disabled={!(customerName.length > 0 && emailAddress.length > 0)}variant="secondary" className="w-100" onClick={() => handleCheckoutButton()}>
                     Checkout
                 </Button>
 

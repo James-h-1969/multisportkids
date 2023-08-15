@@ -1,7 +1,7 @@
 import LinkButton from "../LinkButton";
 import { Image, Button, Form } from "react-bootstrap";
 import development from "/assets/development.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "../../context/cartContext";
 
 
@@ -23,8 +23,15 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic}: C
     const [childAge, setChildAge] = useState('');
     const [club, setClub] = useState('');
     const [comments, setComments] = useState('');
+    const [chosen, setChosen] = useState([false, false]);
 
     function handleAddingCart(){
+        let ID = 0;
+        if ((chosen[0] && !chosen[1]) || (chosen[1] && !chosen[0])){
+            ID = 16;
+        } else {
+            ID = 11;
+        }
         const Customdetails = {
             childName: childName,
             childAge: childAge,
@@ -32,11 +39,21 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic}: C
             childClub: club,
             purchaseName: [name],
         }
-        addToCart(11, 1, Customdetails);
+        addToCart(ID, 1, Customdetails);
         location.reload();
     }
 
-    const isButtonDisabled = !(childName && childAge && club && comments);
+    function handleDayClick(day:number){
+        let newChosen = [...chosen];
+        newChosen[day] = !chosen[day];
+        setChosen(newChosen);
+    }
+
+    useEffect(() => {
+        
+    }, [chosen])
+
+    const isButtonDisabled = !(childName && childAge && club && comments && (chosen[0] || chosen[1]));
     
     return(
         <div className="m-5" style={{backgroundColor:"rgb(70, 118, 142)", fontFamily:"Rubik", borderRadius:"15px"}}>
@@ -68,6 +85,14 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic}: C
                                     {address}
                                 </div>
                                 <Image src={locPic} className="pt-4" style={{width:"70%"}}/>
+                                <div className="mt-5 d-flex justify-content-around">
+                                    <div>
+                                        Both Days<br/><span style={{fontSize:"50px"}}>$150</span>
+                                    </div>
+                                    <div>
+                                        One Day<br/><span style={{fontSize:"50px"}}>$100</span>
+                                    </div>
+                                </div>
                             </div>
                             <div style={{fontSize:"15px", textAlign:"center", width:"50%"}}>
                                 (1) Refunds available for classes, personal coaching and/or holiday camps if;<br />
@@ -113,6 +138,15 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic}: C
                                             onChange={(e) => setComments(e.target.value)}
                                             />
                                         </Form.Group>
+                                        Select which days you want to join
+                                        <div className="d-flex justify-content-around mt-4">
+                                            <div className="p-3 ps-5 pe-5" style={{backgroundColor: chosen[0] ? "rgb(200, 200, 200)":"white", cursor:"pointer", borderRadius:"15px"}} onClick={() => handleDayClick(0)}>
+                                                Day 1
+                                            </div>
+                                            <div className="p-3 ps-5 pe-5" style={{backgroundColor: chosen[1] ? "rgb(200, 200, 200)":"white", cursor:"pointer", borderRadius:"15px"}} onClick={() => handleDayClick(1)}>
+                                                Day 2
+                                            </div>
+                                        </div>
                                         <Button
                                             className="mt-5"
                                             style={{ backgroundColor: "white", color: "black", width: "50%" }}

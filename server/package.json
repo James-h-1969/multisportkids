@@ -10,15 +10,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
     "aws-sdk": "^2.1432.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.1.4",
     "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.2.3",
-    "stripe": "^12.12.0"
+    "stripe": "^12.12.0",
+    "typescript": "^5.1.6"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

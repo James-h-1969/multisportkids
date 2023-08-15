@@ -4,8 +4,8 @@ import Oneon1 from "/assets/1on1.png";
 import Banner from "/assets/banner.jpg"
 
 export default function PrivatePlans(){
-    const indDesc = ["5x sessions", "Mental rehearsal, Video Analysis, Goal-Setting", "Save $25", "Valid for up to 10 weeks"];
-    const groupDesc = ["5x sessions", "Group work, constructive feedback, engaging drills", "Valid for up to 10 weeks"]
+    const indDesc = ["5x sessions", "Mental rehearsal, Video Analysis, Goal-Setting", "Save $25", "Valid for up to 10 weeks", "Will be emailed 5 codes to redeem after purchase"];
+    const groupDesc = ["5x sessions", "Group work, constructive feedback, engaging drills", "Valid for up to 10 weeks", "Will be emailed 5 codes to redeem after purchase"]
 
     return(
         <div className="pt-4 ps-2">
@@ -16,7 +16,7 @@ export default function PrivatePlans(){
                         <PlanItem name="1 on 1 Private Plan" price="$375 overall" image={Oneon1} desc={indDesc} id={9}/>
                     </Col>
                     <Col>
-                        <PlanItem name="Group Private Plan" price="$200 per week" image={Banner} desc={groupDesc} id={10}/>
+                        <PlanItem name="2 on 1 Private Plan" price="$500 overall" image={Banner} desc={groupDesc} id={10}/>
                     </Col>
                 </Row>
             </div>

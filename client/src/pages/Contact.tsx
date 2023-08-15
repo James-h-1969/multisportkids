@@ -20,6 +20,8 @@ export default function Contact() {
         setplayerShowing(name);
     }
 
+    //need to add an image, the afl accomplishments and their coach accomplishments
+
     const playerInfo = {
         "Tom O'Leary":{
             role: "Founder/Sydney Coach",
@@ -39,6 +41,18 @@ export default function Contact() {
             phone: "+61 431 036 199",
             quote: "I have built up an interest coaching different teams over the years and would love to gain but also pass on experience through 1:1's"
         },
+        "Test1":{
+            role: "I am a test",
+            position: "Key/Small Forward",
+            phone: "+61 431 036 199",
+            quote: "I have built up an interest coaching different teams over the years and would love to gain but also pass on experience through 1:1's"
+        },
+        "Test2":{
+            role: "This is a test",
+            position: "Key/Small Forward",
+            phone: "+61 431 036 199",
+            quote: "I have built up an interest coaching different teams over the years and would love to gain but also pass on experience through 1:1's"
+        }
 
     }
 
@@ -75,9 +89,10 @@ export default function Contact() {
                     <div className="mt-4" style={{fontWeight:"bold"}}>Our Team</div>
                     <div className="d-flex justify-content-around">
                         <div className="d-flex justify-content-around text-align-center pt-3 flex-column">
-                            <TeamCard name="Tom O'Leary" changePlayer={changeActive} player={playerShowing}/>
-                            <TeamCard name="William Smit" changePlayer={changeActive}  player={playerShowing}/>
-                            <TeamCard name="Kale Gablia" changePlayer={changeActive}  player={playerShowing}/>
+                            {Object.keys(playerInfo).map((val) => (
+                                <TeamCard name={val} changePlayer={changeActive} player={playerShowing}/>
+                            ))}
+                            
                         </div>
                         {playerShowing === "" ? <div className="pt-5" style={{width:"70%", fontWeight:"lighter"}}>Choose a team member to learn more</div>: <CoachInfo role={playerInfo[playerShowing as keyof typeof playerInfo].role} position={playerInfo[playerShowing as keyof typeof playerInfo].position} phone={playerInfo[playerShowing as keyof typeof playerInfo].phone} quote={playerInfo[playerShowing as keyof typeof playerInfo].quote}/>}
                     </div>

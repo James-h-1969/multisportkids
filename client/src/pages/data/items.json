@@ -64,16 +64,16 @@
     }, 
     {
         "id":10,
-        "name": "Group Private Plan",
-        "priceString": "$1000.00",
-        "priceNum": 1000.00,
+        "name": "2 on 1 Private Plan",
+        "priceString": "$500.00",
+        "priceNum": 500.00,
         "imgUrl": "/assets/camps.jpg"
     },
     {
         "id":11,
         "name": "Holiday Camp",
-        "priceString": "$130.00",
-        "priceNum": 130.00,
+        "priceString": "$150.00",
+        "priceNum": 150.00,
         "imgUrl": "/assets/camps.jpg"
     },
     {
@@ -99,12 +99,16 @@
     }, 
     {
         "id":15,
-        "name": "Group Private (Plan)",
+        "name": "2 on 1 Private (Plan)",
         "priceString": "$0.00",
         "priceNum": 0.00,
         "imgUrl": "/assets/camps.jpg"
+    },
+    {
+        "id":16,
+        "name": "Holiday Camp (1 day)",
+        "priceString": "$100.00",
+        "priceNum": 100.00,
+        "imgUrl": "/assets/camps.jpg"
     }
-
-
-
 ]

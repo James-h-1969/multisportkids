@@ -5,9 +5,15 @@ import HomeLocation from "./Components/HomeComponents/HomeLocation";
 import HomeQuotes from "./Components/HomeComponents/HomeQuotes";
 import Footer from "./Components/Footer";
 import { Button } from "react-bootstrap";
+import ball from "/assets/ball.png"
 import "./Home.css";
 
-function Home(){
+type HomeProps = {
+    setManageLogged: (logged:boolean) => void;
+    manageLogged:boolean;
+}
+
+function Home({setManageLogged, manageLogged}:HomeProps){
 
     function addAcademy(){
         fetch("http://localhost:3000/PrivateTimes",
@@ -28,6 +34,7 @@ function Home(){
             <div className="home-desc-button">
                 <LinkButton to="/private" color="#46768E" textcolor="white" text="Book now" />
             </div>
+            <img src={ball} style={{position:"absolute", left:"65%", top:"50%", width:"25%", height:"50vh"}}/>
             <div className="home-deals">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#46768E" fill-opacity="1" d="M0,192L80,197.3C160,203,320,213,480,197.3C640,181,800,139,960,133.3C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
                 <HomeQuotes />
@@ -36,7 +43,7 @@ function Home(){
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="white" fill-opacity="1" d="M0,192L80,197.3C160,203,320,213,480,197.3C640,181,800,139,960,133.3C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
                 </div>
             </div>
-            {/* <Button onClick={addAcademy}>Add academy</Button> */}
+            <Button onClick={() => setManageLogged(true)}>Add academy</Button>
             {/* <div className="home-location">
                 <HomeLocation />
             </div> */}
