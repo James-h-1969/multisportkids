@@ -42,7 +42,6 @@ export default function AddSession(props:AddSessionProps){
         return false;
     }
 
-    //m4SBLJeg
 
     async function handleAddingCart(){
 
@@ -77,6 +76,17 @@ export default function AddSession(props:AddSessionProps){
             childClub: club,
             purchaseName: [props.name, Newerdate, props.time, token]
         }
+
+        const response = await fetch('http://localhost:3000/session-into-cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ coachName: props.name,date:Newerdate,time:props.time,kidName:childName  }),
+            });
+        const data = await response.json();
+
+
 
         addToCart(ID, 1, Customdetails);
         location.reload();

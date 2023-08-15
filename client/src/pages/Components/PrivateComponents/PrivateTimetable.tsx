@@ -31,7 +31,6 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
         "#0B285C"  // Navy Blue
       ];
       
-      
                 
     const timeAvailable = ["7:00am", "9:00am", "11:00am", "1:00pm", "3:00pm", "4:00pm"];
 

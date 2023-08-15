@@ -10,7 +10,21 @@ type CartItemProps = {
 export function CartItem({id, quantity}: CartItemProps){
     const { removeFromCart } = useCart();
     const item = storeItems.find(i => i.id === id)
-    if (item == null) return null
+    if (item == null) return null;
+
+    async function handleRemoveFromCart(id:number){
+        if (id <= 8 && id >= 3){
+            const response = await fetch('http://localhost:3000/session-outof-cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ coachName: item.name,date:Newerdate,time:props.time,kidName:childName  }),
+            });
+            const data = await response.json();
+            }
+        removeFromCart(id);
+    }
     return (
         <Stack direction="horizontal" gap={2}>
             <img src={item.imgUrl} style ={{width: "75px", height: "75px", objectFit:"cover"}} />
@@ -30,7 +44,7 @@ export function CartItem({id, quantity}: CartItemProps){
             <div>
                 ${(item.priceNum * quantity).toFixed(2)}
             </div>
-            <Button variant="outline-danger" size="sm" onClick={() => removeFromCart(item.id)}>x</Button>
+            <Button variant="outline-danger" size="sm" onClick={() => handleRemoveFromCart(item.id)}>x</Button>
         </Stack>
     )
 }   

@@ -7,6 +7,7 @@ import Academy from "../Models/Academy";
 import Tokens from "../Models/Tokens";
 import Product from "../Models/Product";
 import Parent from "../Models/Parent";
+import CoachBooked from "../Models/coachBooked";
 import bcrypt from "bcryptjs";
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
@@ -544,4 +545,51 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
         res.status(500).json({ error: e.message });
     }
 });
+
+app.post('/session-into-cart', async (req: Request, res: Response) => {
+    //put into database
+    const coachName = req.body.coachName;
+    const time = req.body.time;
+    const date = req.body.date;
+    const kidName = req.body.kidName;
+    const newCoachBooked = new CoachBooked({
+            coachName: coachName,
+            time: time,
+            date: date,
+            kidName: kidName,
+        })
+    const createdAcad = await newCoachBooked.save();
+
+    //remove from database
+    const filter = { name: coachName, dates: date };
+    const update = { $pull: { dates: date, times: time }};
+    try{
+        const updatedCoach = await Coach.findOneAndUpdate(filter, update, { new:true, runValidators:true})
+    } catch (error) {
+        console.error("Error updating Coach:", error);
+    }
+})
+
+app.post('/session-outof-cart', async (req: Request, res: Response) => {
+    //remove the session from the database
+    const coachName = req.body.coachName;
+    const time = req.body.time;
+    const date = req.body.date;
+    const kidName = req.body.kidName;
+    let filter = { coachName: coachName, date: date };
+    let update = { $pull: { date: date, time: time }};
+    try{
+        const updatedCoach = await CoachBooked.findOneAndUpdate(filter, update, { new:true, runValidators:true})
+    } catch (error) {
+        console.error("Error updating Coach:", error);
+    }
+    //add into coach
+    let filter2 = { name: coachName, date: date };
+    let update2 = { $push: { dates: date, times: time }};
+    try{
+        const updatedCoach = await Coach.findOneAndUpdate(filter2, update2, { new:true, runValidators:true})
+    } catch (error) {
+        console.error("Error updating Coach:", error);
+    }
+})
 
