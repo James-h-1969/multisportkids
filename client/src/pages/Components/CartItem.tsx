@@ -13,16 +13,16 @@ export function CartItem({id, quantity}: CartItemProps){
     if (item == null) return null;
 
     async function handleRemoveFromCart(id:number){
-        if (id <= 8 && id >= 3){
-            const response = await fetch('http://localhost:3000/session-outof-cart', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ coachName: item.name,date:Newerdate,time:props.time,kidName:childName  }),
-            });
-            const data = await response.json();
-            }
+        // if (id <= 8 && id >= 3){
+        //     const response = await fetch('http://localhost:3000/session-outof-cart', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({ coachName: item.name, date:Newerdate, time:props.time, kidName:childName }),
+        //     });
+        //     const data = await response.json();
+        // }
         removeFromCart(id);
     }
     return (

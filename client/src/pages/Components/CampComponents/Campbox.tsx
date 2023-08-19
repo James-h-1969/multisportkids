@@ -3,6 +3,10 @@ import { Image, Button, Form } from "react-bootstrap";
 import development from "/assets/development.jpg";
 import { useEffect, useState } from "react";
 import { useCart } from "../../context/cartContext";
+import camp1 from "/assets/CampPhotos/IMG_2365.jpg"
+import camp2 from "/assets/CampPhotos/IMG_2363.jpg"
+import camp3 from "/assets/CampPhotos/IMG_2368.jpg"
+
 
 
 type CampboxProps = {
@@ -13,10 +17,11 @@ type CampboxProps = {
     Price: Number,
     Location: String,
     address: String,
-    locPic: string
+    locPic: string,
+    index: number
 }
 
-function Campbox ({name, Location, ages, date, times, Price, address, locPic}: CampboxProps) {
+function Campbox ({name, Location, ages, date, times, Price, address, locPic, index}: CampboxProps) {
     const [isBooking, setIsBooking] = useState(false);
     const { addToCart } = useCart();
     const [childName, setChildName] = useState('');
@@ -24,6 +29,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic}: C
     const [club, setClub] = useState('');
     const [comments, setComments] = useState('');
     const [chosen, setChosen] = useState([false, false]);
+
 
     function handleAddingCart(){
         let ID = 0;
@@ -49,6 +55,8 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic}: C
         setChosen(newChosen);
     }
 
+    const imgs = [camp1, camp2, camp3];
+
     useEffect(() => {
         
     }, [chosen])
@@ -69,14 +77,18 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic}: C
                     </div>
                 </div>
                 <div>
-                    <Image src={development} style={{contain:"cover", width:"500px"}}/>
+                    <Image src={imgs[index]} style={{contain:"cover", width:"500px", height:"400px"}}/>
                 </div>
             </div>
             { isBooking ? 
                 <div className="d-flex">
                     <div className="p-5">
                         <div className="pb-5" style={{fontSize:"20px"}}>
-                            Our camps are run by Senior AFL players who have been through the Swans Academy, played VFL, play AFLW or play Premier Division AFL. We are a tackle free, and we separate players into groups by age and gender to ensure skills are being matched.
+                            Our camps are run by Senior AFL players who have been through the Swans Academy, 
+                            played VFL, play AFLW or play Premier Division AFL. 
+                            We are a tackle free, and we separate players into groups by age and gender to 
+                            ensure skills are being matched. Namely, players from ages 5-8 will split from players aged 9-13
+                            participating in two seperate camps.
                         </div>
                         <div className="d-flex justify-content-between">
                             <div className="fs-5" style={{textAlign:"center"}}>
@@ -84,7 +96,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic}: C
                                     Location : <span className="ps-4" style={{fontWeight:"bold", fontSize:"30px"}}>{Location}</span><br />
                                     {address}
                                 </div>
-                                <Image src={locPic} className="pt-4" style={{width:"70%"}}/>
+                                <Image src={locPic} className="pt-4 ms-3" style={{width:"500px", height:"500px"}}/>
                                 <div className="mt-5 d-flex justify-content-around">
                                     <div>
                                         Both Days<br/><span style={{fontSize:"50px"}}>$150</span>

@@ -30,7 +30,7 @@ function UpcomingCamps() {
         <div className="mt-3">
             <span className="fs-1 ps-5" style={{fontFamily:"Rubik", fontWeight:"bold"}}>Upcoming Camps</span>
             {camps.map((value, index) => (
-              <Campbox Location={value.Location} name={value.name} ages={value.ages} date={value.date} times={value.times} Price={value.Price} address={value.address} locPic={value.locPic}/>
+              <Campbox Location={value.Location} name={value.name} ages={value.ages} date={value.date} times={value.times} Price={value.Price} address={value.address} locPic={value.locPic} index={index}/>
             ))}
         </div>
       </div>

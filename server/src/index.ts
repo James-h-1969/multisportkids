@@ -417,13 +417,13 @@ app.post("/product", async (req: Request, res: Response) => {
 app.post("/camps", async (req: Request, res: Response) => {
     const newCamp = new Camp({
         name: "North Shore Holiday Camp",
-        ages: "Ages 9-13",
-        date: "26th and 27th of September",
-        times: "9am-1pm",
-        Price: 130.00,
-        Location: "Weldon Oval",
-        address: "Curl Curl NSW 2099",
-        locPic: "/assets/weldon.png",
+        ages: "Ages 5-13",
+        date: "5th and 6th of October",
+        times: "9am-3pm",
+        Price: 150.00,
+        Location: "Gore Hill Oval",
+        address: "St Leonards, 2065",
+        locPic: "/assets/gore.png",
         kids: [],
     });
     const createdCamp = await newCamp.save();
