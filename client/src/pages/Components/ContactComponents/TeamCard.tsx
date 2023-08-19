@@ -1,5 +1,4 @@
 
-
 type TeamProps = {
     name:string,
     player: string,

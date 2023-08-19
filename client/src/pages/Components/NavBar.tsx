@@ -14,7 +14,7 @@ function NavBar() {
         <Container>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Brand className="navbar-brand-custom">
-            <Image alt="logo" src={logo} className="navbar-logo" />
+            <Image alt="logo" src={logo} className="navbar-logo" style={{width:"200px"}}/>
           </Navbar.Brand>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto">

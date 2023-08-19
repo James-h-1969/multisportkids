@@ -61,6 +61,10 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
         
     }, [chosen])
 
+    const brokenDate = date.split(" ");
+    const firstDate = [brokenDate[0], brokenDate.slice(-2).join(" ")].join(" ");
+    const secondDate = [brokenDate[2], brokenDate.slice(-2).join(" ")].join(" ");
+
     const isButtonDisabled = !(childName && childAge && club && comments && (chosen[0] || chosen[1]));
     
     return(
@@ -96,7 +100,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                     Location : <span className="ps-4" style={{fontWeight:"bold", fontSize:"30px"}}>{Location}</span><br />
                                     {address}
                                 </div>
-                                <Image src={locPic} className="pt-4 ms-3" style={{width:"500px", height:"500px"}}/>
+                                <Image src={locPic} className="pt-4 ms-3" style={{width:"400px", height:"400px"}}/>
                                 <div className="mt-5 d-flex justify-content-around">
                                     <div>
                                         Both Days<br/><span style={{fontSize:"50px"}}>$150</span>
@@ -150,13 +154,15 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             onChange={(e) => setComments(e.target.value)}
                                             />
                                         </Form.Group>
-                                        Select which days you want to join
-                                        <div className="d-flex justify-content-around mt-4">
+                                        Select which days you want to join (Select both for the full experience)
+                                        <div className="d-flex mt-4 gap-4 justify-content-center">
                                             <div className="p-3 ps-5 pe-5" style={{backgroundColor: chosen[0] ? "rgb(200, 200, 200)":"white", cursor:"pointer", borderRadius:"15px"}} onClick={() => handleDayClick(0)}>
-                                                Day 1
+                                                Day 1<br />
+                                                {firstDate}
                                             </div>
                                             <div className="p-3 ps-5 pe-5" style={{backgroundColor: chosen[1] ? "rgb(200, 200, 200)":"white", cursor:"pointer", borderRadius:"15px"}} onClick={() => handleDayClick(1)}>
-                                                Day 2
+                                                Day 2<br />
+                                                {secondDate}
                                             </div>
                                         </div>
                                         <Button
