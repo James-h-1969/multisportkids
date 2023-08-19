@@ -2,6 +2,12 @@ import { useCart } from "../../context/cartContext";
 import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import bcrypt from "bcryptjs";
+import storeItems from "../../data/items.json"
+
+type storeItemType = {
+    id:number,
+    name:String
+}
 
 
 type AddSessionProps = {
@@ -23,6 +29,7 @@ export default function AddSession(props:AddSessionProps){
     const [comments, setComments] = useState('');
     const [token, setToken] = useState('');
     const [showWarning, setShowWarning] = useState(false);
+    const [email, setEmail] = useState('');
 
     async function isTokenRight(token:string, id:number){
         let newHash = await bcrypt.hash(token, 10);
@@ -66,8 +73,6 @@ export default function AddSession(props:AddSessionProps){
                 return
             }
         }
-
-
         
         const Customdetails = {
             childName: childName,
@@ -91,10 +96,70 @@ export default function AddSession(props:AddSessionProps){
         addToCart(ID, 1, Customdetails);
         location.reload();
     }
+
+    async function handleSendingEmail(){
+
+        let Newdate = props.date.split(' ');
+        Newdate[Newdate.length - 1] = Newdate[Newdate.length - 1].slice(2);
+        let Newerdate = Newdate.join("");
+
+
+        let ID = props.id;
+
+        if (token.length > 0){
+            let isValid = await isTokenRight(token, props.id);
+            if (isValid){
+                if (props.id == 3){
+                    ID = 14;
+                } else {
+                    ID = 15;
+                }
+            } else {
+                setShowWarning(true);
+                return
+            }
+        }
+  
+        const item = storeItems.find(i => i.id === ID)
+        const response = await fetch('http://localhost:3000/email-private', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                coachName: props.name, 
+                date:Newerdate, 
+                time:props.time, 
+                kidName:childName, 
+                kidAges:childAge,
+                sessionType: item?.name,
+                clubs: club,
+                comments: comments,
+                token: token,
+                email: email
+                }),
+            });
+        if (response.ok) {
+            // The fetch was successful
+            console.log("TEST");
+            window.location.reload();
+        } else {
+            console.log("HI");
+        }
+    }
     
     return(
         <div className="p-2 ps-4 pe-4 m-5" style={{backgroundColor:"rgb(222, 222, 231)", borderRadius:"15px"}}>
+            
             <Form className="mt-5">
+                        <Form.Group className="d-flex mb-3" controlId="formBasicEmail">
+                            <Form.Label style={{ width: "50%" }}>Parent Email</Form.Label>
+                            <Form.Control
+                            placeholder="Enter email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </Form.Group>
                         <Form.Group className="d-flex mb-3" controlId="formBasicEmail">
                             <Form.Label style={{ width: "50%" }}>Child name(s)</Form.Label>
                             <Form.Control
@@ -142,7 +207,7 @@ export default function AddSession(props:AddSessionProps){
 
                     </Form>
             <div className="p-3 ps-5 d-flex justify-content-between m-5">
-                <div className="d-flex justify-content-between align-items-center" style={{width:"70%"}}>
+                <div className="d-flex justify-content-between align-items-center" style={{width:"100%"}}>
                     <div>
                         <span style={{fontSize:"20px"}}>
                             {props.date}
@@ -156,7 +221,11 @@ export default function AddSession(props:AddSessionProps){
                         <span style={{fontWeight:"bold"}}>${props.price}.00</span>
                     </div>
                 </div>
-                <Button variant="secondary" style={{width:"300px", cursor:"pointer"}} onClick={() => handleAddingCart()}>Add session</Button>
+                {/* <Button variant="secondary" style={{width:"300px", cursor:"pointer"}} onClick={() => handleAddingCart()}>Add session</Button> */}
+            </div>
+            <div className="d-flex justify-content-around p-3">
+                Send email to the coach with your details to make an enquiry. The coach will reply within 3 days to confirm the booking or provide any updates.
+                <Button variant="secondary" style={{width:"300px", cursor:"pointer"}} onClick={() => handleSendingEmail()}>Send Email</Button>
             </div>
         </div>
     )

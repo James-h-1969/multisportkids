@@ -31,8 +31,7 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
         "#0B285C"  // Navy Blue
       ];
       
-                
-    const timeAvailable = ["7:00am", "9:00am", "11:00am", "1:00pm", "3:00pm", "4:00pm"];
+
 
     const handleClick = (week:number, day:number) => {
         showTypes(false);
@@ -237,7 +236,7 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
                         </div> 
                         <div className="mb-4 p-4">
                             {
-                                timeAvailable.map((time) => (
+                                currentTimes.map((time) => (
                                     <div className="mt-4 d-flex justify-content-between" style={{height:"30px"}}>
                                         <span>{time}</span>
                                         {currentTimes.includes(time) ? 
