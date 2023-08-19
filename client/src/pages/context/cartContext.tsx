@@ -28,7 +28,7 @@ type details = {
 type CartItem = {
     id: number;
     quantity: number;
-    details?: details
+    details: Array<details>
 }
 
 const CartContext = createContext({} as CartContext);
@@ -49,21 +49,24 @@ export function CartProvider( {children}:cartProviderProps ){
         return cartItems?.find(item => item.id === id)?.quantity || 0;
     }
 
-    function addToCart (id: number, addingQuantity: number, details:details){
+    function addToCart(id: number, addingQuantity: number, details: details) {
         setCartItems((currItems) => {
-            if (currItems?.find((item) => item.id === id) == null){
-                return [...currItems, {id, quantity: addingQuantity, details:details}]
-            } else {
-                return currItems?.map(item => {
-                    if(item.id === id){
-                       return {...item, quantity: item.quantity + addingQuantity} 
-                    } else {
-                        return item;
-                    }
-                })
-            }
-        })
-    }
+          if (currItems?.find((item) => item.id === id) == null) {
+            // The item is not in the cart already
+            return [...currItems, { id, quantity: addingQuantity, details: [details] }]; // Wrap details in an array
+          } else {
+            return currItems?.map((item) => {
+              // The item is in the cart already
+              if (item.id === id) {
+                const updatedDetails = [...item.details, details]; // Append the new details
+                return { ...item, quantity: item.quantity + addingQuantity, details: updatedDetails };
+              } else {
+                return item;
+              }
+            });
+          }
+        });
+      }
 
     function removeFromCart(id: number) {
         setCartItems((currItems) => {

@@ -33,8 +33,14 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
 
     function handleAddingCart(){
         let ID = 0;
+        let day = "";
         if ((chosen[0] && !chosen[1]) || (chosen[1] && !chosen[0])){
             ID = 16;
+            if (chosen[0]){
+                day = "1";
+            } else {
+                day = "2";
+            }
         } else {
             ID = 11;
         }
@@ -43,7 +49,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
             childAge: childAge,
             childComments: comments,
             childClub: club,
-            purchaseName: [name],
+            purchaseName: [name, day],
         }
         addToCart(ID, 1, Customdetails);
         location.reload();

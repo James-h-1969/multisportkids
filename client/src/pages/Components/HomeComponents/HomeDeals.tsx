@@ -1,10 +1,10 @@
 import React from "react";
 import LinkButton from "./../LinkButton";
-import campPhoto from "/assets/camps.jpg";
-import privatePhoto from "/assets/flag.jpg";
-import devPhoto from "/assets/development.jpg";
+import campPhoto from "/assets/CampPhotos/IMG_3105.png";
+import privatePhoto from "/assets/CampPhotos/IMG_3513.png";
 import { Carousel, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import useMediaQueries from "media-queries-in-react";
 
 
 
@@ -13,19 +13,23 @@ function HomeDeals(){
         window.scrollTo(0, 0);
     };
 
+    const mediaQueries = useMediaQueries({ 
+        mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
+      });
+
     return(
         <div className="page-box">
-            <Carousel style={{paddingBottom:"40px"}}>
+            <Carousel style={{paddingBottom:mediaQueries.mobile?"60px":"40px"}}>
                 <Carousel.Item interval={1000}>
                     <img
                     className="d-block"
-                    src="/assets/camps.jpg"
+                    src={campPhoto}
                     alt="First slide"
-                    style={{content:"cover", height:"700px", width:"900px", margin:"0 auto", paddingBottom:"220px"}}
+                    style={{height:mediaQueries.mobile?"500px":"700px", width:mediaQueries.mobile?"500px":"700px", margin:"0 auto", paddingBottom:"220px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
                     />
                     <Carousel.Caption style={{ paddingBottom:"40px"}}>
-                    <h3><span style={{fontWeight:"bold", fontSize:"40px"}}>Holiday Camps</span></h3>
-                    <p><span style={{fontWeight:"lighter", fontSize:"20px"}}>Our camps combine a mix of skill drills and games to create a fun environment for AFL kids.</span></p>
+                    <h3><span style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"30px":"40px"}}>Holiday Camps</span></h3>
+                    <p><span style={{fontWeight:"lighter", fontSize:mediaQueries.mobile?"15px":"20px"}}>Our camps combine a mix of skill drills and games to create a fun environment for AFL kids.</span></p>
                     <Link to="/camps" onClick={scrollToTop}>
                         <Button variant="secondary" style={{fontWeight:"bold"}}>View Holiday Camps</Button>
                     </Link>
@@ -34,33 +38,33 @@ function HomeDeals(){
                 <Carousel.Item interval={1000}>
                     <img
                     className="d-block"
-                    src="/assets/development.jpg"
+                    src={privatePhoto}
                     alt="second slide"
-                    style={{content:"cover", height:"700px", width:"900px", margin:"0 auto", paddingBottom:"230px"}}
+                    style={{height:mediaQueries.mobile?"500px":"700px", width:mediaQueries.mobile?"500px":"700px", margin:"0 auto", paddingBottom:"230px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
                     />
                     <Carousel.Caption>
-                    <h3><span style={{fontWeight:"bold", fontSize:"40px"}}>Private Sessions</span></h3>
-                    <p><span style={{fontWeight:"lighter", fontSize:"20px"}}>Get personalized assissance from one of our many top coaches to get the most out of your AFL kid.</span></p>
+                    <h3><span style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"30px":"40px"}}>Private Sessions</span></h3>
+                    <p><span style={{fontWeight:"lighter", fontSize:mediaQueries.mobile?"15px":"20px"}}>Get personalized assissance from one of our many top coaches to get the most out of your AFL kid.</span></p>
                     <Link to="/private" onClick={scrollToTop}>
                         <Button variant="secondary" style={{fontWeight:"bold"}}>View Private Sessions</Button>
                     </Link>
                     </Carousel.Caption>
                 </Carousel.Item>
-                <Carousel.Item interval={1000}>
+                {/* <Carousel.Item interval={1000}>
                     <img
                     className="d-block"
                     src="/assets/flag.jpg"
                     alt="third slide"
-                    style={{content:"cover", height:"700px", width:"900px", margin:"0 auto", paddingBottom:"230px"}}
+                    style={{content:"cover", height:mediaQueries.mobile?"500px":"700px", width:"900px", margin:"0 auto", paddingBottom:"230px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
                     />
                     <Carousel.Caption>
-                    <h3><span style={{fontWeight:"bold", fontSize:"40px"}}>Academy Preparation</span></h3>
-                    <p><span style={{fontWeight:"lighter", fontSize:"20px"}}>Enhance the skills of AFL kids within your club over multiple weeks from some of our best coaches.</span></p>
+                    <h3><span style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"30px":"40px"}}>Academy Preparation</span></h3>
+                    <p><span style={{fontWeight:"lighter", fontSize:mediaQueries.mobile?"15px":"20px"}}>Enhance the skills of AFL kids within your club over multiple weeks from some of our best coaches.</span></p>
                     <Link to="/development" onClick={scrollToTop}>
                         <Button variant="secondary" style={{fontWeight:"bold"}}>View Academy Preparation</Button>
                     </Link>
                     </Carousel.Caption>
-                </Carousel.Item>
+                </Carousel.Item> */}
             </Carousel>
         </div>
     )
