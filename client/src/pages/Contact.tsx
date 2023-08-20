@@ -12,6 +12,7 @@ import { useState } from "react";
 import CoachInfo from "./Components/ContactComponents/CoachInfo";
 import teamPhoto from "/assets/CampPhotos/IMG_2363.jpg";
 import { Link } from "react-router-dom";
+import useMediaQueries from "media-queries-in-react";
 
 
 
@@ -69,45 +70,50 @@ export default function Contact() {
 
     }
 
+    const mediaQueries = useMediaQueries({ 
+        mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
+      });
+
+
     return(
         <>
             <NavBar />
             <Header title="Our Team" description="Find out more about our team and get in contact to get the most out of your experience. Learn about the coaches years of experience and some of the performances they have had on the field."/>
             <div className="" style={{position:"absolute", left:"63%", top:"18%"}}>
-                <Image src={teamPhoto} style={{width:"450px", height:"300px", borderRadius:"20px"}}/>
+                <Image src={teamPhoto} style={{width:mediaQueries.mobile?"130px":"450px", height:mediaQueries.mobile?"100px":"300px", borderRadius:"20px"}}/>
             </div>
             <div className="d-flex" style={{fontFamily:"Rubik"}}>
-                <div className="mt-5 ms-5 fs-4 ps-3 pt-3 pb-3 mb-5" style={{backgroundColor:"rgb(222, 222, 231)", width:"30%", borderRadius:"15px"}}>
+                <div className="ps-3 pt-3 pb-3 mb-5" style={{marginLeft:mediaQueries.mobile?"20px":"40px",marginTop:mediaQueries.mobile?"20px":"40px",backgroundColor:"rgb(222, 222, 231)", width:mediaQueries.mobile?"40%":"30%", borderRadius:"15px", fontSize:mediaQueries.mobile?"12px":"20px"}}>
                     <div style={{fontWeight:"bold"}}>Contact Us</div>
                     <div className="pt-3">Email:</div>
-                    <div className="ps-5" style={{fontWeight:"lighter"}}>
+                    <div className="" style={{fontWeight:"lighter", fontSize:mediaQueries.mobile?"10px":"20px"}}>
                         <div>Tomoleary@AFLKids.com.au</div>
                         <div>WillemSmit@AFLKids.com.au</div>
                         <div>KaleGablia@AFLKids.com.au</div>
                     </div>
                     <div className="pt-3">Phone (Between 9-5 Mon-Fri):</div>
-                    <div className="ps-5" style={{fontWeight:"lighter"}}>+61 448 408 920</div>
+                    <div className="" style={{fontWeight:"lighter"}}>+61 448 408 920</div>
                     <div className="pt-3">Socials</div>
                     <Link to="https://www.instagram.com/aflkids_/" className="d-flex justify-content-between me-5 mt-3" style={{cursor:"pointer", textDecoration: "none", color:"black"}}>
-                        <div className="ps-5" style={{fontWeight:"lighter"}}>Instagram</div>
-                        <img src={insta} style={{width:"12%"}}/>
+                        <div className="" style={{fontWeight:"lighter"}}>Instagram</div>
+                        <img src={insta} style={{width:mediaQueries.mobile?"20%":"12%"}}/>
                     </Link>
                     <Link to="https://www.facebook.com/AFLKids1/" className="d-flex justify-content-between me-5 mt-3" style={{cursor:"pointer", textDecoration: "none", color:"black"}}>
-                        <div className="ps-5" style={{fontWeight:"lighter"}}>Facebook</div>
-                        <img src={facebook} style={{width:"10%"}}/>
+                        <div className="" style={{fontWeight:"lighter"}}>Facebook</div>
+                        <img src={facebook} style={{width:mediaQueries.mobile?"20%":"10%"}}/>
                     </Link>
-                    <div className="mt-5 ms-3" style={{fontWeight:"bold"}}>Our Vision</div>
-                    <div className="pe-5 ms-3" style={{fontSize:"20px"}}>
+                    <div className="mt-5" style={{fontWeight:"bold"}}>Our Vision</div>
+                    <div className="" style={{fontSize:mediaQueries.mobile?"12px":"20px"}}>
                         Our goal at AFLKids is to help players reach their full potential through experienced and accredited AFL coaches, striving for excellence at a junior level.  Through video analysis, goal setting strategies and mental advice, AFLKids goes above and beyond in order to take players to the next level.
                     </div>
                 </div>
-                <div className="ms-5 fs-4 ps-3 pt-3 pb-3 mb-5" style={{backgroundColor:"rgb(222, 222, 231)", width:"60%", borderRadius:"15px", marginTop:"110px", height:"10%"}}>
-                    <div className="mt-1 ms-1" style={{fontWeight:"bold"}}>Our Team</div>
+                <div className="fs-4 pt-3 pb-3 mb-5" style={{paddingLeft:mediaQueries.mobile?"":"20px",marginLeft:mediaQueries.mobile?"20px":"40px", backgroundColor:"rgb(222, 222, 231)", width:mediaQueries.mobile?"46%":"60%", borderRadius:"15px", marginTop:mediaQueries.mobile?"20px":"150px", height:"10%"}}>
+                    <div className="mt-1 ms-1" style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"12px":"20px"}}>Our Team</div>
                     <div className="">
-                        <div style={{textAlign:"center"}}>
+                        <div style={{textAlign:"center", fontSize:mediaQueries.mobile?"12px":"20px", paddingBottom:mediaQueries.mobile?"":"20px"}}>
                             Click on a Coach to learn more
                         </div>
-                        <div className="d-flex justify-content-around text-align-center pt-3">
+                        <div className="d-flex justify-content-around text-align-center">
                             {Object.keys(playerInfo).map((val) => (
                                 <TeamCard name={val} changePlayer={changeActive} player={playerShowing}/>
                             ))}
