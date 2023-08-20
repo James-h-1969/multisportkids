@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, DropdownButton, ButtonGroup, Dropdown, InputGroup, FormControl, Container, Card } from "react-bootstrap";
 import { useCart } from "../context/cartContext";
+import useMediaQueries from "media-queries-in-react";
 
 interface MerchItemProps{
     name: string,
@@ -20,6 +21,10 @@ const MerchItem: React.FC<MerchItemProps> = ({name, price, image, id}) => {
             setSelectedOption(eventkey);
         }
     }
+
+    const mediaQueries = useMediaQueries({ 
+        mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
+      });
 
     function updateAmount(change: number){
         let newValue = value + change;
@@ -42,8 +47,8 @@ const MerchItem: React.FC<MerchItemProps> = ({name, price, image, id}) => {
     }
 
     return(
-        <Card>
-            <Card.Img variant="top" src={image} style={{height:'400px', objectFit:"cover"}}/>
+        <Card className="" style={{height:mediaQueries.mobile?"460px":"", width:mediaQueries.mobile?"320px":"", marginLeft:mediaQueries.mobile?"":"60px"}}>
+            <Card.Img variant="top" src={image} style={{height:mediaQueries.mobile?"200px":'400px', objectFit:"cover"}}/>
             <Card.Body className="d-flex flex-column">
                 <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
                     <span className="fs-2">{name}</span>
@@ -76,7 +81,6 @@ const MerchItem: React.FC<MerchItemProps> = ({name, price, image, id}) => {
                         Coming Soon
                     </Button>:<></>
                 }
-
             </Card.Body>
         </Card>
     )

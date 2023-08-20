@@ -14,7 +14,7 @@ function Merch(){
         <>
             <NavBar />
             <Header title="Merch" description="Look good, play good. Choose from our range of top quality products below."/>
-            <div className="d-flex p-2 merch-box" style={{marginLeft:"50px", marginTop:"50px", marginBottom:"30px"}}>
+            <div className="d-flex merch-box" style={{marginLeft:"20px", marginTop:"20px", marginBottom:"30px"}}>
                 <Row className="g-3 ml-1" xs={1} lg={2} >
                     <Col>
                         <MerchItem name="Hoodie" price="$34.99" image={hoodie} id={1}/>
