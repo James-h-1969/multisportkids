@@ -113,7 +113,7 @@ type details = {
 interface Item {
     id: number;
     quantity: number;
-    details?: details
+    details: Array<details>
 }
 
 function generateRandomToken(length = 10) {
@@ -151,8 +151,6 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
   
       const data = event.data.object;
       const eventType = event.type;
-
-
  
       // Handle the event
       if (eventType === "payment_intent.succeeded") {
@@ -175,140 +173,157 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         const events: Array<String> = []
 
         JSONStuff.forEach(async (val:Item) => {
-            console.log(val);
-            if (val.details != null){ //there is a child
-                const kidName: String = val.details?.childName;
-                console.log(kidName);
-                if (!kidsChecked.includes(kidName)){
-                    kidsChecked.push(kidName);
-                    agesChecked.push(val.details?.childAge);
-                    detailsChecked.push(val.details?.childComments);
-                    clubChecked.push(val.details?.childClub);
-                    events.push(val.details?.purchaseName[0]);
+            console.log(val.details);
+            let index = 0;
+            while (index < val.details.length){
+                if (val.details[index] != null){ //there is a child
+                    const kidName: String = val.details[index].childName;
+                    console.log(kidName);
+                    if (!kidsChecked.includes(kidName)){
+                        kidsChecked.push(kidName);
+                        agesChecked.push(val.details[index].childAge);
+                        detailsChecked.push(val.details[index].childComments);
+                        clubChecked.push(val.details[index].childClub);
+                        events.push(val.details[index].purchaseName[0]);
+                    }
                 }
-            }
-     
-            if (val.id == 11){ //holiday camp
-                const filter =  { name: val.details?.purchaseName[0] };
-                const update = { $push: {kids: val.details }};
-                try {
-                    const updatedCamp = await Camp.findOneAndUpdate(filter, update, { new:true, runValidators:true});
-                  } catch (error) {
-                    console.error("Error updating camp:", error);
-                }
-            } else if (val.id == 12) { //1 academy
-                const nameToChange = val.details?.purchaseName[0];
-                const dateToChange = val.details?.purchaseName[1];
-                const filter =  { name: nameToChange,  [`dates.${dateToChange}`]: { $exists: true } };
-                const update = { $push: {[`dates.${dateToChange}`]: val.details }};
-                try{
-                    const updatedAcademy = await Academy.findOneAndUpdate(filter, update, { new:true, runValidators:true})
-                } catch (error) {
-                    console.error("Error updating Academy:", error);
-                }
-            } else if (val.id == 13) { //4 academy
-                const nameToChange = val.details?.purchaseName[0];
-                const datesToChange = val.details?.purchaseName[1].split(" ");
-                datesToChange?.forEach(async (date) => {
-                    const filter =  { name: nameToChange,  [`dates.${date}`]: { $exists: true } };
-                    const update = { $push: {[`dates.${date}`]: val.details }};
+        
+                if (val.id == 11 || val.id == 16){ //holiday camp 2 day or 1 day
+                    const filter =  { name: val.details[index].purchaseName[0] };
+                    let update = {};
+                    if (val.id == 11){
+                        update = { $push: {kidsDay1: val.details[index], kidsDay2: val.details[index] }};
+                    } else {
+                        let day = val.details[index].purchaseName[1];
+                        if (day === "1"){
+                            update = { $push: {kidsDay1: val.details[index]} };
+                        } else if (day === "2") {
+                            update = { $push: {kidsDay2: val.details[index]} };
+                        }
+                    }
+                    
+                    try {
+                        const updatedCamp = await Camp.findOneAndUpdate(filter, update, { new:true, runValidators:true});
+                    } catch (error) {
+                        console.error("Error updating camp:", error);
+                    }
+                } else if (val.id == 12) { //1 academy
+                    const nameToChange = val.details[index].purchaseName[0];
+                    const dateToChange = val.details[index].purchaseName[1];
+                    const filter =  { name: nameToChange,  [`dates.${dateToChange}`]: { $exists: true } };
+                    const update = { $push: {[`dates.${dateToChange}`]: val.details[index] }};
                     try{
                         const updatedAcademy = await Academy.findOneAndUpdate(filter, update, { new:true, runValidators:true})
                     } catch (error) {
                         console.error("Error updating Academy:", error);
                     }
-                })
-            } else if (val.id >= 3 && val.id <= 8) { //private session
-                const coachName = val.details?.purchaseName[0];
-                const dateDel = val.details?.purchaseName[1];
-                const timeDel = val.details?.purchaseName[2];
- 
-                const filter = { name: coachName, dates: dateDel };
-                const update = { $pull: { dates: dateDel, times: timeDel }};
-                try{
-                    const updatedCoach = await Coach.findOneAndUpdate(filter, update, { new:true, runValidators:true})
-                } catch (error) {
-                    console.error("Error updating Coach:", error);
-                }
-            } else if (val.id == 9 || val.id == 10){ //buying plans
-                //create 5 tokens
-                let generatedTokens = await generateHashedTokens();
-                const newTokens = generatedTokens[1];
-                const hashedTokens = generatedTokens[0];
-                //add them onto corresponding database
-                const typeOfToken = (val.id == 9) ? "singleTokens":"groupTokens";
-                let filter = { };
-                hashedTokens.forEach(async (token) => {
-                    let update = { $push: { [typeOfToken]: token } };
-                    const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
-                })  
-                //add them to email details.   
-                const tokenString = newTokens.join(", ");
-                const subject = (val.id == 9) ? "AFLKIDS 5x 1 on 1 Session Tokens":"AFLKIDS 5x Group Session Tokens";
-                const params = {
-                    Destination: {
-                        ToAddresses: ["jameshocking542@gmail.com"]
-                    },
-                    Message: {
-                        Body: {
-                            Html: { Data: `Thanks for purchasing! <br /><br />Use these five codes at any point in the next 6 months by inputting when you are booking a session. Keep them and cross off each one as you use it. <br />They are <br /><br />${tokenString}<br /><br /> Thanks, <br />AFLKIDS` }
+                } else if (val.id == 13) { //4 academy
+                    const nameToChange = val.details[index].purchaseName[0];
+                    const datesToChange = val.details[index].purchaseName[1].split(" ");
+                    datesToChange?.forEach(async (date) => {
+                        const filter =  { name: nameToChange,  [`dates.${date}`]: { $exists: true } };
+                        const update = { $push: {[`dates.${date}`]: val.details[index] }};
+                        try{
+                            const updatedAcademy = await Academy.findOneAndUpdate(filter, update, { new:true, runValidators:true})
+                        } catch (error) {
+                            console.error("Error updating Academy:", error);
+                        }
+                    })
+                } else if (val.id >= 3 && val.id <= 8) { //private session
+                    const coachName = val.details[index].purchaseName[0];
+                    const dateDel = val.details[index].purchaseName[1];
+                    const timeDel = val.details[index].purchaseName[2];
+    
+                    const filter = { name: coachName, dates: dateDel };
+                    const update = { $pull: { dates: dateDel, times: timeDel }};
+                    try{
+                        const updatedCoach = await Coach.findOneAndUpdate(filter, update, { new:true, runValidators:true})
+                    } catch (error) {
+                        console.error("Error updating Coach:", error);
+                    }
+                } else if (val.id == 9 || val.id == 10){ //buying plans
+                    //create 5 tokens
+                    let generatedTokens = await generateHashedTokens();
+                    const newTokens = generatedTokens[1];
+                    const hashedTokens = generatedTokens[0];
+                    //add them onto corresponding database
+                    const typeOfToken = (val.id == 9) ? "singleTokens":"groupTokens";
+                    let filter = { };
+                    hashedTokens.forEach(async (token) => {
+                        let update = { $push: { [typeOfToken]: token } };
+                        const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
+                    })  
+                    //add them to email details.   
+                    const tokenString = newTokens.join(", ");
+                    const subject = (val.id == 9) ? "AFLKIDS 5x 1 on 1 Session Tokens":"AFLKIDS 5x Group Session Tokens";
+                    const params = {
+                        Destination: {
+                            ToAddresses: ["jameshocking542@gmail.com"]
                         },
-                        Subject: { Data: subject }
-                    },
-                    Source: senderEmail
-                };
+                        Message: {
+                            Body: {
+                                Html: { Data: `Thanks for purchasing! <br /><br />Use these five codes at any point in the next 6 months by inputting when you are booking a session. Keep them and cross off each one as you use it. <br />They are <br /><br />${tokenString}<br /><br /> Thanks, <br />AFLKIDS` }
+                            },
+                            Subject: { Data: subject }
+                        },
+                        Source: senderEmail
+                    };
+                
+                    try {
+                        const result = await ses.sendEmail(params).promise();
+                        console.log(`Email sent to ${email}. Message ID: ${result.MessageId}`);
+                    } catch (error) {
+                        console.error(`Error sending email to ${email}:`, error);
+                    }
+                    
+                } else if (val.id == 14 || val.id == 15){ //using tokens
+                    //ir3ffJN3
+                    //remove tokens from backend
+                    const token = val.details[index].purchaseName[3];
+                    console.log(token);
+                    const typeOfToken = (val.id == 14) ? "singleTokens":"groupTokens";
+                    
+                    let filter = {};
+    
+                    const allHashedTokens:Array<hashedTokensType> = await Tokens.find();
+                    const ActualTokens:hashedTokensType = allHashedTokens[0];
+                    let searching = [""];
             
-                try {
-                    const result = await ses.sendEmail(params).promise();
-                    console.log(`Email sent to ${email}. Message ID: ${result.MessageId}`);
-                } catch (error) {
-                    console.error(`Error sending email to ${email}:`, error);
+                    if (val.id == 14){
+                        searching = ActualTokens.singleTokens;
+                    } else {
+                        searching = ActualTokens.groupTokens;
+                    }
+                    
+                    let indexer = 0;
+                    for (let i = 0; i < searching.length; i++){
+                        let isMatch = await bcrypt.compareSync(token?token:"", searching[i]);
+                        if (isMatch){
+                            indexer = i;
+                        }     
+                    }
+    
+                    const update = { $pull: { [typeOfToken]: searching[indexer] } };
+                    const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
+    
+                    // //handle like a normal private session
+                    // const coachName = val.details?.purchaseName[0];
+                    // const dateDel = val.details?.purchaseName[1];
+                    // const timeDel = val.details?.purchaseName[2];
+    
+                    // filter = { name: coachName, dates: dateDel };
+                    // update = { $pull: { dates: dateDel, times: timeDel }};
+                    // try{
+                    //     const updatedCoach = await Coach.findOneAndUpdate(filter, update, { new:true, runValidators:true})
+                    // } catch (error) {
+                    //     console.error("Error updating Coach:", error);
+                    // }
+                    }
+                    index += 1;
                 }
-                
-            } else if (val.id == 14 || val.id == 15){ //using tokens
-                //ir3ffJN3
-                //remove tokens from backend
-                const token = val.details?.purchaseName[3];
-                console.log(token);
-                const typeOfToken = (val.id == 14) ? "singleTokens":"groupTokens";
-                
-                let filter = {};
-
-                const allHashedTokens:Array<hashedTokensType> = await Tokens.find();
-                const ActualTokens:hashedTokensType = allHashedTokens[0];
-                let searching = [""];
+            });
         
-                if (val.id == 14){
-                    searching = ActualTokens.singleTokens;
-                } else {
-                    searching = ActualTokens.groupTokens;
-                }
-                
-                let index = 0;
-                for (let i = 0; i < searching.length; i++){
-                    let isMatch = await bcrypt.compareSync(token?token:"", searching[i]);
-                    if (isMatch){
-                        index = i;
-                    }     
-                }
-
-                const update = { $pull: { [typeOfToken]: searching[index] } };
-                const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
-
-                // //handle like a normal private session
-                // const coachName = val.details?.purchaseName[0];
-                // const dateDel = val.details?.purchaseName[1];
-                // const timeDel = val.details?.purchaseName[2];
- 
-                // filter = { name: coachName, dates: dateDel };
-                // update = { $pull: { dates: dateDel, times: timeDel }};
-                // try{
-                //     const updatedCoach = await Coach.findOneAndUpdate(filter, update, { new:true, runValidators:true})
-                // } catch (error) {
-                //     console.error("Error updating Coach:", error);
-                // }
-            }
-        });
+            
        //search for parent name
        const existingParent = await Parent.findOne({ name: customer.name });
        if (!existingParent){
@@ -416,15 +431,16 @@ app.post("/product", async (req: Request, res: Response) => {
 
 app.post("/camps", async (req: Request, res: Response) => {
     const newCamp = new Camp({
-        name: "North Shore Holiday Camp",
+        name: "Northern Beaches Holiday Camp",
         ages: "Ages 5-13",
-        date: "5th and 6th of October",
+        date: "27th and 29th of September",
         times: "9am-3pm",
         Price: 150.00,
-        Location: "Gore Hill Oval",
-        address: "St Leonards, 2065",
-        locPic: "/assets/gore.png",
-        kids: [],
+        Location: "Weldon Oval",
+        address: "Curl Curl, 2099",
+        locPic: "/assets/weldon.png",
+        kidsDay1: [],
+        kidsDay2: [],
     });
     const createdCamp = await newCamp.save();
     res.json(createdCamp);

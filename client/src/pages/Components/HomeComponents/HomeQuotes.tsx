@@ -17,7 +17,7 @@ export default function HomeQuotes() {
       if (mediaQueries.mobile) {
         maxDistance = windowHeight * 1.5; // Smaller maxDistance for mobile
       } else {
-        maxDistance = windowHeight / 2; // Larger maxDistance for desktop
+        maxDistance = windowHeight / 1; // Larger maxDistance for desktop
       }
       
       const distanceToMiddle = Math.abs(scrollY - middleOfScreen);

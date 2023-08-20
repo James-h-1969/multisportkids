@@ -10,12 +10,12 @@ import useMediaQueries from "media-queries-in-react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 
-type HomeProps = {
-    setManageLogged: (logged:boolean) => void;
-    manageLogged:boolean;
-}
+// type HomeProps = {
+//     setManageLogged: (logged:boolean) => void;
+//     manageLogged:boolean;
+// }
 
-function Home({setManageLogged, manageLogged}:HomeProps){
+function Home(){
 
     function addAcademy(){
         fetch("http://localhost:3000/PrivateTimes",
@@ -31,25 +31,25 @@ function Home({setManageLogged, manageLogged}:HomeProps){
     return (
         <>
             <NavBar />
-            <div className="ps-3" style={{marginTop:"110px"}}>
-                <h1><span className="mt-5" style={{fontSize:mediaQueries.mobile?"30px":"50px", fontWeight:"bold", fontFamily:"Rubik"}}>Helping kids reach their{!mediaQueries.mobile?<br />:<></>} full <span style={{color:"#46768E"}}>AFL</span> potential</span></h1>
+            <div className="ps-3" style={{marginTop:"110px", marginLeft:mediaQueries.mobile?"0px":"30px"}}>
+                <h1><span className="mt-5" style={{fontSize:mediaQueries.mobile?"30px":"70px", fontWeight:"bold", fontFamily:"Rubik"}}>Helping kids reach their{!mediaQueries.mobile?<br />:<></>} full <span style={{color:"#46768E"}}>AFL</span> potential</span></h1>
             </div>
             <div className="ps-3">
-                <a><span className="" style={{fontSize:mediaQueries.mobile?"20px":"50px", fontWeight:"bold", fontFamily:"Rubik"}}>AFL Holiday Camps, classes, and personal coaching</span></a>
+                <a><span className="" style={{fontSize:mediaQueries.mobile?"20px":"30px", paddingLeft:mediaQueries.mobile?"0px":"30px", fontWeight:"bold", fontFamily:"Rubik"}}>AFL Holiday Camps, classes, and personal coaching</span></a>
             </div>
-            <Link to="/private" className="mb-5 ms-3">
-                <Button className="mt-2" style={{backgroundColor:"#46768E", border:"transparent"}}>Book now</Button>
+            <Link to="/private" className="mb-5 ms-3" style={{paddingLeft:mediaQueries.mobile?"0px":"30px"}}>
+                <Button className="mt-3" size={mediaQueries.mobile?"sm":"lg"} style={{backgroundColor:"#46768E", border:"transparent", fontWeight:"bold"}}>Book now</Button>
             </Link>
-            <img src={ball} style={{position:"absolute", left:"65%", top:mediaQueries.mobile?"32%":"50%", width:mediaQueries.mobile?"20%":"", height:mediaQueries.mobile?"12vh":""}}/>
             <div className="">
+                <img src={ball} style={{position:"absolute", left:"65%", width:mediaQueries.mobile?"20%":"", height:mediaQueries.mobile?"12vh":""}}/>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#46768E" fill-opacity="1" d="M0,192L80,197.3C160,203,320,213,480,197.3C640,181,800,139,960,133.3C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
                 <HomeQuotes />
                 <HomeDeals />
-                <div style={{"marginTop":"-80px"}}>
+                <div style={{marginTop:mediaQueries.mobile?"-80px":"-200px"}}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="white" fill-opacity="1" d="M0,192L80,197.3C160,203,320,213,480,197.3C640,181,800,139,960,133.3C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
                 </div>
             </div>
-            <Button onClick={() => setManageLogged(true)}>Login</Button>
+            {/* <Button onClick={() => setManageLogged(true)}>Login</Button> */}
             {/* <div className="home-location">
                 <HomeLocation />
             </div> */}

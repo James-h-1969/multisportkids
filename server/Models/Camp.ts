@@ -11,7 +11,8 @@ const CampSchema = new Schema({
     Location: String,
     address: String,
     locPic: String,
-    kids: Array,
+    kidsDay1: Array,
+    kidsDay2: Array
 })
 
 const CampModel = mongoose.model("Camp", CampSchema);
