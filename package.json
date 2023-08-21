@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install-server": "cd server && npm install",
-    "start-server": "cd server && cd src && node index.ts",
+    "install-server": "cd server && build",
+    "start-server": "cd server && start",
     "install-client": "cd client && npm install",
     "build-client": "cd client && npm run build",
     "start-client": "cd client && npm run start"

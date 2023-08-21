@@ -7,7 +7,7 @@ import Tokens from "../Models/Tokens";
 import Product from "../Models/Product";
 import Parent from "../Models/Parent";
 import CoachBooked from "../Models/coachBooked";
-import bcrypt from "bcryptjs";
+const bcrypt = require("bcryptjs");
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
@@ -23,7 +23,8 @@ const SES_CONFIG = {
 const ses = new AWS.SES(SES_CONFIG);
 const senderEmail = 'jameshocking542@gmail.com'; // Replace with your sender email address
 
-import express, { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
+const express = require("express");
 
 //setup server
 const app = express();
