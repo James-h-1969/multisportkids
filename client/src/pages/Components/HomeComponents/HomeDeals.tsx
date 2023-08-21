@@ -1,5 +1,3 @@
-import campPhoto from "/assets/CampPhotos/IMG_3105.png";
-import privatePhoto from "/assets/CampPhotos/IMG_3513.png";
 import { Carousel, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useMediaQueries from "media-queries-in-react";
@@ -21,7 +19,7 @@ function HomeDeals(){
                 <Carousel.Item interval={1000}>
                     <img
                     className="d-block"
-                    src={campPhoto}
+                    src="/assets/CampPhotos/IMG_3105.png"
                     alt="First slide"
                     style={{height:mediaQueries.mobile?"500px":"700px", width:mediaQueries.mobile?"500px":"700px", margin:"0 auto", paddingBottom:"220px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
                     />
@@ -36,7 +34,7 @@ function HomeDeals(){
                 <Carousel.Item interval={1000}>
                     <img
                     className="d-block"
-                    src={privatePhoto}
+                    src="/assets/CampPhotos/IMG_3513.png"
                     alt="second slide"
                     style={{height:mediaQueries.mobile?"500px":"700px", width:mediaQueries.mobile?"500px":"700px", margin:"0 auto", paddingBottom:"230px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
                     />
