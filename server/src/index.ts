@@ -1,4 +1,3 @@
-import { config } from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import Camp from "../Models/Camp";
@@ -14,7 +13,7 @@ const jwt = require('jsonwebtoken');
 
 // SETUP EMAILS
 const AWS = require('aws-sdk');
-config();
+require("dotenv").config();
 
 const SES_CONFIG = {
     accessKeyId: process.env.AWS_ACCESS_KEY,
