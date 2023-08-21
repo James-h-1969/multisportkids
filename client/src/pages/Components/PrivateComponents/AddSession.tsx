@@ -125,7 +125,7 @@ export default function AddSession(props:AddSessionProps){
         }
   
         const item = storeItems.find(i => i.id === ID)
-        const response = await fetch('http://localhost:3000/email-private', {
+        const response = await fetch('https://aflkids-backend.onrender.com/email-private', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

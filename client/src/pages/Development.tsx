@@ -18,7 +18,7 @@ function Development(){
 
     useEffect(() => {
         async function fetchAcad() {
-          const response = await fetch("http://localhost:3000/academy");
+          const response = await fetch("https://aflkids-backend.onrender.com/academy");
           const newAcad = await response.json();
           setAcademy(newAcad);
         }

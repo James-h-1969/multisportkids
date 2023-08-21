@@ -38,7 +38,7 @@ function App() {
     <div className="App">
       <CartProvider>
         <Routes>
-          <Route path="/" element={<Home setManageLogged={setManageLogged} manageLogged={manageLogged}/>} />
+          <Route path="/" element={<Home />} />
           <Route path="/camps" element={<Camps />} />
           <Route path="/private" element={<Private />} />
           <Route path="/development" element={<Development />} />

@@ -9,7 +9,7 @@ export default function Success(){
     useEffect(() => {
         //update DB
         cartItems.forEach((item) => {
-            // removeFromCart(item.id);
+            removeFromCart(item.id);
         })
     }, []);
 

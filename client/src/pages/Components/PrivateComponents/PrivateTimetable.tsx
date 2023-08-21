@@ -101,7 +101,7 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
 
     useEffect(() => {
         async function fetchCoaches() {
-          const response = await fetch("http://localhost:3000/PrivateTimes");
+          const response = await fetch("https://aflkids-backend.onrender.com/PrivateTimes");
           const newCoaches = await response.json();
           const datesFree: {[date:string]: CoachObject } = {};
             newCoaches.forEach((value:CoachType) => {
