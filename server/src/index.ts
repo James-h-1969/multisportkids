@@ -12,7 +12,7 @@ import bcrypt from "bcryptjs";
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
-// import store from "../data/items.json";
+// SETUP EMAILS
 const AWS = require('aws-sdk');
 config();
 
@@ -26,82 +26,23 @@ const senderEmail = 'jameshocking542@gmail.com'; // Replace with your sender ema
 
 import express, { NextFunction, Request, Response } from "express";
 
+//setup server
 const app = express();
-app.use(cookieParser());
 
 app.use(cors({
-    origin: "*" //this will be the site name so that only it can access the API
+    origin: "http://localhost:5173" //this will be the site name so that only it can access the API
 }));
 
+const PORT = process.env.PORT || 3000;
+
 const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
-    app.listen(3000);
+    app.listen(PORT);
 });
-
-interface UserData {
-    username: string;
-    password: string;
-}
-
-declare namespace Express {
-    interface Request {
-    user?: UserData; // Assuming you have an interface named UserData for your user data
-    }
-}
-
-const SECRET_KEY = 'your-secret-key';
-
-// Simulate user data
-const users: Record<string, UserData> = {
-  manager: { username: 'Tom Oleary', password: 'Bombers30!' },
-};
-
-app.post('/login', (req:Request, res:Response) => {
-  const { username, password } = req.body;
-
-  // Simulate user authentication (replace with actual logic)
-  const user = users[username];
-  if (user && user.password === password) {
-    const token = jwt.sign({ username }, SECRET_KEY);
-    res.cookie('token', token, { httpOnly: true, secure: true });
-    res.status(200).json({ message: 'Login successful' });
-  } else {
-    res.status(401).json({ message: 'Authentication failed' });
-  }
-});
-
-app.post('/logout', (req, res) => {
-  res.clearCookie('token');
-  res.status(200).json({ message: 'Logout successful' });
-});
-
-// Middleware to check for authentication
-const authenticate = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.cookies.token;
-
-  if (!token) {
-    return res.status(401).json({ message: 'Authentication required' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, SECRET_KEY) as { username: string };
-    const user = users[decoded.username];
-    next();
-  } catch (error) {
-    return res.status(401).json({ message: 'Invalid token' });
-  }
-};
-
-app.get('/protected', authenticate, (req, res) => {
-  res.status(200).json({ message: 'You have manager access' });
-});
-
-
 
 type hashedTokensType = {
     singleTokens: Array<string>;
     groupTokens: Array<string>
 }
-
 type details = {
     childName: string,
     childAge: string,
@@ -136,7 +77,6 @@ async function generateHashedTokens() {
       const hashedToken = bcrypt.hashSync(token, 10); // Use your desired salt rounds
       hashedTokens.push(hashedToken);
     }
-  
     return [hashedTokens, nonhashedTokens];
   }
 
@@ -401,11 +341,11 @@ app.get("/PrivateTimes", async (req: Request, res: Response) => {
     res.json(coaches);
 })
 
-app.get("/academy", async (req: Request, res: Response) => {
-    //TODO: fetch all camps and send to user
-    const academy = await Academy.find();
-    res.json(academy);
-})
+// app.get("/academy", async (req: Request, res: Response) => {
+//     //TODO: fetch all camps and send to user
+//     const academy = await Academy.find();
+//     res.json(academy);
+// })
 
 
 // POST REQUESTS //
@@ -422,8 +362,8 @@ app.post("/PrivateTimes", async (req: Request, res: Response) => {
 
 app.post("/product", async (req: Request, res: Response) => {
     const newProduct = new Product({
-        id: 15,
-        name: "Group Private (Plan)"
+        id: 16,
+        name: "Holiday Camp (1 day)"
     });
     const createdProduct = await newProduct.save();
     res.json(createdProduct);
@@ -481,23 +421,22 @@ app.post("/checkTokens", async (req: Request, res: Response) => {
       }
 })
 
-app.post("/academy", async (req: Request, res: Response) => {
-    const newAcademy = new Academy({
-        name: "St Ives Preparation",
-        time: "Monday 9:00am",
-        start: "29/7/23",
-        Location: "Accron Oval",
-        dates: {
-            "29/7/23": [],
-            "5/8/23": [],
-            "12/8/23": [],
-            "19/8/23": []
-        }
-    })
-    const createdAcad = await newAcademy.save();
-    res.json(createdAcad);
-})
-
+// app.post("/academy", async (req: Request, res: Response) => {
+//     const newAcademy = new Academy({
+//         name: "St Ives Preparation",
+//         time: "Monday 9:00am",
+//         start: "29/7/23",
+//         Location: "Accron Oval",
+//         dates: {
+//             "29/7/23": [],
+//             "5/8/23": [],
+//             "12/8/23": [],
+//             "19/8/23": []
+//         }
+//     })
+//     const createdAcad = await newAcademy.save();
+//     res.json(createdAcad);
+// })
 
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
@@ -600,50 +539,5 @@ app.post('/email-private', async (req: Request, res: Response) => {
 
 })
 
-app.post('/session-into-cart', async (req: Request, res: Response) => {
-    //put into database
-    const coachName = req.body.coachName;
-    const time = req.body.time;
-    const date = req.body.date;
-    const kidName = req.body.kidName;
-    const newCoachBooked = new CoachBooked({
-            coachName: coachName,
-            time: time,
-            date: date,
-            kidName: kidName,
-        })
-    const createdAcad = await newCoachBooked.save();
 
-    //remove from database
-    const filter = { name: coachName, dates: date };
-    const update = { $pull: { dates: date, times: time }};
-    try{
-        const updatedCoach = await Coach.findOneAndUpdate(filter, update, { new:true, runValidators:true})
-    } catch (error) {
-        console.error("Error updating Coach:", error);
-    }
-})
-
-app.post('/session-outof-cart', async (req: Request, res: Response) => {
-    //remove the session from the database
-    const coachName = req.body.coachName;
-    const time = req.body.time;
-    const date = req.body.date;
-    const kidName = req.body.kidName;
-    let filter = { coachName: coachName, date: date };
-    let update = { $pull: { date: date, time: time }};
-    try{
-        const updatedCoach = await CoachBooked.findOneAndUpdate(filter, update, { new:true, runValidators:true})
-    } catch (error) {
-        console.error("Error updating Coach:", error);
-    }
-    //add into coach
-    let filter2 = { name: coachName, date: date };
-    let update2 = { $push: { dates: date, times: time }};
-    try{
-        const updatedCoach = await Coach.findOneAndUpdate(filter2, update2, { new:true, runValidators:true})
-    } catch (error) {
-        console.error("Error updating Coach:", error);
-    }
-})
 
