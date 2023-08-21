@@ -57,7 +57,7 @@ export default function Contact() {
             coachingExperience: ["Level 1 Accredited AFL Coach", "Willoughby/Mosman Coach of U17 Boys Premiers 2022", "Swans Academmy Coach Ages (U11-16) 2019-2022", "Pymble Ladies College AFL Coach"],
             playingExperience: ["Swans Academy Graduate 2015-2021", "Swans NAB league player", "Sydney Swans Reserve Squad Member 2022", "Knox Grammer First VIII Player 2018-2020", "CIS Representive Team 2018", "Manly Wolves Forward of the Year and Premier Division Player"]
         },
-        "Hannah":{
+        "Hannah Woolf":{
             role: "Girls Head Coach",
             position: "Key/Small Forward",
             phone: "+61 431 036 199",
