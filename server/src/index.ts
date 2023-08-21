@@ -1,5 +1,5 @@
-import cors from "cors";
-import mongoose from "mongoose";
+const cors = require("cors");
+const mongoose = require("mongoose");
 import Camp from "../Models/Camp";
 import Coach from "../Models/Coach";
 import Academy from "../Models/Academy";
