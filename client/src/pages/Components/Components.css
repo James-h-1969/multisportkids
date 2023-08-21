@@ -111,10 +111,6 @@
     border-radius: 30px;
 }
 
-.timetable-box {
-    position: relative;
-}
-
 .cell{
     align-items: center;
     justify-content: center;
@@ -126,63 +122,36 @@
 .box-red{
     background-color: #6c757d;
     position: relative;
-    width: 100%;
-    height: 100%;
     cursor: pointer;
 }
 
 .current-day{
     background-color: rgb(70, 118, 142);
     position: relative;
-    width: 100%;
-    height: 100%;
 }
 
 .activeDay{
     background-color: rgb(235, 235, 235);
     position: relative;
-    width: 100%;
-    height: 100%;
     cursor: pointer;
 }
-
-
 
 
 .session-type-deactive{
     background-color: rgb(124, 124, 126);
-    padding: 20px;
     border-radius: 15px;
     text-align: center;
     cursor: pointer;
-    padding-bottom: 70px;
 }
 
 .session-type-active{
     background-color: rgb(70, 118, 142);
-    padding: 20px;
     border-radius: 15px;
     text-align: center;
-    cursor: pointer;
-    padding-bottom: 70px;
+    cursor: pointer
 }
 
-.private-session-type{
-    font-weight: lighter;
-    font-size: 60px;
-}
 
-.private-session-price{
-    font-size: 80px;
-    font-weight: bold;
-}
-
-.kid-quantity{
-    position: absolute;
-    right: 170px;
-    width: 60px;
-    margin-top: 240px;
-}
 
 .private-add{
     text-align: center;

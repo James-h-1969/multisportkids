@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import bcrypt from "bcryptjs";
 import storeItems from "../../data/items.json"
+import useMediaQueries from "media-queries-in-react";
 
 type storeItemType = {
     id:number,
@@ -22,6 +23,11 @@ type AddSessionProps = {
 //add a bunch of backend adding it to the system
 
 export default function AddSession(props:AddSessionProps){
+
+    const mediaQueries = useMediaQueries({ 
+        mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
+    });
+
     const { addToCart } = useCart();
     const [childName, setChildName] = useState('');
     const [childAge, setChildAge] = useState('');
@@ -50,52 +56,50 @@ export default function AddSession(props:AddSessionProps){
     }
 
 
-    async function handleAddingCart(){
+    // async function handleAddingCart(){
+    //     let Newdate = props.date.split(' ');
+    //     Newdate[Newdate.length - 1] = Newdate[Newdate.length - 1].slice(2);
+    //     let Newerdate = Newdate.join("");
 
 
-        let Newdate = props.date.split(' ');
-        Newdate[Newdate.length - 1] = Newdate[Newdate.length - 1].slice(2);
-        let Newerdate = Newdate.join("");
+    //     let ID = props.id;
 
-
-        let ID = props.id;
-
-        if (token.length > 0){
-            let isValid = await isTokenRight(token, props.id);
-            if (isValid){
-                if (props.id == 3){
-                    ID = 14;
-                } else {
-                    ID = 15;
-                }
-            } else {
-                setShowWarning(true);
-                return
-            }
-        }
+    //     if (token.length > 0){
+    //         let isValid = await isTokenRight(token, props.id);
+    //         if (isValid){
+    //             if (props.id == 3){
+    //                 ID = 14;
+    //             } else {
+    //                 ID = 15;
+    //             }
+    //         } else {
+    //             setShowWarning(true);
+    //             return
+    //         }
+    //     }
         
-        const Customdetails = {
-            childName: childName,
-            childAge: childAge,
-            childComments: comments,
-            childClub: club,
-            purchaseName: [props.name, Newerdate, props.time, token]
-        }
+    //     const Customdetails = {
+    //         childName: childName,
+    //         childAge: childAge,
+    //         childComments: comments,
+    //         childClub: club,
+    //         purchaseName: [props.name, Newerdate, props.time, token]
+    //     }
 
-        const response = await fetch('http://localhost:3000/session-into-cart', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ coachName: props.name,date:Newerdate,time:props.time,kidName:childName  }),
-            });
-        const data = await response.json();
+    //     const response = await fetch('http://localhost:3000/session-into-cart', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({ coachName: props.name,date:Newerdate,time:props.time,kidName:childName  }),
+    //         });
+    //     const data = await response.json();
 
 
 
-        addToCart(ID, 1, Customdetails);
-        location.reload();
-    }
+    //     addToCart(ID, 1, Customdetails);
+    //     location.reload();
+    // }
 
     async function handleSendingEmail(){
 
@@ -141,16 +145,15 @@ export default function AddSession(props:AddSessionProps){
             });
         if (response.ok) {
             // The fetch was successful
-            console.log("TEST");
             window.location.reload();
         } else {
-            console.log("HI");
         }
     }
+
+    const isEmailingPossible =  email && childName && childAge && club;
     
     return(
-        <div className="p-2 ps-4 pe-4 m-5" style={{backgroundColor:"rgb(222, 222, 231)", borderRadius:"15px"}}>
-            
+        <div className="p-2 ps-4 pe-4" style={{backgroundColor:"rgb(222, 222, 231)", borderRadius:"15px", margin:mediaQueries.mobile?"20px":"40px"}}>
             <Form className="mt-5">
                         <Form.Group className="d-flex mb-3" controlId="formBasicEmail">
                             <Form.Label style={{ width: "50%" }}>Parent Email</Form.Label>
@@ -206,17 +209,17 @@ export default function AddSession(props:AddSessionProps){
                         </div>: <></>}
 
                     </Form>
-            <div className="p-3 ps-5 d-flex justify-content-between m-5">
-                <div className="d-flex justify-content-between align-items-center" style={{width:"100%"}}>
+            <div className="p-3 d-flex m-5">
+                <div className="d-flex justify-content-around align-items-center gap-4" style={{width:"100%"}}>
                     <div>
-                        <span style={{fontSize:"20px"}}>
+                        <span style={{fontSize:mediaQueries.mobile?"13px":"20px"}}>
                             {props.date}
                         </span>
                         <span style={{marginLeft:"30px"}}>
                             {props.time}
                         </span>
                     </div>
-                    <span style={{fontSize:"20px"}}>{props.location}</span>
+                    <span style={{fontSize:mediaQueries.mobile?"13px":"20px"}}>{props.location}</span>
                     <div className="" >
                         <span style={{fontWeight:"bold"}}>${props.price}.00</span>
                     </div>
@@ -225,7 +228,7 @@ export default function AddSession(props:AddSessionProps){
             </div>
             <div className="d-flex justify-content-around p-3">
                 Send email to the coach with your details to make an enquiry. The coach will reply within 3 days to confirm the booking or provide any updates.
-                <Button variant="secondary" style={{width:"300px", cursor:"pointer"}} onClick={() => handleSendingEmail()}>Send Email</Button>
+                <Button variant="secondary" style={{width:"300px", cursor:"pointer"}} onClick={() => handleSendingEmail()} disabled={!isEmailingPossible}>Send Email</Button>
             </div>
         </div>
     )

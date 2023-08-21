@@ -3,6 +3,7 @@ import { getDates, getMonthName, getMonthNum, getYear, getCurrentDayNum } from "
 import "../Components.css";
 import { Button } from "react-bootstrap";
 import { ArrowRight, ArrowLeft } from "react-bootstrap-icons";
+import useMediaQueries from "media-queries-in-react";
 
 type PrivateTimetableProps = {
     showTypes: (show:boolean) => void;
@@ -77,6 +78,10 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
         let month = isCurrentMonth ? getMonthNum().toString(): (getMonthNum() + 1).toString();
         return `${date}  /  ${month} / 2023`;
     }
+
+    const mediaQueries = useMediaQueries({ 
+        mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
+    });
 
     type CoachType = {
         name: string,
@@ -174,8 +179,8 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
 
     return (
         <>
-            <div className='private-timetable-box p-4 m-5 d-flex justify-content-between'>
-            <div className="timetable-box d-flex flex-column pb-3" style={{width: "50%"}}>
+            <div className='private-timetable-box p-4 justify-content-between text-center' style={{display:mediaQueries.mobile?"":"flex", margin:mediaQueries.mobile?"20px":"40px"}}>
+            <div className="timetable-box d-flex flex-column pb-5" style={{width: mediaQueries.mobile?"80%":"50%"}}>
                 <div className="text-start d-flex justify-content-between">
                     <div className="d-flex justify-content-between align-items-end ms-4" style={{width:"150px"}}>
                         <h1><span className="fs-4">{getMonthName(isCurrentMonth)}</span></h1>
@@ -187,14 +192,14 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
                 </div>
                 <div className="weekday d-flex justify-content-around" style={{height:"60px"}}>
                     {weekDays.map((day) => (
-                        <div className=" p-4 text-center text-muted">{day}</div>
+                        <div className=" p-1 text-center text-muted">{day}</div>
                     ))}
                 </div>
                 <div className="timetable-box">
                     {timetableDates.map((week, weeknum) => (
                         <div className="d-flex justify-content-around" style={{}}>
                         {week.map((day, daynum) => (
-                            <div className="d-flex m-4 text-center row" style={{ width: "30px", height: "30px"}} onClick={() => handleClick(weeknum, daynum)}>
+                            <div className="d-flex m-3 text-center row" style={{ width:mediaQueries.mobile?"5px":"30px", height:mediaQueries.mobile?"5px":"30px"}} onClick={() => handleClick(weeknum, daynum)}>
                                 <div className={day[1] === "currentDay" && isCurrentMonth ? "current-day rounded-circle" : "" || isAvailableDate(daynum, weeknum) ? "box-red rounded-circle":""}>
                                     <div className={day[0] === "invalid" ? "":"show-shadow rounded-circle"}>
                                         <a> <span className="fs-6 d-flex align-items-start justify-content-center" style={{ height: "100%", width: "100%" }}>{day[0] === "invalid"? "":day[0]}</span></a>   
@@ -207,12 +212,12 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
                 </div>
                 <div className="d-flex justify-content-around pt-3">
                     <div className="d-flex">
-                        <div className="rounded-circle me-4" style={{backgroundColor:"#46768E", width:"20px", height:"20px"}}>
+                        <div className="rounded-circle me-4" style={{backgroundColor:"#46768E", width:mediaQueries.mobile?"20px":"30px", height:mediaQueries.mobile?"20px":"30px"}}>
                         </div>
                         Current Day
                     </div>
                     <div className="d-flex">
-                        <div className="rounded-circle me-4" style={{backgroundColor:"#6c757d", width:"20px", height:"20px"}}>
+                        <div className="rounded-circle me-4" style={{backgroundColor:"#6c757d", width:mediaQueries.mobile?"20px":"30px", height:mediaQueries.mobile?"20px":"30px"}}>
                         </div>
                         Available Days
                     </div>
@@ -272,8 +277,8 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
                         </div>
                     </div>}
                     <div className="pt-4">
-                        {selectedTime ? <><span className="text-muted">Selected:</span> <span style={{fontSize:"27px", paddingLeft:"200px"}}>{selectedTime}{" "}{getDate()}</span>
-                        <div><span className="text-muted">Coach:</span> <span style={{fontSize:"27px", paddingLeft:"220px"}}>{selectedCoach}</span></div>
+                        {selectedTime ? <><span className="text-muted">Selected:</span> <span style={{fontSize:mediaQueries.mobile?"15px":"27px", height:mediaQueries.mobile?"5px":"30px", paddingLeft:mediaQueries.mobile?"15px":"220px"}}>{selectedTime}{" "}{getDate()}</span>
+                        <div><span className="text-muted">Coach:</span> <span style={{fontSize:mediaQueries.mobile?"15px":"27px", paddingLeft:mediaQueries.mobile?"15px":"220px"}}>{selectedCoach}</span></div>
                         </>:<></>}
                     </div>
                </div>            

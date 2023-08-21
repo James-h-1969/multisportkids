@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { InputGroup, FormControl } from "react-bootstrap";
+import useMediaQueries from "media-queries-in-react";
 
 type PrivateSessionTypeProps = {
     showAdd: (show:boolean) => void;
@@ -10,6 +11,11 @@ function PrivateSessionType({showAdd, step3}:PrivateSessionTypeProps){
     const [isActive, setisActive] = useState([false, false, false, false, false]);
     const [activeIndex, setactiveIndex] = useState(-1);
     const [amountofKids, setamountofKids] = useState(1);
+
+    const mediaQueries = useMediaQueries({ 
+        mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
+    });
+
 
     const handleClick = (index:number, kids:number) => {
         let newState = isActive;
@@ -45,32 +51,31 @@ function PrivateSessionType({showAdd, step3}:PrivateSessionTypeProps){
     }
 
     return(
-        <div className="p-4 m-5" style={{backgroundColor:"rgb(222, 222, 231)", borderRadius:"20px"}}>
+        <div className="" style={{backgroundColor:"rgb(222, 222, 231)", borderRadius:"20px", margin:mediaQueries.mobile?"20px":"40px", padding:mediaQueries.mobile?"20px":"40px"}}>
             <h1><span className='step1'>Step 3: Pick Session Type</span></h1>
-            <div className="d-flex p-3 pt-5 justify-content-around">
-                <div className={isActive[0] ? "session-type-active": "session-type-deactive"} onClick={() => handleClick(0,1)}>
-                    <h1><span className="private-session-type">1 on 1</span></h1>
+            <div className="d-flex pt-2 justify-content-around gap-2" style={{padding:mediaQueries.mobile?"0px":"20px"}}>
+                <div className={isActive[0] ? "session-type-active": "session-type-deactive"} style={{width:mediaQueries.mobile?"60px":"180px", paddingTop:mediaQueries.mobile?"10px":"20px"}} onClick={() => handleClick(0,1)}>
+                    <h1><span className="private-session-type" style={{fontSize:mediaQueries.mobile?"15px":"40px"}}>1 on 1</span></h1>
                     <h2><span className="private-session-price">$80</span></h2>
                 </div>
-                <div className={isActive[1] ? "session-type-active": "session-type-deactive"} onClick={() => handleClick(1,2)}>
-                    <h1><span className="private-session-type">2 on 1</span></h1>
+                <div className={isActive[1] ? "session-type-active": "session-type-deactive"}  style={{width:mediaQueries.mobile?"60px":"180px", paddingTop:mediaQueries.mobile?"10px":"20px"}}onClick={() => handleClick(1,2)}>
+                    <h1><span className="private-session-type" style={{fontSize:mediaQueries.mobile?"15px":"40px"}}>2 on 1</span></h1>
                     <h2><span className="private-session-price">$110</span></h2>
                 </div>
-                <div className={isActive[2] ? "session-type-active": "session-type-deactive"} onClick={() => handleClick(2,3)}>
-                    <h1><span className="private-session-type">3 on 1</span></h1>
+                <div className={isActive[2] ? "session-type-active": "session-type-deactive"}  style={{width:mediaQueries.mobile?"60px":"180px", paddingTop:mediaQueries.mobile?"10px":"20px"}} onClick={() => handleClick(2,3)}>
+                    <h1><span className="private-session-type" style={{fontSize:mediaQueries.mobile?"15px":"40px"}}>3 on 1</span></h1>
                     <h2><span className="private-session-price">$140</span></h2>
                 </div>
-                <div className={isActive[3] ? "session-type-active": "session-type-deactive"} onClick={() => handleClick(3,5)}>
-                    <h1><span className="private-session-type">5 on 1</span></h1>
+                <div className={isActive[3] ? "session-type-active": "session-type-deactive"} style={{width:mediaQueries.mobile?"60px":"180px", paddingTop:mediaQueries.mobile?"10px":"20px"}} onClick={() => handleClick(3,5)}>
+                    <h1><span className="private-session-type" style={{fontSize:mediaQueries.mobile?"15px":"40px"}}>5 on 1</span></h1>
                     <h2><span className="private-session-price">$200</span></h2>
                 </div>
-                <div className={isActive[4] ? "session-type-active": "session-type-deactive"} onClick={() => handleClick(4, amountofKids)}>
-                    <h1><span className="private-session-type">... on 1</span></h1>
+                <div className={isActive[4] ? "session-type-active": "session-type-deactive"} style={{width:mediaQueries.mobile?"60px":"180px", paddingTop:mediaQueries.mobile?"10px":"20px"}} onClick={() => handleClick(4, amountofKids)}>
+                    <h1><span className="private-session-type" style={{fontSize:mediaQueries.mobile?"15px":"40px"}}>... on 1</span></h1>
                     <h2><span className="private-session-price">${80 + 30 * (amountofKids-1)}</span></h2>
-                    <a>+ $30 per extra AFL kid</a>
-                </div>
-                <div className="kid-quantity">
-                        <InputGroup>
+                    <a><span style={{fontSize:mediaQueries.mobile?"10px":"30px"}}>+ $30 per extra AFL kid</span></a>
+                    <div className="kid-quantity d-flex justify-content-center">
+                        <InputGroup style={{width:"70%"}}>
                             <FormControl
                                 type="number"
                                 value={amountofKids}
@@ -78,7 +83,9 @@ function PrivateSessionType({showAdd, step3}:PrivateSessionTypeProps){
                                 readOnly={!isActive[4]}
                             />
                         </InputGroup>
+                    </div>
                 </div>
+
         </div>
 
         </div>
