@@ -2,7 +2,7 @@
     font-family: 'Rubik';
     font-weight: normal;
     font-style: normal;
-    src: url('../fonts/Rubik-Regular.ttf') format('truetype'),
+    src: url('/fonts/Rubik-Regular.ttf') format('truetype'),
 } 
 
 .heading{

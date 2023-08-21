@@ -3,14 +3,14 @@
     font-family: 'Rubik';
     font-weight: 400;
     font-style: normal;
-    src: url('../fonts/Rubik-Regular.ttf') format('truetype');
+    src: url('/fonts/Rubik-Regular.ttf') format('truetype');
 } 
 
 @font-face {
     font-family: 'Rubik';
     font-weight: bold;
     font-style: normal;
-    src: url('../fonts/Rubik-Bold.ttf') format('truetype');
+    src: url('/fonts/Rubik-Bold.ttf') format('truetype');
 }
 
 
