@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install-server": "cd server && npm run build",
-    "start-server": "cd server && node build/src/index.js",
+    "install-server": "cd server && npm install",
+    "start-server": "cd server && npm run build && node build/src/index.js",
     "install-client": "cd client && npm install",
     "build-client": "cd client && npm run build",
     "start-client": "cd client && npm run start"
@@ -13,7 +13,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "typescript": "^5.1.6"
   }
 }
