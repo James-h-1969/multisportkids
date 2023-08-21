@@ -1,9 +1,6 @@
-import LinkButton from "./Components/LinkButton";
 import NavBar from "./Components/NavBar";
 import HomeDeals from "./Components/HomeComponents/HomeDeals";
-import HomeLocation from "./Components/HomeComponents/HomeLocation";
 import HomeQuotes from "./Components/HomeComponents/HomeQuotes";
-import Footer from "./Components/Footer";
 import { Button } from "react-bootstrap";
 import ball from "/assets/ball.png"
 import useMediaQueries from "media-queries-in-react";
@@ -17,12 +14,12 @@ import { Link } from "react-router-dom";
 
 function Home(){
 
-    function addAcademy(){
-        fetch("http://localhost:3000/PrivateTimes",
-        {
-            method:"POST"
-        })
-    }
+    // function addAcademy(){
+    //     fetch("http://localhost:3000/PrivateTimes",
+    //     {
+    //         method:"POST"
+    //     })
+    // }
 
     const mediaQueries = useMediaQueries({ 
         mobile: "(max-width: 480px)",

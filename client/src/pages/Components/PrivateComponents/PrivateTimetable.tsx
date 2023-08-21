@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { getDates, getMonthName, getMonthNum, getYear, getCurrentDayNum } from "../../functions/getDates";
 import "../Components.css";
-import { Button } from "react-bootstrap";
 import { ArrowRight, ArrowLeft } from "react-bootstrap-icons";
 import useMediaQueries from "media-queries-in-react";
 
@@ -90,9 +89,9 @@ function PrivateTimetable({showTypes, step2, location}:PrivateTimetableProps){
         location: string
     }
 
-    type CoachTimes = {
-        times: Array<string>
-    }
+    // type CoachTimes = {
+    //     times: Array<string>
+    // }
 
     interface CoachObject {
         Coachname: string[];

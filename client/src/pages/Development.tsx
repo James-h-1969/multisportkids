@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
 import AcademyItem from "./Components/AcademyItem";
@@ -30,7 +30,7 @@ function Development(){
             <NavBar />
             <Header title="Academy Preparation" description={text}/>
             <div className="d-flex mt-5">
-                {academy.map((val,indx) => (
+                {academy.map((val) => (
                     <>
                     <AcademyItem name={val.name} Location={val.Location} start={val.start} time={val.time} dates={Object.keys(val.dates)}/>
                     </>

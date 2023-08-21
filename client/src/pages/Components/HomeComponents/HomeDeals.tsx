@@ -1,5 +1,3 @@
-import React from "react";
-import LinkButton from "./../LinkButton";
 import campPhoto from "/assets/CampPhotos/IMG_3105.png";
 import privatePhoto from "/assets/CampPhotos/IMG_3513.png";
 import { Carousel, Button } from "react-bootstrap";

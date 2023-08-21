@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import Campbox from "./Campbox";
 import useMediaQueries from "media-queries-in-react";
 

@@ -1,12 +1,11 @@
 import NavBar from "./Components/NavBar"
 import Header from "./Components/Header"
 import insta from "/assets/instagram.png";
-import tomPhoto from "/assets/CampPhotos/IMG_3794.jpg"
 // import smitPhoto from "/assets/CampPhotos/IMG_3338.jpg"
 // import kalePhoto from "/assets/CampPhotos/IMG_0603.jpg"
 // import hannahPhoto from "/assets/CampPhotos/IMG_2326.jpg"
 import facebook from "/assets/facebook.png"
-import { Image, Button } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import TeamCard from "./Components/ContactComponents/TeamCard";
 import { useState } from "react";
 import CoachInfo from "./Components/ContactComponents/CoachInfo";

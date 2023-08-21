@@ -1,6 +1,5 @@
-import React, { useState } from "react";
 import { useCart } from "../../context/cartContext";
-import { Card, Button, Form } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import useMediaQueries from "media-queries-in-react";
 
 type PlanItemProps = {

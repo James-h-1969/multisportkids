@@ -1,9 +1,6 @@
-import React from "react";
 import { Container, Nav, Navbar, Image, Button, NavDropdown } from "react-bootstrap";
 import "./Components.css";
 import logo from "/assets/AFLKidsLogo.png";
-import instagram from "/assets/instagram.png";
-import facebook from "/assets/facebook.png";
 import { useCart } from "../context/cartContext";
 import useMediaQueries from "media-queries-in-react";
 

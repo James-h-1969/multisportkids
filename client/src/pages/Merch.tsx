@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import {Row, Col } from "react-bootstrap";
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
@@ -6,7 +5,7 @@ import MerchItem from "./Components/MerchItem";
 import "./Merch.css";
 import hoodie from "/assets/AFLkids hoodie.jpg";
 import shirt from "/assets/AFLkids playing shirt.jpg"
-import Footer from "./Components/Footer";
+
 
 
 function Merch(){

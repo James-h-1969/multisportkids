@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../Components.css';
 import useMediaQueries from "media-queries-in-react";
 

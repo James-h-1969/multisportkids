@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, DropdownButton, ButtonGroup, Dropdown, InputGroup, FormControl, Container, Card } from "react-bootstrap";
+import { Button, DropdownButton, ButtonGroup, Dropdown, Card } from "react-bootstrap";
 import { useCart } from "../context/cartContext";
 import useMediaQueries from "media-queries-in-react";
 

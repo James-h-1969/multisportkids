@@ -1,6 +1,4 @@
-import LinkButton from "../LinkButton";
 import { Image, Button, Form } from "react-bootstrap";
-import development from "/assets/development.jpg";
 import { useEffect, useState } from "react";
 import { useCart } from "../../context/cartContext";
 import camp1 from "/assets/CampPhotos/IMG_2365.jpg"

@@ -1,7 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import "./Components.css";
-import PropTypes from "prop-types";
 import useMediaQueries from "media-queries-in-react";
 
 interface HeaderProps {

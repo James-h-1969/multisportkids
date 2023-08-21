@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
-import banner from "/assets/banner.jpg";
 import UpComingCamps from "./Components/CampComponents/UpcomingCamps";
-import Footer from "./Components/Footer";
 import "./Camps.css";
 import useMediaQueries from "media-queries-in-react";
 import campVideo from "/assets/aflkidsvid.mp4";

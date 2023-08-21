@@ -1,4 +1,4 @@
-import { Card, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import PlanItem from "./PlanItem";
 import Oneon1 from "/assets/1on1.png";
 import Banner from "/assets/banner.jpg"

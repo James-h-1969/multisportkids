@@ -1,14 +1,13 @@
-import { useCart } from "../../context/cartContext";
+// import { useCart } from "../../context/cartContext";
 import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
-import bcrypt from "bcryptjs";
 import storeItems from "../../data/items.json"
 import useMediaQueries from "media-queries-in-react";
 
-type storeItemType = {
-    id:number,
-    name:String
-}
+// type storeItemType = {
+//     id:number,
+//     name:String
+// }
 
 
 type AddSessionProps = {
@@ -28,7 +27,7 @@ export default function AddSession(props:AddSessionProps){
         mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
     });
 
-    const { addToCart } = useCart();
+    // const { addToCart } = useCart();
     const [childName, setChildName] = useState('');
     const [childAge, setChildAge] = useState('');
     const [club, setClub] = useState('');
@@ -38,7 +37,7 @@ export default function AddSession(props:AddSessionProps){
     const [email, setEmail] = useState('');
 
     async function isTokenRight(token:string, id:number){
-        let newHash = await bcrypt.hash(token, 10);
+        // let newHash = await bcrypt.hash(token, 10);
         const response = await fetch('http://localhost:3000/checkTokens', {
             method: 'POST',
             headers: {
@@ -52,6 +51,7 @@ export default function AddSession(props:AddSessionProps){
         } else {
             return false; // Invalid token
         }
+        console.log(data);
         return false;
     }
 
