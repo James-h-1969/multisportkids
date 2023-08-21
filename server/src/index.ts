@@ -30,7 +30,7 @@ const express = require("express");
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5174" //this will be the site name so that only it can access the API
+    origin: "https://aflkids-frontend.onrender.com" //this will be the site name so that only it can access the API
 }));
 
 const PORT = process.env.PORT || 3000;
