@@ -73,7 +73,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
     const firstDate = [brokenDate[0], brokenDate.slice(-2).join(" ")].join(" ");
     const secondDate = [brokenDate[2], brokenDate.slice(-2).join(" ")].join(" ");
 
-    const isButtonDisabled = !(childName && childAge && club && comments && (selectedOption != "Choose Days"));
+    const isButtonDisabled = !(childName && childAge && club  && (selectedOption != "Choose Days"));
     
     return(
         <div className="m-3 pb-4 " style={{backgroundColor:"rgb(70, 118, 142)", fontFamily:"Rubik", borderRadius:"15px", paddingLeft:mediaQueries.mobile?"0px":"30px", paddingRight:mediaQueries.mobile?"10px":"30px"}}>

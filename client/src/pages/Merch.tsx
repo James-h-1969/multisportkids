@@ -17,10 +17,10 @@ function Merch(){
             <div className="d-flex merch-box" style={{marginLeft:"20px", marginTop:"20px", marginBottom:"30px"}}>
                 <Row className="g-3 ml-1" xs={1} lg={2} >
                     <Col>
-                        <MerchItem name="Hoodie" price="$34.99" image={hoodie} id={1}/>
+                        <MerchItem name="Hoodie" price="$54.99" image={hoodie} id={1}/>
                     </Col>
                     <Col>
-                    <MerchItem name="Training Shirt" price="$24.99" image={shirt} id={2}/>
+                    <MerchItem name="Training Shirt" price="$34.99" image={shirt} id={2}/>
                     </Col>
                 </Row>
             </div>

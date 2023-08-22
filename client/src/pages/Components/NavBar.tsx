@@ -3,6 +3,7 @@ import "./Components.css";
 import logo from "/assets/AFLKidsLogo.png";
 import { useCart } from "../context/cartContext";
 import useMediaQueries from "media-queries-in-react";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   const {openCart, cartQuantity} = useCart();
@@ -16,7 +17,9 @@ function NavBar() {
         <Container>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Brand className="navbar-brand-custom">
+            <Link to="/">
             <Image alt="logo" src={logo} className="navbar-logo" style={{width:"200px"}}/>
+            </Link>
           </Navbar.Brand>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto">
@@ -56,11 +59,13 @@ function NavBar() {
       </Navbar>:
       <Navbar expand="true" fixed="top" variant="light" style={{ background: 'white', height:"100px"}}>
       <Navbar.Brand className="navbar-brand-custom" style={{marginLeft:"20px", marginBottom:"10px"}}>
+        <Link to="/">
         <Image alt="logo" src={logo} className="navbar-logo" style={{width:"200px"}}/>
+        </Link>
       </Navbar.Brand>
       { (cartQuantity > 0) ? 
             <Button style={{
-              width: "100%", height: "55px", position: "relative", right:"50px"}} 
+              width: "40px", height: "40px", position: "relative", right:"110px"}} 
               variant="outline-primary" className="rounded-circle"
               onClick={openCart}>
             <svg
@@ -82,7 +87,7 @@ function NavBar() {
             </div>
             </Button>:<></>
         }
-      <Navbar.Toggle aria-controls="basic-navbar-nav" style={{marginRight:"20px"}}/>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" style={{position:"absolute", right:"30px", top:"40px"}}/>
       <Navbar.Collapse id="" style={{marginLeft:"260px", backgroundColor:"white", width:"200px"}}>
   
         <Nav className="ms-auto" style={{fontSize:"12px", border:"3px solid light grey"}}>

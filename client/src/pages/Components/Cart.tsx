@@ -26,6 +26,7 @@ export function Cart({isOpen}:CartProps){
     const { closeCart, cartItems } = useCart();
     const [ emailAddress, setEmailAdress ] = useState("");
     const [ customerName, setCustomerName ] = useState("");
+    const [ phoneNumber, setPhoneNumber ] = useState("");
 
     async function handleCheckoutButton(){
         closeCart();
@@ -81,15 +82,22 @@ export function Cart({isOpen}:CartProps){
                             onChange={(e) => setCustomerName(e.target.value)}
                             />
                     </Form.Group>
-                            <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
+                    <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
                             <Form.Control
                             placeholder="Enter Email Address"
                             value={emailAddress}
                             onChange={(e) => setEmailAdress(e.target.value)}
                             />
                     </Form.Group>
+                    <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
+                            <Form.Control
+                            placeholder="Enter Phone Number"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            />
+                    </Form.Group>
                 </Form>
-                <Button disabled={!(customerName.length > 0 && emailAddress.length > 0)}variant="secondary" className="w-100" onClick={() => handleCheckoutButton()}>
+                <Button disabled={!(customerName.length > 0 && emailAddress.length > 0 && phoneNumber.length > 0)}variant="secondary" className="w-100" onClick={() => handleCheckoutButton()}>
                     Checkout
                 </Button>
 
