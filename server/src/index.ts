@@ -467,13 +467,16 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
         const customerEmail = req.body.customerEmail;
         const customer = await stripe.customers.create({
             email: customerEmail,
-            name: customerName
+            name: customerName,
         });
         let items = JSON.stringify(req.body.items);
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             mode: 'payment',
             customer: customer.id,
+            phone_number_collection: {
+                enabled: true,
+            },
             line_items: (req.body.items as Item[]).map(item => {
                 const storeItem = storeItems.get(item.id);
                 return {
@@ -487,8 +490,8 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
                     quantity: item.quantity
                 };
             }),
-            success_url: 'http://localhost:5173/success', // Replace this with your server route or function
-            cancel_url: 'http://localhost:5173/',
+            success_url: 'https://aflkids-frontend.onrender.com/success', // Replace this with your server route or function
+            cancel_url: 'https://aflkids-frontend.onrender.com/',
             payment_intent_data: {
                 metadata: {
                   cartItems: items
