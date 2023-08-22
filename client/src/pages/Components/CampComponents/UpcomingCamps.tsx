@@ -25,6 +25,9 @@ function UpcomingCamps() {
     fetchCamps();
   }, [])
 
+  //"https://aflkids-backend.onrender.com/camps");
+
+
   const mediaQueries = useMediaQueries({ 
     mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
   });

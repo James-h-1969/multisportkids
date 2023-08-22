@@ -7,6 +7,7 @@ import PrivateSessionType from "./Components/PrivateComponents/PrivateSessionTyp
 import AddSession from "./Components/PrivateComponents/AddSession";
 import PrivatePlans from "./Components/PrivateComponents/PrivatePlans";
 import "./Components/Components.css";
+import Footer from "./Components/Footer"
 
 function Private() {
     const desc = "Get one of our best coaches for personalised assistance. Tailored help to get the most out of your AFL kid.";
@@ -86,7 +87,7 @@ function Private() {
         {stepStates[1] ? <PrivateTimetable showTypes={showType} step2={step2} location={overallSession.location}/> :<></>}
         {stepStates[2] ? <PrivateSessionType showAdd={showAdd} step3={step3}/>:<></>}
         {stepStates[3] ? <AddSession time={overallSession.time} date={overallSession.date} id={overallSession.id} location={overallSession.location} price={overallSession.price} name={overallSession.coachName}/>:<></>}
-
+        <Footer />
       </>
     )
   }

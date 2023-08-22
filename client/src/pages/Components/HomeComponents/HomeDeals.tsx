@@ -2,7 +2,7 @@ import { Carousel, Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useMediaQueries from "media-queries-in-react";
 import campPhoto from "/assets/CampPhotos/IMG_2368.jpg"
-import soloPhoto from "/assets/camps.jpg";
+import soloPhoto from "/assets/usePhoto.jpg";
 
 
 function HomeDeals(){
@@ -22,7 +22,7 @@ function HomeDeals(){
                     className="d-block"
                     src={campPhoto}
                     alt="First slide"
-                    style={{height:mediaQueries.mobile?"500px":"700px", width:mediaQueries.mobile?"500px":"700px", margin:"0 auto", paddingBottom:"220px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
+                    style={{objectFit:"cover", height:mediaQueries.mobile?"500px":"700px", width:mediaQueries.mobile?"500px":"700px", margin:"0 auto", paddingBottom:"220px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
                     />
                     <Carousel.Caption style={{ paddingBottom:"40px"}}>
                     <h3><span style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"30px":"40px"}}>Holiday Camps</span></h3>
@@ -37,7 +37,7 @@ function HomeDeals(){
                     className="d-block"
                     src={soloPhoto}
                     alt="second slide"
-                    style={{height:mediaQueries.mobile?"500px":"700px", width:mediaQueries.mobile?"500px":"700px", margin:"0 auto", paddingBottom:"230px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
+                    style={{objectFit:"cover", height:mediaQueries.mobile?"500px":"700px", width:mediaQueries.mobile?"500px":"700px", margin:"0 auto", paddingBottom:"230px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
                     />
                     <Carousel.Caption>
                     <h3><span style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"30px":"40px"}}>Private Sessions</span></h3>

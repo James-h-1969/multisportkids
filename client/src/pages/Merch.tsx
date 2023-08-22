@@ -1,6 +1,7 @@
 import {Row, Col } from "react-bootstrap";
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
+import Footer from "./Components/Footer";
 import MerchItem from "./Components/MerchItem";
 import "./Merch.css";
 import hoodie from "/assets/AFLkids hoodie.jpg";
@@ -23,6 +24,7 @@ function Merch(){
                     </Col>
                 </Row>
             </div>
+            <Footer />
         </>
     )
 }

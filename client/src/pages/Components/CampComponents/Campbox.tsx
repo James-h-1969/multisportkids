@@ -4,6 +4,9 @@ import { useCart } from "../../context/cartContext";
 import camp1 from "/assets/CampPhotos/IMG_2365.jpg"
 import camp2 from "/assets/CampPhotos/IMG_2363.jpg"
 import camp3 from "/assets/CampPhotos/IMG_2368.jpg"
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import useMediaQueries from "media-queries-in-react";
 
 type CampboxProps = {
@@ -25,7 +28,8 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
     const [childAge, setChildAge] = useState('');
     const [club, setClub] = useState('');
     const [comments, setComments] = useState('');
-    const [chosen, setChosen] = useState([false, false]);
+    const [selectedOption, setSelectedOption] = useState('Choose Days');
+
 
     const mediaQueries = useMediaQueries({ 
         mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
@@ -35,9 +39,9 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
     function handleAddingCart(){
         let ID = 0;
         let day = "";
-        if ((chosen[0] && !chosen[1]) || (chosen[1] && !chosen[0])){
+        if (selectedOption == "Day One" || selectedOption == "Day Two"){
             ID = 16;
-            if (chosen[0]){
+            if (selectedOption == "Day One"){
                 day = "1";
             } else {
                 day = "2";
@@ -56,23 +60,20 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
         location.reload();
     }
 
-    function handleDayClick(day:number){
-        let newChosen = [...chosen];
-        newChosen[day] = !chosen[day];
-        setChosen(newChosen);
-    }
+    const handleOptionSelect = (eventKey: string | null) => {
+        if (eventKey) {
+          setSelectedOption(eventKey);
+        }
+      };
 
     const imgs = [camp1, camp2, camp3];
 
-    useEffect(() => {
-        
-    }, [chosen])
 
     const brokenDate = date.split(" ");
     const firstDate = [brokenDate[0], brokenDate.slice(-2).join(" ")].join(" ");
     const secondDate = [brokenDate[2], brokenDate.slice(-2).join(" ")].join(" ");
 
-    const isButtonDisabled = !(childName && childAge && club && comments && (chosen[0] || chosen[1]));
+    const isButtonDisabled = !(childName && childAge && club && comments && (selectedOption != "Choose Days"));
     
     return(
         <div className="m-3 pb-4 " style={{backgroundColor:"rgb(70, 118, 142)", fontFamily:"Rubik", borderRadius:"15px", paddingLeft:mediaQueries.mobile?"0px":"30px", paddingRight:mediaQueries.mobile?"10px":"30px"}}>
@@ -82,7 +83,8 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                     <span className="mb-1" style={{fontWeight:"400", fontSize:mediaQueries.mobile?"20px":"70px"}}>${Price.toString()}</span>
                     <span style={{fontWeight:"400", fontSize:mediaQueries.mobile?"10px":"30px"}}>{ages}</span>
                     <span style={{fontWeight:"400", fontSize:mediaQueries.mobile?"10px":"20px"}}>{date}</span>
-                    <span className="mb-2" style={{fontWeight:"400", fontSize:mediaQueries.mobile?"10px":"20px"}}>{times}</span>
+                    <span className="mb-3" style={{fontWeight:"400", fontSize:mediaQueries.mobile?"10px":"20px"}}>{times}</span>
+                    {!isBooking?<span className="" style={{fontWeight:"400", fontSize:mediaQueries.mobile?"20px":"40px"}}>{Location}</span>:<></>}
                     <Button className="" style={{backgroundColor:"white", color:"black", width:"100%", marginTop:mediaQueries.mobile?"17px":"50px"}} onClick={() => setIsBooking(!isBooking)}>{!isBooking ? "Show more":"Hide"}</Button>
                 </div>
                 <div>
@@ -106,26 +108,31 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                     {address}
                                 </div>
                                 <Image src={locPic} className="pt-4 ms-3" style={{width:mediaQueries.mobile?"100px":"400px", height:mediaQueries.mobile?"120px":"400px"}}/>
-                                <div className="mt-5 d-flex justify-content-around">
-                                    <div>
-                                        Both Days<br/><span style={{fontSize:mediaQueries.mobile?"20px":"50px"}}>$150</span>
-                                    </div>
-                                    <div>
-                                        One Day<br/><span style={{fontSize:mediaQueries.mobile?"20px":"50px"}}>$100</span>
-                                    </div>
-                                </div>
+                                {mediaQueries.mobile?<>
+                                        <div className="mt-3 d-flex justify-content-center gap-4">
+                                            <div>
+                                            Both Days<br/><span style={{fontSize:"20px"}}>$150</span>
+                                            </div>
+                                            <div>
+                                                One Day<br/><span style={{fontSize:mediaQueries.mobile?"20px":"50px"}}>$100</span>
+                                            </div>
+                                        </div>
+                                        <span style={{fontSize:"10px"}}>Select which days you want<br/> to join (Select both for<br/> the full experience)</span>
+                                        <DropdownButton
+                                            as={ButtonGroup}
+                                            size={mediaQueries.mobile?"sm":"lg"}
+                                            title={selectedOption}
+                                            onSelect={handleOptionSelect}
+                                            variant="secondary"
+                                            style = {{width:mediaQueries.mobile?"80%":'100%', paddingTop:"20px"}}
+                                        >
+                                            <Dropdown.Item eventKey="Both Days">Both Days</Dropdown.Item>
+                                            <Dropdown.Item eventKey="Day One">Day One ({firstDate})</Dropdown.Item>
+                                            <Dropdown.Item eventKey="Day Two">Day Two ({secondDate})</Dropdown.Item>
+                                        </DropdownButton></>:<></>}
                             </div>
                             <div style={{fontSize:mediaQueries.mobile?"7px":"15px", textAlign:"center", width:"50%"}}>
-                                (1) Refunds available for classes, personal coaching and/or holiday camps if;<br />
-                                    (a) Player misses AFLKids due to Covid-19<br />
-                                    (b) AFLKids calls the session off due to wet weather or unforeseen circumstances<br />
-                                    (c) Other refunds must go past Tom O'Leary<br />
-                                (2) Players consent to photographs/videos to be put on social media and/or website is provided by booking with AFLKids<br />
-                                    (a) These exclude individual photos of players<br />
-                                    (b) Individuals have the ability to take away consent with a request directed to Tom O'Leary in writing.<br />
-                                (3) The player takes the field at their own risk<br />
-                                    (a) We have a no-tackle policy, but accidental or touch contact can still occur.<br />
-                                    (b) by booking with AFLKids, AFLKids are not liable for any injury.<br />
+    
                                     <Form className="mt-3">
                                         <Form.Group className="d-flex mb-3" controlId="formBasicEmail">
                                             <Form.Label style={{ width: "60%" }}>Child name</Form.Label>
@@ -163,17 +170,28 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             style={{fontSize:"10px"}}
                                             />
                                         </Form.Group>
-                                        Select which days you want to join (Select both for the full experience)
-                                        <div className="d-flex mt-2 gap-2 justify-content-center">
-                                            <div className="p-3" style={{backgroundColor: chosen[0] ? "rgb(200, 200, 200)":"white", cursor:"pointer", borderRadius:"15px"}} onClick={() => handleDayClick(0)}>
-                                                Day 1<br />
-                                                {firstDate}
+                                        {!mediaQueries.mobile?<>
+                                        <div className="mt-5 d-flex justify-content-around">
+                                            <div>
+                                            Both Days<br/><span style={{fontSize:mediaQueries.mobile?"20px":"50px"}}>$150</span>
                                             </div>
-                                            <div className="p-3" style={{backgroundColor: chosen[1] ? "rgb(200, 200, 200)":"white", cursor:"pointer", borderRadius:"15px"}} onClick={() => handleDayClick(1)}>
-                                                Day 2<br />
-                                                {secondDate}
+                                            <div>
+                                                One Day<br/><span style={{fontSize:mediaQueries.mobile?"20px":"50px"}}>$100</span>
                                             </div>
                                         </div>
+                                        Select which days you want to join (Select both for the full experience)
+                                        <DropdownButton
+                                            as={ButtonGroup}
+                                            size={mediaQueries.mobile?"sm":"lg"}
+                                            title={selectedOption}
+                                            onSelect={handleOptionSelect}
+                                            variant="secondary"
+                                            style = {{width:mediaQueries.mobile?"20%":'100%', paddingTop:"20px"}}
+                                        >
+                                            <Dropdown.Item eventKey="Both Days">Both Days</Dropdown.Item>
+                                            <Dropdown.Item eventKey="Day One">Day One ({firstDate})</Dropdown.Item>
+                                            <Dropdown.Item eventKey="Day Two">Day Two ({secondDate})</Dropdown.Item>
+                                        </DropdownButton></>:<></>}
                                         <Button
                                             className="mt-3"
                                             style={{ backgroundColor: "white", color: "black", width: "100%" }}

@@ -12,6 +12,7 @@ import CoachInfo from "./Components/ContactComponents/CoachInfo";
 import teamPhoto from "/assets/CampPhotos/IMG_2363.jpg";
 import { Link } from "react-router-dom";
 import useMediaQueries from "media-queries-in-react";
+import Footer from "./Components/Footer";
 
 
 
@@ -93,15 +94,15 @@ export default function Contact() {
                     <div className="pt-3">Phone (Between 9-5 Mon-Fri):</div>
                     <div className="" style={{fontWeight:"lighter"}}>+61 448 408 920</div>
                     <div className="pt-3">Socials</div>
-                    <Link to="https://www.instagram.com/aflkids_/" className="d-flex justify-content-between me-5 mt-3" style={{cursor:"pointer", textDecoration: "none", color:"black"}}>
-                        <div className="" style={{fontWeight:"lighter"}}>Instagram</div>
-                        <img src={insta} style={{width:mediaQueries.mobile?"20%":"12%"}}/>
-                    </Link>
-                    <Link to="https://www.facebook.com/AFLKids1/" className="d-flex justify-content-between me-5 mt-3" style={{cursor:"pointer", textDecoration: "none", color:"black"}}>
-                        <div className="" style={{fontWeight:"lighter"}}>Facebook</div>
-                        <img src={facebook} style={{width:mediaQueries.mobile?"20%":"10%"}}/>
-                    </Link>
-                    <div className="mt-5" style={{fontWeight:"bold"}}>Our Vision</div>
+                    <div className="d-flex">
+                        <Link to="https://www.instagram.com/aflkids_/" className="d-flex justify-content-between me-3 mt-3" style={{cursor:"pointer", textDecoration: "none", color:"black"}}>
+                            <img src={insta} style={{width:mediaQueries.mobile?"100%":"100%"}}/>
+                        </Link>
+                        <Link to="https://www.facebook.com/AFLKids1/" className="d-flex justify-content-between me-5 mt-3" style={{cursor:"pointer", textDecoration: "none", color:"black"}}>
+                            <img src={facebook} style={{width:mediaQueries.mobile?"30%":"30%"}}/>
+                        </Link>
+                    </div>
+                    <div className="" style={{fontWeight:"bold", marginTop:mediaQueries.mobile?"20px":"50px"}}>Our Vision</div>
                     <div className="" style={{fontSize:mediaQueries.mobile?"12px":"20px"}}>
                         Our goal at AFLKids is to help players reach their full potential through experienced and accredited AFL coaches, striving for excellence at a junior level.  Through video analysis, goal setting strategies and mental advice, AFLKids goes above and beyond in order to take players to the next level.
                     </div>
@@ -122,6 +123,7 @@ export default function Contact() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     )
 }
