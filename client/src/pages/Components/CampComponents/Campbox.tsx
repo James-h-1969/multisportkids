@@ -1,5 +1,5 @@
 import { Image, Button, Form } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCart } from "../../context/cartContext";
 import camp1 from "/assets/CampPhotos/IMG_2365.jpg"
 import camp2 from "/assets/CampPhotos/IMG_2363.jpg"

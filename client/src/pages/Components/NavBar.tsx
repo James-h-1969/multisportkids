@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar, Image, Button, NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar, Image, Button } from "react-bootstrap";
 import "./Components.css";
 import logo from "/assets/AFLKidsLogo.png";
 import { useCart } from "../context/cartContext";
