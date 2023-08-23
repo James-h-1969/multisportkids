@@ -110,5 +110,12 @@
         "priceString": "$100.00",
         "priceNum": 100.00,
         "imgUrl": "/assets/camps.jpg"
+    },
+    {
+        "id":17,
+        "name": "Test 50c Purchase",
+        "priceString": "$0.50",
+        "priceNum": 0.50,
+        "imgUrl": "/assets/camps.jpg"
     }
 ]

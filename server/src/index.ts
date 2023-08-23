@@ -198,7 +198,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                     const subject = (val.id == 9) ? "AFLKIDS 5x 1 on 1 Session Tokens":"AFLKIDS 5x Group Session Tokens";
                     const params = {
                         Destination: {
-                            ToAddresses: ["jameshocking542@gmail.com"]
+                            ToAddresses: [email, "Tomoleary@AFLKids.com.au"]
                         },
                         Message: {
                             Body: {
@@ -292,7 +292,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
   
         const params = {
           Destination: {
-              ToAddresses: ["jameshocking542@gmail.com"]
+              ToAddresses: ["jameshocking542@gmail.com", "Tomoleary@AFLKids.com.au"]
           },
           Message: {
               Body: {
@@ -456,8 +456,8 @@ const storeItems = new Map([
     [13, { priceInCents: 13000, name: "4 Academy Prep Sessions"}],
     [14, { priceInCents: 50, name: "1 on 1 Private (Plan)"}],
     [15, { priceInCents: 50, name: "Group Private (Plan)"}],
-    [16, { priceInCents: 10000, name: "Holiday Camp (1 day)"}]
-
+    [16, { priceInCents: 10000, name: "Holiday Camp (1 day)"}],
+    [17, { priceInCents: 50, name:"Test 50c Purchase"}]
 ])
 
 
@@ -518,7 +518,7 @@ app.post('/email-private', async (req: Request, res: Response) => {
 
     const params = {
         Destination: {
-            ToAddresses: ["jameshocking542@gmail.com"]
+            ToAddresses: ["jameshocking542@gmail.com", "Tomoleary@AFLKids.com.au"]
         },
         Message: {
             Body: {

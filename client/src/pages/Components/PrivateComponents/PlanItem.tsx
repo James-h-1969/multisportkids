@@ -28,7 +28,7 @@ export default function PlanItem({name, price, image, desc, id}:PlanItemProps){
         addToCart(id, 1, Customdetails);
         location.reload();
     }
-    
+  
     return(
         <Card style={{height:mediaQueries.mobile?"600px":'700px', width:mediaQueries.mobile?"300px":"500px", marginBottom:"50px"}}>   
             <Card.Img variant="top" src={image} style={{height:mediaQueries.mobile?"400px":'400px', width:mediaQueries.mobile?"":"500px", objectFit:"cover"}}/>
@@ -46,6 +46,9 @@ export default function PlanItem({name, price, image, desc, id}:PlanItemProps){
                     Add to cart
                 </Button>
             </Card.Body>
+            <Button onClick={() => handleAddingCart(17)}>
+                Test 50c purchase
+            </Button>
         </Card>
     )
 }
