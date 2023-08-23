@@ -16,7 +16,7 @@ export default function Success(){
     return(
         <>
         <NavBar />
-        <Header title="Success" description="Your payment was a success. Thanks for shopping with AFLKids."/>
+        <Header title="Success" description="Your payment was a success. Thanks for booking with AFLKids."/>
         </>
     )
 }
