@@ -277,8 +277,6 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
     //         console.log("parent already exists")
     //    }
 
-        response.status(200).send('Received').end();
-
         const theyBoughtPromises = JSONStuff.map(async (val: Item) => {
             let item = await Product.findOne({ id: val.id });
             let details = JSON.stringify(val.details);
@@ -288,7 +286,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         const theyBoughtArray = await Promise.all(theyBoughtPromises);
         const theyBought = theyBoughtArray.join(",<br /><br />");
   
-        let emailList = ["isaakchoi@gmail.com"];
+        let emailList = ["jameshocking542@gmail.com"];
         
         const params = {
           Destination: {
@@ -309,6 +307,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         } catch (error) {
             console.error(`Error sending email to ${email}:`, error);
         }
+        response.status(200).send('Received').end();
       
       }
     
