@@ -59,9 +59,6 @@ function Home(){
                 <HomeLocation />
             </div> */}
             {/* <div><Footer /></div> */}
-            <Button>
-                Buy test $50c option
-            </Button>
         </>
     )
 }
