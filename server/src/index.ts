@@ -126,6 +126,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                 }
         
                 if (val.id == 11 || val.id == 16){ //holiday camp 2 day or 1 day
+                    response.status(200).send(`DEALING WITH HOLIDAYS`).end();
                     const filter =  { name: val.details[index].purchaseName[0] };
                     let update = {};
                     if (val.id == 11){
@@ -261,22 +262,22 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
             });
             
        //search for parent name
-       const existingParent = await Parent.findOne({ name: customer.name });
-       if (!existingParent){
-           const addingParent = await Parent.create({ 
-            parentname: customer.name, 
-            email: customer.email, 
-            phone: customer.phone,
-            childNames: kidsChecked,
-            childAge: agesChecked,
-            childComments: detailsChecked,
-            childEvents: events,
-            childClubs: clubChecked
-            });
-            const createdParent = await addingParent.save();
-       } else {
-            console.log("parent already exists")
-       }
+    //    const existingParent = await Parent.findOne({ name: customer.name });
+    //    if (!existingParent){
+    //        const addingParent = await Parent.create({ 
+    //         parentname: customer.name, 
+    //         email: customer.email, 
+    //         phone: customer.phone,
+    //         childNames: kidsChecked,
+    //         childAge: agesChecked,
+    //         childComments: detailsChecked,
+    //         childEvents: events,
+    //         childClubs: clubChecked
+    //         });
+    //         const createdParent = await addingParent.save();
+    //    } else {
+    //         console.log("parent already exists")
+    //    }
 
         const theyBoughtPromises = JSONStuff.map(async (val: Item) => {
             let item = await Product.findOne({ id: val.id });
