@@ -266,7 +266,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
            const addingParent = await Parent.create({ 
             parentname: customer.name, 
             email: customer.email, 
-            phone: "0433833966",
+            phone: customer.phone,
             childNames: kidsChecked,
             childAge: agesChecked,
             childComments: detailsChecked,
