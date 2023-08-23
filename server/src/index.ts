@@ -468,15 +468,14 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
         let customer = null;
         //dont add if already in
         // Check if customer with the provided email already exists
-        let existingCustomer = null;
-        existingCustomer = await stripe.customers.list({ email: customerEmail, limit: 1 });
-        if (existingCustomer && existingCustomer.data && existingCustomer.data.length > 0) {
+        let existingCustomer = await stripe.customers.list({ email: customerEmail, limit: 1 });
+        if (existingCustomer) {
             customer = existingCustomer.data;
         } else {
         // Customer with the provided email does not exist, create a new customer
             const newCustomer = await stripe.customers.create({
-            email: customerEmail,
-            name: customerName,
+                email: customerEmail,
+                name: customerName,
             });
             customer = newCustomer;
         }
@@ -484,7 +483,7 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             mode: 'payment',
-            customer: customer?.id,
+            customer: customer.id,
             phone_number_collection: {
                 enabled: true,
             },
