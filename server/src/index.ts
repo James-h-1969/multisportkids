@@ -514,43 +514,43 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
     }
 });
 
-app.post('/email-private', async (req: Request, res: Response) => {
-    const coachName = req.body.coachName;
-    const time = req.body.time;
-    const date = req.body.date;
-    const sessionType = req.body.sessionType;
-    const parentEmail = req.body.email;
-    const kidNames = req.body.kidName;
-    const kidAges = req.body.kidAges;
-    const kidClubs = req.body.clubs;
-    const comments = req.body.comments;
-    const token = req.body.token;
+// app.post('/email-private', async (req: Request, res: Response) => {
+//     const coachName = req.body.coachName;
+//     const time = req.body.time;
+//     const date = req.body.date;
+//     const sessionType = req.body.sessionType;
+//     const parentEmail = req.body.email;
+//     const kidNames = req.body.kidName;
+//     const kidAges = req.body.kidAges;
+//     const kidClubs = req.body.clubs;
+//     const comments = req.body.comments;
+//     const token = req.body.token;
 
-    const params = {
-        Destination: {
-            ToAddresses: ["jameshocking542@gmail.com", "Tomoleary@AFLKids.com.au"]
-        },
-        Message: {
-            Body: {
-                Html: { Data: `${parentEmail} is enquiring about a private session with ${coachName} at ${time} on ${date}. <br /><br />
-                They want it to be a ${sessionType}. The kids involved are ${kidNames}, each with the ages of ${kidAges}, club(s) of 
-                ${kidClubs}, and parent comments of ${comments}. They provided a token of: ${token}` }
-            },
-            Subject: { Data: "Private Session Enquiry" }
-        },
-        Source: senderEmail
-      };
+//     const params = {
+//         Destination: {
+//             ToAddresses: ["jameshocking542@gmail.com", "Tomoleary@AFLKids.com.au"]
+//         },
+//         Message: {
+//             Body: {
+//                 Html: { Data: `${parentEmail} is enquiring about a private session with ${coachName} at ${time} on ${date}. <br /><br />
+//                 They want it to be a ${sessionType}. The kids involved are ${kidNames}, each with the ages of ${kidAges}, club(s) of 
+//                 ${kidClubs}, and parent comments of ${comments}. They provided a token of: ${token}` }
+//             },
+//             Subject: { Data: "Private Session Enquiry" }
+//         },
+//         Source: senderEmail
+//       };
   
-      try {
-          const result = await ses.sendEmail(params).promise();
-          console.log(`Email sent to ${parentEmail}. Message ID: ${result.MessageId}`);
-          res.status(200).json({ message: 'Email sent successfully' });
-      } catch (error) {
-          console.error(`Error sending email to ${parentEmail}:`, error);
-      }
+//       try {
+//           const result = await ses.sendEmail(params).promise();
+//           console.log(`Email sent to ${parentEmail}. Message ID: ${result.MessageId}`);
+//           res.status(200).json({ message: 'Email sent successfully' });
+//       } catch (error) {
+//           console.error(`Error sending email to ${parentEmail}:`, error);
+//       }
 
 
-})
+// })
 
 
 
