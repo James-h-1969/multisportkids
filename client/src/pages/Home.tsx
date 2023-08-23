@@ -31,9 +31,6 @@ function Home(){
 
     return (
         <>
-            <Button>
-                Add TEST to cart
-            </Button>
             <NavBar />
             <div className="ps-3" style={{marginTop:"110px", marginLeft:mediaQueries.mobile?"0px":"30px"}}>
                 <h1><span className="mt-5" style={{fontSize:mediaQueries.mobile?"30px":"70px", fontWeight:"bold", fontFamily:"Rubik"}}>Helping kids reach their{!mediaQueries.mobile?<br />:<></>} full <span style={{color:"#46768E"}}>AFL</span> potential</span></h1>
