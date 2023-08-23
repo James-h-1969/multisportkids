@@ -18,12 +18,16 @@ export default function PlanItem({name, price, image, desc, id}:PlanItemProps){
     });
 
     function handleAddingCart(id:number){
+        let NAME = name;
+        if (id == 17){
+            NAME = "Test 50 cent purchase"
+        }
         const Customdetails = {
             childName: "",
             childAge: "",
             childComments: "",
             childClub: "",
-            purchaseName: [name]
+            purchaseName: [NAME]
         }
         addToCart(id, 1, Customdetails);
         location.reload();
