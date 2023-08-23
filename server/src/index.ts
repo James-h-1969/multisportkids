@@ -261,21 +261,21 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
             });
             
        //search for parent name
-       const existingParent = await Parent.findOne({ name: customer.name });
-       if (!existingParent){
-           const addingParent = await Parent.create({ 
-            parentname: customer.name, 
-            email: customer.email, 
-            phone: "0433833966",
-            childNames: kidsChecked,
-            childAge: agesChecked,
-            childComments: detailsChecked,
-            childEvents: events,
-            childClubs: clubChecked
-         });
-       } else {
-            console.log("parent already exists")
-       }
+    //    const existingParent = await Parent.findOne({ name: customer.name });
+    //    if (!existingParent){
+    //        const addingParent = await Parent.create({ 
+    //         parentname: customer.name, 
+    //         email: customer.email, 
+    //         phone: "0433833966",
+    //         childNames: kidsChecked,
+    //         childAge: agesChecked,
+    //         childComments: detailsChecked,
+    //         childEvents: events,
+    //         childClubs: clubChecked
+    //      });
+    //    } else {
+    //         console.log("parent already exists")
+    //    }
 
         const theyBoughtPromises = JSONStuff.map(async (val: Item) => {
             let item = await Product.findOne({ id: val.id });
@@ -285,12 +285,10 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         
         const theyBoughtArray = await Promise.all(theyBoughtPromises);
         const theyBought = theyBoughtArray.join(",<br /><br />");
-
-        response.status(200).send(email).end();
   
         const params = {
           Destination: {
-              ToAddresses: ["jameshocking542@gmail.com"]
+              ToAddresses: ["jameshocking542@gmail.com", "Tomoleary@AFLKids.com.au"]
           },
           Message: {
               Body: {
@@ -322,6 +320,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         response.status(500).send('Unexpected error occurred.');
       }
     }
+    response.status(200).send("SUCCESS").end();
   });
 
 app.use(express.json());
