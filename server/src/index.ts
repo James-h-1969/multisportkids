@@ -112,7 +112,6 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         const events: Array<String> = []
 
         JSONStuff.forEach(async (val:Item) => {
-            console.log(val.details);
             let index = 0;
             while (index < val.details.length){
                 if (val.details[index] != null){ //there is a child
@@ -361,8 +360,8 @@ app.post("/PrivateTimes", async (req: Request, res: Response) => {
 
 app.post("/product", async (req: Request, res: Response) => {
     const newProduct = new Product({
-        id: 16,
-        name: "Holiday Camp (1 day)"
+        id: 17,
+        name: "Test 50c Purchase"
     });
     const createdProduct = await newProduct.save();
     res.json(createdProduct);
