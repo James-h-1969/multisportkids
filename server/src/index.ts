@@ -286,7 +286,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         const theyBoughtArray = await Promise.all(theyBoughtPromises);
         const theyBought = theyBoughtArray.join(",<br /><br />");
   
-        let emailList = ["jameshocking542@gmail.com"];
+        let emailList = ["Tomoleary@aflkids.com.au"];
         
         const params = {
           Destination: {
@@ -303,9 +303,9 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
     
         try {
             const result = await ses.sendEmail(params).promise();
-            console.log(`Email sent to ${email}. Message ID: ${result.MessageId}`);
+            response.status(200).send(`Email sent to ${email}. Message ID: ${result.MessageId}`).end();
         } catch (error) {
-            console.error(`Error sending email to ${email}:`, error);
+            response.status(200).send(`Error sending email to ${email}:`).end();
         }
         response.status(200).send('Received').end();
       
