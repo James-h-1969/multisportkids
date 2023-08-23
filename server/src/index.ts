@@ -33,6 +33,8 @@ app.use(cors({
     origin: "https://aflkids-frontend.onrender.com" //this will be the site name so that only it can access the API
 }));
 
+//https://aflkids-frontend.onrender.com
+
 const PORT = process.env.PORT || 3000;
 
 const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
@@ -86,17 +88,15 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
     const sig = request.headers['stripe-signature'];
     try {
       const event = stripe.webhooks.constructEvent(request.body, sig, process.env.STRIPE_ENDPOINT_KEY);
-      console.log("Webhook verified.");
   
       const data = event.data.object;
       const eventType = event.type;
  
       // Handle the event
       if (eventType === "payment_intent.succeeded") {
-
+        response.status(200).send('PAYMENT EVENT CHECKED').end();
         const customerId = data.customer;
         const customer = await stripe.customers.retrieve(customerId);
-  
 
         const { metadata, receipt_email } = data;
         const cartItems = metadata.cartItems;
@@ -260,7 +260,6 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                     index += 1;
                 }
             });
-        
             
        //search for parent name
        const existingParent = await Parent.findOne({ name: customer.name });
@@ -290,7 +289,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
   
         const params = {
           Destination: {
-              ToAddresses: ["jameshocking542@gmail.com", "Tomoleary@AFLKids.com.au"]
+              ToAddresses: ["jameshocking542@gmail.com"]
           },
           Message: {
               Body: {
@@ -310,7 +309,6 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
       
       }
     
-  
       // Return a 200 response to acknowledge receipt of the event
       response.status(200).send('Received').end();
     } catch (err) {
