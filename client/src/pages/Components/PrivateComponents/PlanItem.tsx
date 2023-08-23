@@ -50,9 +50,9 @@ export default function PlanItem({name, price, image, desc, id}:PlanItemProps){
                     Add to cart
                 </Button>
             </Card.Body>
-            <Button onClick={() => handleAddingCart(17)}>
+            {/* <Button onClick={() => handleAddingCart(17)}>
                 Test 50c purchase
-            </Button>
+            </Button> */}
         </Card>
     )
 }

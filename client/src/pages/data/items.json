@@ -72,8 +72,8 @@
     {
         "id":11,
         "name": "Holiday Camp",
-        "priceString": "$0.50",
-        "priceNum": 0.50,
+        "priceString": "$150.00",
+        "priceNum": 150.00,
         "imgUrl": "/assets/camps.jpg"
     },
     {

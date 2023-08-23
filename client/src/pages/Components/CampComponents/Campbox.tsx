@@ -140,7 +140,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             placeholder="Enter name"
                                             value={childName}
                                             onChange={(e) => setChildName(e.target.value)}
-                                            style={{fontSize:"10px"}}
+                                            style={{fontSize:mediaQueries.mobile?"7px":"15px"}}
                                             />
                                         </Form.Group>
                                         <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
@@ -149,7 +149,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             placeholder="Enter Age"
                                             value={childAge}
                                             onChange={(e) => setChildAge(e.target.value)}
-                                            style={{fontSize:"10px"}}
+                                            style={{fontSize:mediaQueries.mobile?"7px":"15px"}}
                                             />
                                         </Form.Group>
                                         <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
@@ -158,7 +158,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             placeholder="Enter Club"
                                             value={club}
                                             onChange={(e) => setClub(e.target.value)}
-                                            style={{fontSize:"10px"}}
+                                            style={{fontSize:mediaQueries.mobile?"7px":"15px"}}
                                             />
                                         </Form.Group>
                                         <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
@@ -167,7 +167,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             placeholder="Enter Comments"
                                             value={comments}
                                             onChange={(e) => setComments(e.target.value)}
-                                            style={{fontSize:"10px"}}
+                                            style={{fontSize:mediaQueries.mobile?"7px":"15px"}}
                                             />
                                         </Form.Group>
                                         {!mediaQueries.mobile?<>
