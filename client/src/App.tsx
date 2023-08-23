@@ -18,13 +18,13 @@ function App() {
       <CartProvider>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/finished" element={<Success />} />
           <Route path="/camps" element={<Camps />} />
           <Route path="/private" element={<Private />} />
           {/* <Route path="/development" element={<Development />} /> */}
           <Route path="/merch" element={<Merch />} />
           <Route path="/contact" element={<Contact />} />
           {/* <Route path="/checkout" element={<Checkout />} /> */}
-          <Route path="/success" element={<Success />} />
         </Routes>
       </CartProvider>
     </div>
