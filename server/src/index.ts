@@ -288,7 +288,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         const theyBoughtArray = await Promise.all(theyBoughtPromises);
         const theyBought = theyBoughtArray.join(",<br /><br />");
   
-        let emailList = ["jameshocking542@gmail.com", 'TomOleary@AFLKids.com.au'];
+        let emailList = ["jameshocking542@gmail.com"];
         
         const params = {
           Destination: {
