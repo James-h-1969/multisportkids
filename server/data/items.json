@@ -72,7 +72,7 @@
     {
         "id":11,
         "name": "Holiday Camp",
-        "priceString": "$130.00",
+        "priceString": "$150.00",
         "priceNum": 130.00,
         "imgUrl": "/assets/camps.jpg"
     },
