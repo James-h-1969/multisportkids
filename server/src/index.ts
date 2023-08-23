@@ -491,7 +491,7 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
                 };
             }),
             success_url: 'https://aflkids-frontend.onrender.com/success', // Replace this with your server route or function
-            cancel_url: 'https://aflkids-frontend.onrender.com/',
+            cancel_url: 'https://aflkids-frontend.onrender.com/success',
             payment_intent_data: {
                 metadata: {
                   cartItems: items
