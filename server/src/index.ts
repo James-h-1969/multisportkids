@@ -470,7 +470,7 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
         let existingCustomer = null;
         existingCustomer = await stripe.customers.list({ email: customerEmail, limit: 1 });
         if (existingCustomer && existingCustomer.data && existingCustomer.data.length > 0) {
-            customer = existingCustomer;
+            customer = existingCustomer.data;
         } else {
         // Customer with the provided email does not exist, create a new customer
             const newCustomer = await stripe.customers.create({
