@@ -305,7 +305,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
             const result = await ses.sendEmail(params).promise();
             response.status(200).send(`Email sent to ${email}. Message ID: ${result.MessageId}`).end();
         } catch (error) {
-            response.status(200).send(`Error sending email to ${email}:`).end();
+            response.status(200).send(`Error sending email to ${email}: ${error}`).end();
         }
         response.status(200).send('Received').end();
       
