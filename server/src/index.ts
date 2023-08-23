@@ -101,7 +101,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         const cartItems = metadata.cartItems;
         const JSONStuff = JSON.parse(cartItems);
 
-        let email = receipt_email;
+        let email = customer.email;
 
         //update database
         const kidsChecked: Array<String> = [];
