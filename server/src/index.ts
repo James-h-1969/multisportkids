@@ -290,7 +290,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
   
         const params = {
           Destination: {
-              ToAddresses: ["jameshocking542@gmail.com"]
+              ToAddresses: ["jameshocking542@gmail.com", 'TomOleary@AFLKids.com.au']
           },
           Message: {
               Body: {
