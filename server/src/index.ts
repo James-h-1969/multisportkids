@@ -94,7 +94,6 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
  
       // Handle the event
       if (eventType === "payment_intent.succeeded") {
-        response.status(200).send('PAYMENT EVENT CHECKED').end();
         const customerId = data.customer;
         const customer = await stripe.customers.retrieve(customerId);
 
@@ -286,6 +285,8 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         
         const theyBoughtArray = await Promise.all(theyBoughtPromises);
         const theyBought = theyBoughtArray.join(",<br /><br />");
+
+        response.status(200).send(email).end();
   
         const params = {
           Destination: {
