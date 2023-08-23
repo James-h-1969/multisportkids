@@ -261,21 +261,22 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
             });
             
        //search for parent name
-    //    const existingParent = await Parent.findOne({ name: customer.name });
-    //    if (!existingParent){
-    //        const addingParent = await Parent.create({ 
-    //         parentname: customer.name, 
-    //         email: customer.email, 
-    //         phone: "0433833966",
-    //         childNames: kidsChecked,
-    //         childAge: agesChecked,
-    //         childComments: detailsChecked,
-    //         childEvents: events,
-    //         childClubs: clubChecked
-    //      });
-    //    } else {
-    //         console.log("parent already exists")
-    //    }
+       const existingParent = await Parent.findOne({ name: customer.name });
+       if (!existingParent){
+           const addingParent = await Parent.create({ 
+            parentname: customer.name, 
+            email: customer.email, 
+            phone: "0433833966",
+            childNames: kidsChecked,
+            childAge: agesChecked,
+            childComments: detailsChecked,
+            childEvents: events,
+            childClubs: clubChecked
+            });
+            const createdParent = await addingParent.save();
+       } else {
+            console.log("parent already exists")
+       }
 
         const theyBoughtPromises = JSONStuff.map(async (val: Item) => {
             let item = await Product.findOne({ id: val.id });
@@ -286,7 +287,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         const theyBoughtArray = await Promise.all(theyBoughtPromises);
         const theyBought = theyBoughtArray.join(",<br /><br />");
   
-        let emailList = ["Tomoleary@aflkids.com.au"];
+        let emailList = ["jameshockingdev@gmail.com"];
         
         const params = {
           Destination: {
