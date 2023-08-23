@@ -82,11 +82,10 @@ async function generateHashedTokens() {
 
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
-const endpointSecret = "whsec_42762b3164b7a9048eeca1a3577cc35181d4da78a77b9a95f0d2b23496c2c561";
 app.post('/webhook', express.raw({ type: 'application/json' }), async (request: Request, response: Response) => {
     const sig = request.headers['stripe-signature'];
     try {
-      const event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
+      const event = stripe.webhooks.constructEvent(request.body, sig, process.env.STRIPE_ENDPOINT_KEY);
       console.log("Webhook verified.");
   
       const data = event.data.object;
