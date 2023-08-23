@@ -277,6 +277,8 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
     //         console.log("parent already exists")
     //    }
 
+        response.status(200).send('Received').end();
+
         const theyBoughtPromises = JSONStuff.map(async (val: Item) => {
             let item = await Product.findOne({ id: val.id });
             let details = JSON.stringify(val.details);
@@ -288,7 +290,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
   
         const params = {
           Destination: {
-              ToAddresses: ["jameshocking542@gmail.com", "Tomoleary@AFLKids.com.au"]
+              ToAddresses: ["jameshocking542@gmail.com"]
           },
           Message: {
               Body: {
@@ -309,7 +311,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
       }
     
       // Return a 200 response to acknowledge receipt of the event
-      response.status(200).send('Received').end();
+    //   response.status(200).send('Received').end();
     } catch (err) {
       if (err instanceof Error) {
         console.log(`Webhook Error: ${err.message}`);
@@ -320,7 +322,6 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
         response.status(500).send('Unexpected error occurred.');
       }
     }
-    response.status(200).send("SUCCESS").end();
   });
 
 app.use(express.json());
