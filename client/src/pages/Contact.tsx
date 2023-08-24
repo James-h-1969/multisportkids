@@ -62,10 +62,10 @@ export default function Contact() {
             role: "Girls Head Coach",
             position: "Key/Small Forward",
             phone: "+61 431 036 199",
-            quote: "I love sharing my passion and inspiring kids to enjoy the game as much as I do.",
-            img: "/assets/CampPhotos/IMG_3109.png",
-            coachingExperience: ["Level 1 Accredited AFL Coach", "Head Coach of Manly Wolves U12 Talent Academy", "Asssistant Coach of Manly Bombers U17 Div 1"],
-            playingExperience: ["6x Manly Bombers Best and Fairest Winner", "1x Manly Bomber Club Champion", "2020 U17 Div 1 Premiership Captain"]
+            quote: "I enjoy seeing kids find the same spark of enjoyment I gained from footy, as well as watching smiles on faces when thy finally execute a new skill they've been practicing.",
+            img: "/assets/woolf.jpg",
+            coachingExperience: ["Forest Lions Coach U12 Head Coach", "Forest Lions U12-U15 Boys assisttant Coach 2019-2022", "Stella Maris Coach", "St Lukes Coach", "AFL NSW/ACT Coaching experience"],
+            playingExperience: ["Forest Lion Junior", "Manly Wolves Premier Division at 16 y.o", "Swams acade,y Graduate", "All Schools Team NSW", "NSW Rams player"]
         }
 
     }
@@ -79,7 +79,7 @@ export default function Contact() {
         <>
             <NavBar />
             <Header title="Our Team" description="Find out more about our team and get in contact to get the most out of your experience. Learn about the coaches years of experience and some of the performances they have had on the field."/>
-            <div className="" style={{position:"absolute", left:"63%", top:"18%"}}>
+            <div className="" style={{position:"absolute", left:"63%", top:"15%"}}>
                 <Image src={teamPhoto} style={{width:mediaQueries.mobile?"130px":"450px", height:mediaQueries.mobile?"100px":"300px", borderRadius:"20px"}}/>
             </div>
             <div className="d-flex" style={{fontFamily:"Rubik"}}>
