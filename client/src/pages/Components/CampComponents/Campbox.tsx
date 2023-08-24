@@ -85,7 +85,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                     <span style={{fontWeight:"400", fontSize:mediaQueries.mobile?"10px":"20px"}}>{date}</span>
                     <span className="mb-3" style={{fontWeight:"400", fontSize:mediaQueries.mobile?"10px":"20px"}}>{times}</span>
                     {!isBooking?<span className="" style={{fontWeight:"400", fontSize:mediaQueries.mobile?"10px":"40px"}}>{Location}</span>:<></>}
-                    <Button className="" style={{fontSize:mediaQueries.mobile?"20px":'50px', backgroundColor:"white", color:"black", width:"100%", marginTop:mediaQueries.mobile?"17px":"50px"}} onClick={() => setIsBooking(!isBooking)}>{!isBooking ? "Show more":"Hide"}</Button>
+                    <Button className="" style={{fontSize:mediaQueries.mobile?"10px":'30px', backgroundColor:"white", color:"black", width:"100%", marginTop:mediaQueries.mobile?"17px":"50px"}} onClick={() => setIsBooking(!isBooking)}>{!isBooking ? "Show more":"Hide"}</Button>
                 </div>
                 <div>
                     <Image src={imgs[index]} style={{contain:"cover", borderRadius:"10px", width:mediaQueries.mobile?"120px":"500px", height:mediaQueries.mobile?"110px":"400px", marginTop:mediaQueries.mobile?"40px":"0px", paddingLeft:mediaQueries.mobile?"10px":"0px"}}/>
@@ -194,7 +194,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                         </DropdownButton></>:<></>}
                                         <Button
                                             className="mt-3"
-                                            style={{ backgroundColor: "white", color: "black", width: "100%", fontSize:mediaQueries.mobile?"20px":'50px' }}
+                                            style={{ backgroundColor: "white", color: "black", width: "100%", fontSize:mediaQueries.mobile?"10px":'30px' }}
                                             onClick={() => handleAddingCart()}
                                             disabled={isButtonDisabled}
                                         >
