@@ -60,7 +60,7 @@ function NavBar() {
       <Navbar expand="true" fixed="top" variant="light" style={{ background: 'white', height:"100px"}}>
       <Navbar.Brand className="navbar-brand-custom" style={{marginLeft:"20px", marginBottom:"10px"}}>
         <Link to="/">
-        <Image alt="logo" src={logo} className="navbar-logo" style={{width:"200px"}}/>
+        <Image alt="logo" src={logo} className="navbar-logo" style={{width:"100px"}}/>
         </Link>
       </Navbar.Brand>
       { (cartQuantity > 0) ? 
