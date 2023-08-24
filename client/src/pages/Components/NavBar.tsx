@@ -23,12 +23,12 @@ function NavBar() {
           </Navbar.Brand>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link className="nav-link-custom" href="/">Home</Nav.Link>
-              <Nav.Link className="nav-link-custom" href="/camps">Holiday Camps</Nav.Link>
-              <Nav.Link className="nav-link-custom" href="/private">Private Coaching</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="https://www.aflkids.com.au/">Home</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="https://www.aflkids.com.au/holiday-programs">Holiday Camps</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="https://www.aflkids.com.au/northernbeaches">Private Coaching</Nav.Link>
               {/* <Nav.Link className="nav-link-custom" href="/development">Academy Preparation</Nav.Link> */}
               <Nav.Link className="nav-link-custom" href="/merch">Merch</Nav.Link>
-              <Nav.Link className="nav-link-custom" href="/contact">Our Team</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="https://www.aflkids.com.au/contact">Our Team</Nav.Link>
             </Nav>
           </Navbar.Collapse>
           { (cartQuantity > 0) ? 
