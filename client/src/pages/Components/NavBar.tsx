@@ -23,12 +23,12 @@ function NavBar() {
           </Navbar.Brand>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link className="nav-link-custom" href="https://www.aflkids.com.au/">Home</Nav.Link>
-              <Nav.Link className="nav-link-custom" href="https://www.aflkids.com.au/holiday-programs">Holiday Camps</Nav.Link>
-              <Nav.Link className="nav-link-custom" href="https://www.aflkids.com.au/northernbeaches">Private Coaching</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="/">Home</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="/camps">Holiday Camps</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="/private">Private Coaching</Nav.Link>
               {/* <Nav.Link className="nav-link-custom" href="/development">Academy Preparation</Nav.Link> */}
               <Nav.Link className="nav-link-custom" href="/merch">Merch</Nav.Link>
-              <Nav.Link className="nav-link-custom" href="https://www.aflkids.com.au/contact">Our Team</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="/contact">Our Team</Nav.Link>
             </Nav>
           </Navbar.Collapse>
           { (cartQuantity > 0) ? 
@@ -91,12 +91,12 @@ function NavBar() {
       <Navbar.Collapse id="" style={{marginLeft:"260px", backgroundColor:"white", width:"200px"}}>
   
         <Nav className="ms-auto" style={{fontSize:"12px", border:"3px solid light grey"}}>
-              <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="https://www.aflkids.com.au/">Home</Nav.Link>
-              <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="https://www.aflkids.com.au/holiday-programs">Holiday Camps</Nav.Link>
-              <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="https://www.aflkids.com.au/northernbeaches">Private Coaching</Nav.Link>
+              <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/">Home</Nav.Link>
+              <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/camps">Holiday Camps</Nav.Link>
+              <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/private">Private Coaching</Nav.Link>
               {/* <Nav.Link className="nav-link-custom" href="/development">Academy Preparation</Nav.Link> */}
               <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/merch">Merch</Nav.Link>
-              <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="https://www.aflkids.com.au/contact">Our Team</Nav.Link>
+              <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/contact">Our Team</Nav.Link>
           </Nav>
       </Navbar.Collapse>
     </Navbar>
