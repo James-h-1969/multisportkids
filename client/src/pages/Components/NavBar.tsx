@@ -1,3 +1,4 @@
+//IMPORTS
 import { Container, Nav, Navbar, Image, Button } from "react-bootstrap";
 import "./Components.css";
 import logo from "/assets/AFLKidsLogo.png";
@@ -5,14 +6,14 @@ import { useCart } from "../context/cartContext";
 import useMediaQueries from "media-queries-in-react";
 import { Link } from "react-router-dom";
 
-function NavBar() {
+export default function NavBar() {
   const {openCart, cartQuantity} = useCart();
   const mediaQueries = useMediaQueries({ 
     mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
   });
   return (
     <>
-      {!mediaQueries.mobile?
+      {!mediaQueries.mobile? //DESKTOP VERSION
       <Navbar bg="white" fixed="top" variant="light" className="navbar-custom shadom-sm">
         <Container>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -56,11 +57,11 @@ function NavBar() {
             </Button>:<></>
           }
         </Container>
-      </Navbar>:
+      </Navbar>: //MOBILE VERSION
       <Navbar expand="true" fixed="top" variant="light" style={{ background: 'white', height:"100px"}}>
       <Navbar.Brand className="navbar-brand-custom" style={{marginLeft:"20px", marginBottom:"10px"}}>
         <Link to="/">
-        <Image alt="logo" src={logo} className="navbar-logo" style={{width:"100px"}}/>
+        <Image alt="logo" src={logo} className="navbar-logo" style={{width:"130px"}}/>
         </Link>
       </Navbar.Brand>
       { (cartQuantity > 0) ? 
@@ -106,6 +107,5 @@ function NavBar() {
   );
 }
 
-export default NavBar;
 
 

@@ -15,11 +15,16 @@ function Camps(){
         <>
             <NavBar />
             <Header title="Holiday Camps" description={text}/>
-            <div className="" style={{position:"absolute", left:mediaQueries.mobile?"63%":"63%", top:mediaQueries.mobile?"15%":"18%"}}>
+            {!mediaQueries.mobile?
+            <div className="" style={{position:"absolute", left:"63%", top:"18%"}}>
             <video muted autoPlay src={campVideo} loop controls width={mediaQueries.mobile?"130":"360"} height={mediaQueries.mobile?"100":"200"} >
-
+            </video>
+            </div>:
+            <div className="d-flex justify-content-center pt-3 pb-2" style={{width: "80%", alignItems:"center"}}>
+            <video muted autoPlay src={campVideo} loop controls width={300} height={200} >
             </video>
             </div>
+            }
             <UpComingCamps />
             <Footer />
         </>
