@@ -48,7 +48,7 @@ export function Cart({isOpen}:CartProps){
             if (res.ok) return res.json()
             return res.json().then(json => Promise.reject(json))
         }) .then(({ url }) => {
-            window.location = url;
+            window.parent.postMessage(url, "https://www.aflkids.com.au/")
         }).catch(e => {
             console.error(e.error);
         })
