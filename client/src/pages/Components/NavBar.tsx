@@ -61,7 +61,7 @@ export default function NavBar() {
       <Navbar expand="true" fixed="top" variant="light" style={{ background: 'white', height:"100px"}}>
       <Navbar.Brand className="navbar-brand-custom" style={{marginLeft:"20px", marginBottom:"10px"}}>
         <Link to="/">
-        <Image alt="logo" src={logo} className="navbar-logo" style={{width:"130px"}}/>
+        <Image alt="logo" src={logo} className="navbar-logo" style={{width:"150px"}}/>
         </Link>
       </Navbar.Brand>
       { (cartQuantity > 0) ? 
@@ -88,7 +88,7 @@ export default function NavBar() {
             </div>
             </Button>:<></>
         }
-      <Navbar.Toggle aria-controls="basic-navbar-nav" style={{position:"absolute", right:"30px", top:"40px"}}/>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" style={{position:"absolute", right:"30px", top:"30px"}}/>
       <Navbar.Collapse id="" style={{marginLeft:"180px", backgroundColor:"white", width:"200px"}}>
   
         <Nav className="ms-auto" style={{fontSize:"12px", border:"3px solid light grey"}}>
