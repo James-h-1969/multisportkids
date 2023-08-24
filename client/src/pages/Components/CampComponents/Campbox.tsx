@@ -79,13 +79,13 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
         <div className="m-3 pb-4 " style={{backgroundColor:"rgb(70, 118, 142)", fontFamily:"Rubik", borderRadius:"15px", paddingLeft:mediaQueries.mobile?"0px":"30px", paddingRight:mediaQueries.mobile?"10px":"30px"}}>
             <div className="ps-4 w-10 d-flex justify-content-between" style={{paddingTop:mediaQueries.mobile?"17px":"30px"}}>
                 <div className="text-center d-flex flex-column" style={{width:"50%"}}>
-                    <span className="mb-2" style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"17px":"30px", color:"white"}}>{name}</span>
+                    <span className="mb-2" style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"15px":"30px", color:"white"}}>{name}</span>
                     <span className="mb-1" style={{fontWeight:"400", fontSize:mediaQueries.mobile?"20px":"70px"}}>${Price.toString()}</span>
                     <span style={{fontWeight:"400", fontSize:mediaQueries.mobile?"10px":"30px"}}>{ages}</span>
                     <span style={{fontWeight:"400", fontSize:mediaQueries.mobile?"10px":"20px"}}>{date}</span>
                     <span className="mb-3" style={{fontWeight:"400", fontSize:mediaQueries.mobile?"10px":"20px"}}>{times}</span>
-                    {!isBooking?<span className="" style={{fontWeight:"400", fontSize:mediaQueries.mobile?"20px":"40px"}}>{Location}</span>:<></>}
-                    <Button className="" style={{backgroundColor:"white", color:"black", width:"100%", marginTop:mediaQueries.mobile?"17px":"50px"}} onClick={() => setIsBooking(!isBooking)}>{!isBooking ? "Show more":"Hide"}</Button>
+                    {!isBooking?<span className="" style={{fontWeight:"400", fontSize:mediaQueries.mobile?"10px":"40px"}}>{Location}</span>:<></>}
+                    <Button className="" style={{fontSize:mediaQueries.mobile?"20px":'50px', backgroundColor:"white", color:"black", width:"100%", marginTop:mediaQueries.mobile?"17px":"50px"}} onClick={() => setIsBooking(!isBooking)}>{!isBooking ? "Show more":"Hide"}</Button>
                 </div>
                 <div>
                     <Image src={imgs[index]} style={{contain:"cover", borderRadius:"10px", width:mediaQueries.mobile?"120px":"500px", height:mediaQueries.mobile?"110px":"400px", marginTop:mediaQueries.mobile?"40px":"0px", paddingLeft:mediaQueries.mobile?"10px":"0px"}}/>
@@ -140,7 +140,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             placeholder="Enter name"
                                             value={childName}
                                             onChange={(e) => setChildName(e.target.value)}
-                                            style={{fontSize:mediaQueries.mobile?"7px":"15px"}}
+                                            style={{fontSize:mediaQueries.mobile?"5px":"15px"}}
                                             />
                                         </Form.Group>
                                         <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
@@ -149,7 +149,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             placeholder="Enter Age"
                                             value={childAge}
                                             onChange={(e) => setChildAge(e.target.value)}
-                                            style={{fontSize:mediaQueries.mobile?"7px":"15px"}}
+                                            style={{fontSize:mediaQueries.mobile?"5px":"15px"}}
                                             />
                                         </Form.Group>
                                         <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
@@ -158,7 +158,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             placeholder="Enter Club"
                                             value={club}
                                             onChange={(e) => setClub(e.target.value)}
-                                            style={{fontSize:mediaQueries.mobile?"7px":"15px"}}
+                                            style={{fontSize:mediaQueries.mobile?"5px":"15px"}}
                                             />
                                         </Form.Group>
                                         <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
@@ -167,7 +167,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             placeholder="Enter Comments"
                                             value={comments}
                                             onChange={(e) => setComments(e.target.value)}
-                                            style={{fontSize:mediaQueries.mobile?"7px":"15px"}}
+                                            style={{fontSize:mediaQueries.mobile?"5px":"15px"}}
                                             />
                                         </Form.Group>
                                         {!mediaQueries.mobile?<>
@@ -194,7 +194,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                         </DropdownButton></>:<></>}
                                         <Button
                                             className="mt-3"
-                                            style={{ backgroundColor: "white", color: "black", width: "100%" }}
+                                            style={{ backgroundColor: "white", color: "black", width: "100%", fontSize:mediaQueries.mobile?"20px":'50px' }}
                                             onClick={() => handleAddingCart()}
                                             disabled={isButtonDisabled}
                                         >

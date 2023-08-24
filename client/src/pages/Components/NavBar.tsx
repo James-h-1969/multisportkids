@@ -88,7 +88,7 @@ function NavBar() {
             </Button>:<></>
         }
       <Navbar.Toggle aria-controls="basic-navbar-nav" style={{position:"absolute", right:"30px", top:"40px"}}/>
-      <Navbar.Collapse id="" style={{marginLeft:"260px", backgroundColor:"white", width:"200px"}}>
+      <Navbar.Collapse id="" style={{marginLeft:"180px", backgroundColor:"white", width:"200px"}}>
   
         <Nav className="ms-auto" style={{fontSize:"12px", border:"3px solid light grey"}}>
               <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/">Home</Nav.Link>
