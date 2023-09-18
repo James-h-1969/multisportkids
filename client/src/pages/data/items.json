@@ -113,9 +113,10 @@
     },
     {
         "id":17,
-        "name": "Test 50c Purchase",
+        "name": "Discounted Camp",
         "priceString": "$0.50",
         "priceNum": 0.50,
         "imgUrl": "/assets/camps.jpg"
     }
+
 ]

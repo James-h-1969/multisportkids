@@ -29,25 +29,50 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
     const [club, setClub] = useState('');
     const [comments, setComments] = useState('');
     const [selectedOption, setSelectedOption] = useState('Choose Days');
+    const [couponInput, setCouponInput] = useState("");
+    const [validCode, setValidCode] = useState(true);
 
 
     const mediaQueries = useMediaQueries({ 
         mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
-      });
+      });  
+    
+    //this function checks whether the coupon is a valid coupon (async because it is fetching data)
+    async function isValidCode(id: number, token: string){
+        const response = await fetch('https://aflkids-backend.onrender.com/checkTokens', { //make a post request with the info in the body. handle in backend
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: id, token: token }),
+        });
+        return response.ok
+    }
 
-
-    function handleAddingCart(){
+    // this function handles when all the details are inputted and the user wants to add it to the cart
+    async function handleAddingCart(){
         let ID = 0;
         let day = "";
-        if (selectedOption == "Day One" || selectedOption == "Day Two"){
-            ID = 16;
+        if (couponInput.length > 0 && selectedOption != "Day One" && selectedOption != "Day Two"){
+            //chekc whether it is a valid code
+            let isValid = await isValidCode(11, couponInput);
+            if (isValid){ //only check if both days have been selected
+                ID = 17 //change this to be the ID of the new cheap object
+            } else { //not a valid code
+                setValidCode(false)
+                setCouponInput("");
+                return;
+            }
+            //if it is not then exit
+        } else if (selectedOption == "Day One" || selectedOption == "Day Two"){ // check whether a single option has been selected
+            ID = 16; // ID of one day
             if (selectedOption == "Day One"){
                 day = "1";
             } else {
                 day = "2";
             }
         } else {
-            ID = 11;
+            ID = 11; // ID for both days
         }
         const Customdetails = {
             childName: childName,
@@ -169,6 +194,18 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             onChange={(e) => setComments(e.target.value)}
                                             style={{fontSize:mediaQueries.mobile?"5px":"15px"}}
                                             />
+                                        </Form.Group>
+                                        {/* For the coupon code */}
+                                        <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
+                                            <Form.Label style={{ width: "60%" }}>Coupon</Form.Label>
+                                            <Form.Control
+                                            placeholder="Enter Coupon Code (Leave empty if not)"
+                                            value={couponInput}
+                                            onChange={(e) => setComments(e.target.value)}
+                                            style={{fontSize:mediaQueries.mobile?"5px":"15px"}}
+                                        />
+                                        {/*This will show a warning if an incorrect code is inputted */}
+                                        {validCode ? <div style={{color:"red"}}>Please input a valid code</div>:<></>}
                                         </Form.Group>
                                         {!mediaQueries.mobile?<>
                                         <div className="mt-5 d-flex justify-content-around">

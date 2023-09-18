@@ -44,7 +44,8 @@ const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
 
 type hashedTokensType = {
     singleTokens: Array<string>;
-    groupTokens: Array<string>
+    groupTokens: Array<string>;
+    campTokens: Array<string>;
 }
 type details = {
     childName: string,
@@ -397,8 +398,22 @@ app.post("/checkTokens", async (req: Request, res: Response) => {
         const ActualTokens:hashedTokensType = allHashedTokens[0];
         let searching = [""];
 
-        if (id == 3){
+        if (id == 3){ //single private session
             searching = ActualTokens.singleTokens;
+        } else if (id === 11){ //camp 
+            searching = ActualTokens.campTokens;
+            let matchFound = false;
+            for (let i = 0; i < searching.length; i++){
+                let isMatch = (userProvidedToken == searching[i])
+                if (isMatch){
+                    matchFound = true;
+                }     
+            }
+            if (matchFound) {
+                return res.json({ message: 'Token is valid.' });
+            } else {
+                return res.status(401).json({ error: 'Invalid token.' });
+            }
         } else {
             searching = ActualTokens.groupTokens;
         }
@@ -412,7 +427,7 @@ app.post("/checkTokens", async (req: Request, res: Response) => {
         }
         
         if (matchFound) {
-          return res.json({ message: 'Token is valid.' });
+            return res.json({ message: 'Token is valid.' });
         } else {
             return res.status(401).json({ error: 'Invalid token.' });
         }
@@ -458,7 +473,7 @@ const storeItems = new Map([
     [14, { priceInCents: 50, name: "1 on 1 Private (Plan)"}],
     [15, { priceInCents: 50, name: "Group Private (Plan)"}],
     [16, { priceInCents: 10000, name: "Holiday Camp (1 day)"}], //10000
-    [17, { priceInCents: 50, name:"Test 50c Purchase"}]
+    [17, { priceInCents: 50, name:"Discounted Camp"}]
 ])
 
 
