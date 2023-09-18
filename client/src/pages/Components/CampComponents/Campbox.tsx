@@ -30,7 +30,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
     const [comments, setComments] = useState('');
     const [selectedOption, setSelectedOption] = useState('Choose Days');
     const [couponInput, setCouponInput] = useState("");
-    const [validCode, setValidCode] = useState(true);
+    const [validCode, setValidCode] = useState(false);
 
 
     const mediaQueries = useMediaQueries({ 
@@ -59,7 +59,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
             if (isValid){ //only check if both days have been selected
                 ID = 17 //change this to be the ID of the new cheap object
             } else { //not a valid code
-                setValidCode(false)
+                setValidCode(true)
                 setCouponInput("");
                 return;
             }
@@ -201,11 +201,11 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             <Form.Control
                                             placeholder="Enter Coupon Code (Leave empty if not)"
                                             value={couponInput}
-                                            onChange={(e) => setComments(e.target.value)}
+                                            onChange={(e) => setCouponInput(e.target.value)}
                                             style={{fontSize:mediaQueries.mobile?"5px":"15px"}}
                                         />
                                         {/*This will show a warning if an incorrect code is inputted */}
-                                        {validCode ? <div style={{color:"red"}}>Please input a valid code</div>:<></>}
+                                        {validCode ? <a style={{color:"red"}}>Please input a valid code</a>:<></>}
                                         </Form.Group>
                                         {!mediaQueries.mobile?<>
                                         <div className="mt-5 d-flex justify-content-around">
