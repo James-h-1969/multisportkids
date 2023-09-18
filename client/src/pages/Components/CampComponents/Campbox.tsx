@@ -53,7 +53,12 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
     async function handleAddingCart(){
         let ID = 0;
         let day = "";
-        if (couponInput.length > 0 && selectedOption != "Day One" && selectedOption != "Day Two"){
+        if (couponInput.length > 0){
+            if (selectedOption == "Day One" || selectedOption == "Day Two"){
+                setValidCode(true)
+                setCouponInput("");
+                return;
+            }
             //chekc whether it is a valid code
             let isValid = await isValidCode(11, couponInput);
             if (isValid){ //only check if both days have been selected
@@ -204,9 +209,9 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             onChange={(e) => setCouponInput(e.target.value)}
                                             style={{fontSize:mediaQueries.mobile?"5px":"15px"}}
                                         />
+                                        </Form.Group>
                                         {/*This will show a warning if an incorrect code is inputted */}
                                         {validCode ? <a style={{color:"red"}}>Please input a valid code</a>:<></>}
-                                        </Form.Group>
                                         {!mediaQueries.mobile?<>
                                         <div className="mt-5 d-flex justify-content-around">
                                             <div>
