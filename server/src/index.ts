@@ -127,11 +127,11 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request: 
                     }
                 }
         
-                if (val.id == 11 || val.id == 16){ //holiday camp 2 day or 1 day
+                if (val.id == 11 || val.id == 16 || val.id == 17){ //holiday camp 2 day or 1 day
                     response.status(200).send(`DEALING WITH HOLIDAYS`).end();
                     const filter =  { name: val.details[index].purchaseName[0] };
                     let update = {};
-                    if (val.id == 11){
+                    if (val.id == 11 || val.id == 17){
                         update = { $push: {kidsDay1: val.details[index], kidsDay2: val.details[index] }};
                     } else {
                         let day = val.details[index].purchaseName[1];
