@@ -473,7 +473,7 @@ const storeItems = new Map([
     [14, { priceInCents: 50, name: "1 on 1 Private (Plan)"}],
     [15, { priceInCents: 50, name: "Group Private (Plan)"}],
     [16, { priceInCents: 10000, name: "Holiday Camp (1 day)"}], //10000
-    [17, { priceInCents: 50, name:"Discounted Camp"}]
+    [17, { priceInCents: 5500, name:"Discounted Camp"}]
 ])
 
 
