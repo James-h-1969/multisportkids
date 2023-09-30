@@ -11,6 +11,8 @@ type CampType = {
   Location: String,
   address:String,
   locPic:string,
+  kidsDay1: Array<Object>,
+  kidsDay2: Array<Object>,
 }
 
 function UpcomingCamps() {
@@ -18,7 +20,7 @@ function UpcomingCamps() {
   
   useEffect(() => {
     async function fetchCamps() {
-      const response = await fetch("https://aflkids-backend.onrender.com/camps");
+      const response = await fetch(`http://localhost:3000/camps`);
       const newCamps = await response.json();
       setCamps(newCamps);
     }

@@ -30,15 +30,16 @@ const express = require("express");
 const app = express();
 
 app.use(cors({
-    origin: "https://aflkids-frontend.onrender.com" //this will be the site name so that only it can access the API
+    origin: process.env.FRONT_URL //this will be the site name so that only it can access the API
 }));
 
+//process.env.FRONT_URL
 //https://aflkids-frontend.onrender.com
 
 const PORT = process.env.PORT || 3000;
 
 const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{
-    console.log("LISTENING");
+    console.log(`Listening on Port: ${PORT}`);
     app.listen(PORT);
 });
 
@@ -517,8 +518,8 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
                     quantity: item.quantity
                 };
             }),
-            success_url: 'https://aflkids-frontend.onrender.com/finished', // Replace this with your server route or function
-            cancel_url: 'https://aflkids-frontend.onrender.com/',
+            success_url: `${process.env.FRONT_URL}finished`, // Replace this with your server route or function
+            cancel_url: `${process.env.FRONT_URL}`,
             payment_intent_data: {
                 metadata: {
                   cartItems: items
