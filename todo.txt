@@ -17,5 +17,8 @@ TO DO:
 
 
 ######## What to update from dev to production  #####
-- URL on front end (to right backend)
+- Cart.tsx URL
+
+
+git push origin dev
 

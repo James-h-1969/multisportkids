@@ -1,8 +1,6 @@
 import Camp from "../Models/Camp";
 import express, { NextFunction, Request, Response } from "express";
 
-
-
 export const campController = {
     getCamps: async (req: Request, res: Response) => { //function that gets all of the current camps avaialbe 
         const camps = await Camp.find();
@@ -21,6 +19,7 @@ export const campController = {
             locPic: locPic_,
             kidsDay1: [],
             kidsDay2: [],
+            archived: false
         });
         const createdCamp = await newCamp.save();
         res.json(createdCamp);
