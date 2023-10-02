@@ -1,4 +1,3 @@
-import './App.css';
 import Camps from './pages/Camps';
 import Home from './pages/Home';
 import { Route, Routes } from 'react-router-dom';
@@ -21,10 +20,8 @@ function App() {
           <Route path="/finished" element={<Success />} />
           <Route path="/camps" element={<Camps />} />
           <Route path="/private" element={<Private />} />
-          {/* <Route path="/development" element={<Development />} /> */}
           <Route path="/merch" element={<Merch />} />
           <Route path="/contact" element={<Contact />} />
-          {/* <Route path="/checkout" element={<Checkout />} /> */}
         </Routes>
       </CartProvider>
     </div>

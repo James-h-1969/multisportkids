@@ -29,7 +29,7 @@ export function Cart({isOpen}:CartProps){
 
     async function handleCheckoutButton(){
         closeCart();
-        fetch('https://aflkids-backend.onrender.com/create-checkout-session', {
+        fetch('http://localhost:3000/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -48,7 +48,8 @@ export function Cart({isOpen}:CartProps){
             if (res.ok) return res.json()
             return res.json().then(json => Promise.reject(json))
         }) .then(({ url }) => {
-            window.parent.postMessage(url, "https://www.aflkids.com.au/")
+            window.parent.postMessage(url, "https://www.aflkids.com.au/") // so wix changes its url\
+            window.location.assign(url); // changes the current url to work
         }).catch(e => {
             console.error(e.error);
         })
