@@ -40,7 +40,7 @@ function HomeDeals(){
             <div className="" style={{ zIndex: 30, marginTop:"350px", marginLeft:"200px", paddingRight:"100px" }}>
                 <span style={{fontSize:"60px", fontWeight:"bold", fontFamily:"Rubik", color:"white"}}>Holiday Camps<br /></span>
                 <span style={{fontSize:"30px", fontWeight:"normal", fontFamily:"Rubik", color:"white"}}>
-                    Experience the ultimate <span style={{color:'red'}}>AFL</span> holiday camps for kids!  Join us for fun-filled days of skill development, teamwork, and excitement in a safe and supportive environment. 
+                    Experience the ultimate <span style={{color:'red', fontWeight:"bold"}}>AFL</span> holiday camps for kids!  Join us for fun-filled days of skill development, teamwork, and excitement in a safe and supportive environment. 
                     </span>
                     <Link to="/camps" className="mb-5" style={{}}>
                         <Button className="mt-3" size={mediaQueries.mobile?"sm":"lg"} style={{color:"#46768E", backgroundColor:"white", border:"transparent", fontWeight:"bold"}}>View Upcoming Camps</Button>
@@ -48,7 +48,7 @@ function HomeDeals(){
                 <div style={{marginTop:"130px"}}>
                     <span style={{fontSize:"60px", fontWeight:"bold", fontFamily:"Rubik", color:"white"}}>Private Coaching<br /></span>
                     <span style={{fontSize:"30px", fontWeight:"normal", fontFamily:"Rubik", color:"white"}}>
-                        Elevate your skills with personalized <span style={{color:'red'}}>AFL</span> private coaching. Tailored sessions offer focused skill enhancement, strategy development, and individualized attention<br /></span>
+                        Elevate your skills with personalized <span style={{color:'red', fontWeight:"bold"}}>AFL</span> private coaching. Tailored sessions offer focused skill enhancement, strategy development, and individualized attention<br /></span>
                         <Link to="/private" className="" style={{}}>
                             <Button className="mt-3" size={mediaQueries.mobile?"sm":"lg"} style={{color:"#46768E", backgroundColor:"white", border:"transparent", fontWeight:"bold"}}>View Available Sessions</Button>
                         </Link>

@@ -12,17 +12,16 @@ import { useState } from "react";
 
 
 
-// type HomeProps = {
-//     setManageLogged: (logged:boolean) => void;
-//     manageLogged:boolean;
-// }
+type HomeProps = {
+    setManageLogged: (logged:boolean) => void;
+    manageLogged:boolean;
+}
 
-function Home(){
-    const [manageLogged, setManageLogged] = useState(false);
-
+function Home({setManageLogged, manageLogged}:HomeProps){
     const mediaQueries = useMediaQueries({ 
         mobile: "(max-width: 480px)",
     })
+
 
     return (
         <>
@@ -44,8 +43,8 @@ function Home(){
                 {/* <div className="triangle" style={{backgroundColor:"#46768E"}}></div> */}
             </div>
             <Footer />
-
-            {/* {manageLogged ? <>Logged In</>:<ManagerLogin update={setManageLogged} />} */}
+            {manageLogged ? <><Link to="/manager" className="d-flex justify-content-center gap-5 mb-3"><Button style={{fontWeight:"normal", fontFamily:"Rubik", backgroundColor:"#46768E", border:"transparent"}}>Manage AFLKids</Button></Link></>
+            :<ManagerLogin update={setManageLogged} />}
         </>
     )
 }
