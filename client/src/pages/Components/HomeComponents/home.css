@@ -1,0 +1,25 @@
+.linkbox {
+    position: relative;
+    /* Other styles for your linkbox */
+  
+    /* Default styles for the overlay */
+    z-index: 1; /* Ensure it's below content */
+  }
+  
+  .linkbox::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+    background-color: rgba(128, 128, 128, 0); /* Transparent initially */
+    transition: background-color 0.3s; /* Smooth transition */
+  
+    pointer-events: none; /* Allows pointer events to pass through the overlay to the underlying element */
+  }
+  
+  .linkbox:hover::before {
+    background-color: rgba(20, 20, 20, 0.5); /* Grey transparent box */
+  }
+  
