@@ -24,6 +24,22 @@ export const campController = {
         const createdCamp = await newCamp.save();
         res.json(createdCamp);
     },
-
+    changeArchive: async (req: Request, res: Response) => { //function that changes whether a camp is archived or not
+        const {name_, archived_} = req.body;
+        const filter = { name: name_ }
+        const update = { $set: { archived: archived_ } };
+        const updatedToken = await Camp.findOneAndUpdate(filter, update, { new:true, runValidators:true});
+    },
+    deleteCamp:  async (req: Request, res: Response) => {
+        const {name_} = req.body;
+        Camp.deleteOne({ name: name_ }, (err:Error) => {
+            if (err) {
+            console.error('Error deleting camp:', err);
+            } else {
+            console.log(`Successfully deleted camp with name: ${name_}`);
+            }
+        });
+    },
+    
     
 }
