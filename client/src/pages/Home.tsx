@@ -1,6 +1,5 @@
 import NavBar from "./Components/NavBar";
 import HomeDeals from "./Components/HomeComponents/HomeDeals";
-import HomeQuotes from "./Components/HomeComponents/HomeQuotes";
 import ManagerLogin from "./Components/ManagerLogin";
 import Footer from "./Components/Footer"
 import { Button } from "react-bootstrap";
@@ -8,19 +7,23 @@ import ball from "/assets/ball.png"
 import useMediaQueries from "media-queries-in-react";
 import "./Home.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+
 
 
 
 type HomeProps = {
-    setManageLogged: (logged:boolean) => void;
     manageLogged:boolean;
 }
 
-function Home({setManageLogged, manageLogged}:HomeProps){
+function Home({ manageLogged}:HomeProps){
     const mediaQueries = useMediaQueries({ 
         mobile: "(max-width: 480px)",
     })
+
+    function logOut() {
+        sessionStorage.clear();
+        location.reload();
+    }
 
 
     return (
@@ -43,8 +46,18 @@ function Home({setManageLogged, manageLogged}:HomeProps){
                 {/* <div className="triangle" style={{backgroundColor:"#46768E"}}></div> */}
             </div>
             <Footer />
-            {manageLogged ? <><Link to="/manager" className="d-flex justify-content-center gap-5 mb-3"><Button style={{fontWeight:"normal", fontFamily:"Rubik", backgroundColor:"#46768E", border:"transparent"}}>Manage AFLKids</Button></Link></>
-            :<ManagerLogin update={setManageLogged} />}
+            {manageLogged ? 
+            <div className="d-flex justify-content-center gap-5">
+                <Link to="/manager" className="d-flex justify-content-center gap-5 mb-3" style={{ textDecoration: 'none' }}>
+                    <Button style={{ fontWeight: "normal", fontFamily: "Rubik", backgroundColor: "#46768E", border: "transparent" }}>
+                        Manage AFLKids
+                    </Button>
+                </Link>
+                <Button onClick={() => logOut()} style={{ fontWeight: "normal", fontFamily: "Rubik", backgroundColor: "#46768E", border: "transparent", height:"80%" }}>
+                        Log Out
+                </Button>
+            </div>
+            :<ManagerLogin />}
         </>
     )
 }

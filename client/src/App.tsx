@@ -14,20 +14,19 @@ import Manager from './pages/Manager';
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
-  function getToManage(yes:boolean){
-    if (yes){
-      setLoggedIn(true);
-    }
-  }
+  useEffect(() => {
+    const isLogged = sessionStorage.getItem('isLoggedin') === 'True';
+    setLoggedIn(isLogged);
+  }, []);
 
 
   return (
     <div className="App">
       <CartProvider>
         <Routes>
-          <Route path="/" element={<Home manageLogged={loggedIn} setManageLogged={getToManage}/>} />
+          <Route path="/" element={<Home manageLogged={loggedIn} />} />
           <Route path="/finished" element={<Success />} />
           <Route path="/camps" element={<Camps />} />
           <Route path="/private" element={<Private />} />

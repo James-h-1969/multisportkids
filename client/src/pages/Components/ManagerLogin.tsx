@@ -2,10 +2,7 @@ import { Form, Button } from "react-bootstrap";
 import { useState } from "react";
 
 
-type ManagerLoginType = {
-    update: (login: boolean) => void
-}
-export default function ManagerLogin({update}:ManagerLoginType){
+export default function ManagerLogin(){
     const [incorrect, setIncorrect] = useState(false);
     const [password, setPassword] = useState("");
     const [passwordHidden, setPasswordHidden] = useState("");
@@ -28,10 +25,12 @@ export default function ManagerLogin({update}:ManagerLoginType){
         event?.preventDefault();
         if (password == "Bombers30!"){
             console.log("The password to login to the manager account is correct.")
-            update(true);
+            sessionStorage.setItem("isLoggedin", "True")
+            location.reload()
+            // update(true);
             return
         }
-        update(false);
+        // update(false);
         setIncorrect(true)
     }
     
