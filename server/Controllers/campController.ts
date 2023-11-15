@@ -29,7 +29,6 @@ export const campController = {
         const filter = { name: name_ }
         const update = { $set: { archived: archived_ } };
         const updatedToken = await Camp.findOneAndUpdate(filter, update, { new:true, runValidators:true});
-        console.log()
     },
     deleteCamp:  async (req: Request, res: Response) => {
         const {name_} = req.body;

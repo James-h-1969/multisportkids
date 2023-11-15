@@ -21,16 +21,29 @@ export default function ManagerLogin(){
         }
     }
 
-    const handleSubmit = (event?:React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event?:React.FormEvent<HTMLFormElement>) => {
         event?.preventDefault();
-        if (password == "Bombers30!"){
-            console.log("The password to login to the manager account is correct.")
-            sessionStorage.setItem("isLoggedin", "True")
-            location.reload()
-            // update(true);
+        const passBody = {
+            name_: "manager",
+            input_: password,
+        }
+        const requestOptions: RequestInit = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              // Add any additional headers if required
+            },
+            body: JSON.stringify(passBody),
+          };
+
+        const response = await fetch("http://localhost:3000/managercheckpassword", requestOptions);
+        if (response.ok){
+            console.log("Correct Password");
+            sessionStorage.setItem('isLoggedin', "True");
+            location.reload();
             return
         }
-        // update(false);
+        console.log("Incorrect Password :{")
         setIncorrect(true)
     }
     

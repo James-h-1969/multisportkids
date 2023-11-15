@@ -4,6 +4,7 @@ import { campController } from "../Controllers/campController";
 import { privateController } from "../Controllers/privateController";
 import { stripeController } from "../Controllers/stripeController";
 import {tokenController} from "../util/randomToken";
+import { managerController } from "../Controllers/managerController";
 const express = require("express");
 
 //setup server
@@ -41,6 +42,10 @@ app.post("/checkTokens", tokenController.checkToken);
 
 // STRIPE ROUTES //
 app.post('/create-checkout-session', stripeController.createSession);
+
+// MANAGER LOGIN ROUTE //
+app.post('/managercheckpassword', managerController.checkPassword)
+// app.post('/managercheckpassword', managerController.addPassword)
 
 
 
