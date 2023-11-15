@@ -22,23 +22,6 @@ export default function Manager(){
       }, [])
 
 
-
-    async function deleteCamp(name:string) {
-        const update = {name_:name};
-        const requestOptions: RequestInit = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // Add any additional headers if required
-              },
-            body: JSON.stringify(update),
-        };
-
-        const response = fetch("http://localhost:3000/updatecampstatus", requestOptions)
-        console.log(response)
-    }
-
-
     
     return(
         <>
@@ -54,8 +37,8 @@ export default function Manager(){
             </div>
             {showingAddCamp ? <AddCamp setShowingAddCamp={setshowingAddCamp}/>: <></>}
             <div> 
-                {camps.reverse().map((value: CampType, index) => (
-                    <DisplayCamp val={value}/>
+                {camps.slice().reverse().map((value: CampType, index) => (
+                    <DisplayCamp key={index} val={value} />
                 ))}
             </div>
             <div>

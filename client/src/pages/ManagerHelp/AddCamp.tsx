@@ -1,31 +1,13 @@
 import { Button, Form } from "react-bootstrap";
 import { CampType } from "../../types/campType";
 import { useState } from "react";
+import { locations } from "../../types/campType";
 
 
 type AddCampProps = {
     setShowingAddCamp: (showing: boolean) => void
 }
 
-type Location = {
-    address: string;
-    locPic: string;
-};
-
-type Locations = {
-    [key: string]: Location; // Index signature allowing any string as key
-};
-
-const locations: Locations = {
-    "Weldon": {
-        address: "Curl Curl, 2099",
-        locPic: "/assets/weldon.png"
-    }, 
-    "Gore Hill": {
-        address: "St Leonards, 2065",
-        locPic: "/assets/gore.png"
-    }
-}
 
 export default function AddCamp({setShowingAddCamp}:AddCampProps){
     const [campName, setCampName] = useState("");
@@ -37,6 +19,14 @@ export default function AddCamp({setShowingAddCamp}:AddCampProps){
     async function addTheCamp(e:React.FormEvent<HTMLFormElement>){        
         e.preventDefault()
 
+        let Address = "";
+        let Pic = "";
+
+        if (locations[campLocation] != undefined){
+            Address = locations[campLocation].address;
+            Pic = locations[campLocation].locPic;
+        } 
+
         const newCamp = {
             name_: campName,
             ages_: campAgeRange,
@@ -44,8 +34,8 @@ export default function AddCamp({setShowingAddCamp}:AddCampProps){
             times_: campTimes,
             Price_: 150, 
             Location_: campLocation,
-            address_: locations[campLocation].address,
-            locPic_: locations[campLocation].locPic
+            address_: Address,
+            locPic_: Pic
         }
 
         const requestOptions: RequestInit = {
@@ -58,10 +48,12 @@ export default function AddCamp({setShowingAddCamp}:AddCampProps){
           };
 
         const response = fetch("http://localhost:3000/camps", requestOptions)
+
+        location.reload();
     }
 
     return(
-        <div className="p-3" style={{position:"absolute", width:"400px", height:"500px", backgroundColor:"grey", borderRadius:"15px", left:"30vw"}}>
+        <div className="p-3" style={{position:"absolute", width:"400px", height:"500px", backgroundColor:"grey", borderRadius:"15px", left:"30vw", zIndex:'100'}}>
             <div className= "d-flex justify-content-between">
                 <h3>Add a Camp</h3>
                 <div className="circle" onClick={() => setShowingAddCamp(false)}><div className="plus">x</div></div>

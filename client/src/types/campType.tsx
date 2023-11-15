@@ -11,3 +11,23 @@ export type CampType = { // This has the type for a basic AFLKids Holiday Camp
     kidsDay2: Array<Object>,
     archived: boolean,
   }
+
+type Location = {
+    address: string;
+    locPic: string;
+};
+
+type Locations = {
+    [key: string]: Location; // Index signature allowing any string as key
+};
+
+export const locations: Locations = {
+    "Weldon": {
+        address: "Curl Curl, 2099",
+        locPic: "/assets/weldon.png"
+    }, 
+    "Gore Hill": {
+        address: "St Leonards, 2065",
+        locPic: "/assets/gore.png"
+    }
+}
