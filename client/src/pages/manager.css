@@ -14,3 +14,7 @@
   .plus {
     line-height: 0; /* Aligns the plus sign in the center */
   }
+
+  .need_hover:hover{
+    cursor: pointer;
+  }

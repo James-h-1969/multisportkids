@@ -5,6 +5,8 @@ import { privateController } from "../Controllers/privateController";
 import { stripeController } from "../Controllers/stripeController";
 import {tokenController} from "../util/randomToken";
 import { managerController } from "../Controllers/managerController";
+import { parentController } from "../Controllers/parentController";
+import { coachController } from "../Controllers/coachController"
 const express = require("express");
 
 //setup server
@@ -47,6 +49,14 @@ app.post('/create-checkout-session', stripeController.createSession);
 // MANAGER LOGIN ROUTE //
 app.post('/managercheckpassword', managerController.checkPassword)
 // app.post('/managercheckpassword', managerController.addPassword)
+
+// PARENTS ROUTES //
+app.get("/Parents", parentController.getParents)
+
+// COACH ROUTES //
+app.post("/Coaches", coachController.addCoach)
+app.get("/Coaches", coachController.getCoaches)
+app.post("/deleteCoach", coachController.deleteCoach)
 
 
 

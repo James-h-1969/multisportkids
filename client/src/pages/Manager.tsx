@@ -7,6 +7,7 @@ import { CampType } from "../types/campType";
 import ShowKids from "./ManagerHelp/ShowKids";
 import { Child, Kids } from "../types/kidsType";
 import DisplayCamp from "./ManagerHelp/DisplayCamp";
+import CoachSection from "./ManagerHelp/CoachSection";
 
 export default function Manager(){
     const [camps, setCamps] = useState<CampType[]>([]);
@@ -42,8 +43,11 @@ export default function Manager(){
                 ))}
             </div>
             <div>
-
-            </div>
+                <CoachSection />                
+            </div>  
+            <div>
+                <div className="ps-3"><h1 style={{width:"20vw", fontWeight:"bold", fontFamily:"Rubik", fontSize:"40px"}}>Parents</h1></div>
+            </div>  
         </div>
         </>
     )

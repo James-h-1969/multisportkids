@@ -4,9 +4,8 @@ const Schema = mongoose.Schema;
 
 const CoachSchema = new Schema({
     name: String,
-    dates: Array,
-    times: Array,
-    location: String,
+    sessions: Array,
+    imgName: String
 });
 
 const CoachModel = mongoose.model("Coach", CoachSchema);
