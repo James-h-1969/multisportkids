@@ -49,7 +49,7 @@ export default function ManagerLogin(){
     
     return(
         <>
-            <Form className="d-flex justify-content-center gap-5 mb-3" onSubmit={handleSubmit}>
+            <Form className="d-flex justify-content-center gap-5 mb-1" onSubmit={handleSubmit}>
                 <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
                     <Form.Label style={{ width: "60%", marginRight:"20px",fontWeight:"normal", fontFamily:"Rubik" }}>Manager Login</Form.Label>
                     <Form.Control
@@ -60,12 +60,13 @@ export default function ManagerLogin(){
                     />
                 </Form.Group>
                 <Button type="submit" style={{fontWeight:"normal", fontFamily:"Rubik", backgroundColor:"#46768E", border:"transparent", width:"300px"}}>Login</Button>
-            </Form>            
-        { incorrect ?
-        <div className="d-flex justify-content-center mb-5 gap-5" style={{color:"red"}}>
-            Incorrect Password.
-        </div>:<></>
-        }
+            </Form>    
+            { incorrect ?
+            <div className="d-flex justify-content-center mb-5 gap-5" style={{color:"red"}}>
+                Incorrect Password.
+            </div>:<></>
+            }        
+        
         </>
 
     )
