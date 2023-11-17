@@ -9,12 +9,23 @@ import { ses, senderEmail } from "../util/emails";
 
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
+export type Parent = {
+    parentname: String,
+    email: String,
+    phone: String,
+    childNames: Array<string>,
+    childAge: Array<string>,
+    childClubs: Array<string>,
+    childComments: Array<string>,
+    childEvents: Array<Array<string>>, // this will be a 2D list representing each child and then a list of each event they have done
+}
+
 type details = {
     childName: string,
     childAge: string,
     childComments: string,
     childClub: string,
-    purchaseName: string
+    purchaseName: string,
 }
 
 interface Item {
@@ -139,7 +150,7 @@ async function useTokenForPlan(token:string, id:number){
 }
 
 export const stripeController = {
-    createSession: async (req: Request, res: Response) => {
+    createSession: async (req: Request, res: Response) => { //function for handling when a payment session is beginning
         try {
             const customerName = req.body.customerName;
             const customerEmail = req.body.customerEmail;
@@ -181,7 +192,7 @@ export const stripeController = {
             res.status(500).json({ error: e.message });
         }
     },
-    handleSuccessfulPayment: async (request: Request, response: Response) => {
+    handleSuccessfulPayment: async (request: Request, response: Response) => { //function for successful payment
         const sig = request.headers['stripe-signature'];
         try {
           const event = stripe.webhooks.constructEvent(request.body, sig, process.env.STRIPE_ENDPOINT_KEY);
@@ -247,8 +258,6 @@ export const stripeController = {
           
           }
         
-          // Return a 200 response to acknowledge receipt of the event
-        //   response.status(200).send('Received').end();
         } catch (err) {
           if (err instanceof Error) {
             console.log(`Webhook Error: ${err.message}`);

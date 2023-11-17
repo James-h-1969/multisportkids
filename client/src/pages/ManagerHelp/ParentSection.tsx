@@ -23,6 +23,9 @@ export default function ParentSection(){
                 current_parent_Section = [];
             }
           }
+          if (current_parent_Section.length > 0){ // gets the remainding parents
+            parent_sections.push(current_parent_Section);
+          }
           setParentsSection(parent_sections);
         }
         fetchParents();
