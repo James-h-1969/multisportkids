@@ -3,7 +3,6 @@ import Home from './pages/Home';
 import { Route, Routes } from 'react-router-dom';
 import Private from './pages/Private';
 // import Development from './pages/Development';
-import Merch from './pages/Merch';
 import Contact from './pages/Contact';
 import { CartProvider } from './pages/context/cartContext';
 // import Checkout from './pages/Components/Checkout';
