@@ -4,14 +4,9 @@ import soloPhoto from "/assets/usePhoto.jpg";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./home.css"
-import { useState } from "react";
 
 
 function HomeDeals(){
-    const scrollToTop = () => {
-        window.scrollTo(0, 0);
-    };
-
     const mediaQueries = useMediaQueries({ 
         mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
       });
