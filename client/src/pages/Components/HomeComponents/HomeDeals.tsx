@@ -1,8 +1,10 @@
-import { Carousel, Button, Image } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import useMediaQueries from "media-queries-in-react";
 import campPhoto from "/assets/CampPhotos/IMG_2368.jpg"
 import soloPhoto from "/assets/usePhoto.jpg";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import "./home.css"
+import { useState } from "react";
 
 
 function HomeDeals(){
@@ -14,57 +16,47 @@ function HomeDeals(){
         mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
       });
 
-    return(
-        <div className="page-box">
-            <Carousel style={{paddingBottom:mediaQueries.mobile?"60px":"40px"}}>
-                <Carousel.Item interval={1000}>
-                    <Image
-                    className="d-block"
-                    src={campPhoto}
-                    alt="First slide"
-                    style={{objectFit:"cover", height:mediaQueries.mobile?"500px":"700px", width:mediaQueries.mobile?"500px":"700px", margin:"0 auto", paddingBottom:"220px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
-                    />
-                    <Carousel.Caption style={{ paddingBottom:"40px"}}>
-                    <h3><span style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"30px":"40px"}}>Holiday Camps</span></h3>
-                    <p><span style={{fontWeight:"lighter", fontSize:mediaQueries.mobile?"15px":"20px"}}>Our camps combine a mix of skill drills and games to create a fun environment for AFL kids.</span></p>
-                    <Link to="/camps" onClick={scrollToTop}>
-                        <Button variant="secondary" style={{fontWeight:"bold"}}>View Holiday Camps</Button>
+
+    
+      return (
+        <div style={{ height: "150vh", marginBottom: "100px", position: "relative" }}>
+          <div style={{ backgroundColor: "#46768E", width: "100%", position: "absolute", zIndex: 6, opacity: 0.5,  height:"150vh" }}></div>
+          <div style={{ overflow: "hidden" }}>
+            <img src={campPhoto} style={{ width: "98.5vw", zIndex: 5, position: "absolute", height:"150vh"}} alt="Camp Photo" />
+          </div>
+          <div className="d-flex justify-content-start">
+            <div className="d-flex flex-column" style={{ width: "300px", zIndex: 30, marginTop:"300px", marginLeft:"100px" }}>
+              <div className="linkbox">
+                <Link to={"/camps"}>
+                    <img src={campPhoto} style={{ width: "400px", paddingBottom:"30px" }} alt="Camp Photo" />
+                </Link>
+              </div>
+              <div className="linkbox">
+                <Link to={"/private"}>
+                <img src={soloPhoto} style={{ width: "400px", height:"400px" }} alt="Solo Photo" />
+                </Link>
+              </div>
+            </div>
+            <div className="" style={{ zIndex: 30, marginTop:"350px", marginLeft:"200px", paddingRight:"100px" }}>
+                <span style={{fontSize:"60px", fontWeight:"bold", fontFamily:"Rubik", color:"white"}}>Holiday Camps<br /></span>
+                <span style={{fontSize:"30px", fontWeight:"normal", fontFamily:"Rubik", color:"white"}}>
+                    Experience the ultimate <span style={{color:'red', fontWeight:"bold"}}>AFL</span> holiday camps for kids!  Join us for fun-filled days of skill development, teamwork, and excitement in a safe and supportive environment. 
+                    </span>
+                    <Link to="/camps" className="mb-5" style={{}}>
+                        <Button className="mt-3" size={mediaQueries.mobile?"sm":"lg"} style={{color:"#46768E", backgroundColor:"white", border:"transparent", fontWeight:"bold"}}>View Upcoming Camps</Button>
                     </Link>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item interval={1000}>
-                    <Image
-                    className="d-block"
-                    src={soloPhoto}
-                    alt="second slide"
-                    style={{objectFit:"cover", height:mediaQueries.mobile?"500px":"700px", width:mediaQueries.mobile?"500px":"700px", margin:"0 auto", paddingBottom:"230px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
-                    />
-                    <Carousel.Caption>
-                    <h3><span style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"30px":"40px"}}>Private Sessions</span></h3>
-                    <p><span style={{fontWeight:"lighter", fontSize:mediaQueries.mobile?"15px":"20px"}}>Get personalized assissance from one of our many top coaches to get the most out of your AFL kid.</span></p>
-                    <Link to="/private" onClick={scrollToTop}>
-                        <Button variant="secondary" style={{fontWeight:"bold"}}>View Private Sessions</Button>
-                    </Link>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                {/* <Carousel.Item interval={1000}>
-                    <img
-                    className="d-block"
-                    src="/assets/flag.jpg"
-                    alt="third slide"
-                    style={{content:"cover", height:mediaQueries.mobile?"500px":"700px", width:"900px", margin:"0 auto", paddingBottom:"230px", marginBottom:mediaQueries.mobile?"100px":"0px"}}
-                    />
-                    <Carousel.Caption>
-                    <h3><span style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"30px":"40px"}}>Academy Preparation</span></h3>
-                    <p><span style={{fontWeight:"lighter", fontSize:mediaQueries.mobile?"15px":"20px"}}>Enhance the skills of AFL kids within your club over multiple weeks from some of our best coaches.</span></p>
-                    <Link to="/development" onClick={scrollToTop}>
-                        <Button variant="secondary" style={{fontWeight:"bold"}}>View Academy Preparation</Button>
-                    </Link>
-                    </Carousel.Caption>
-                </Carousel.Item> */}
-            </Carousel>
+                <div style={{marginTop:"130px"}}>
+                    <span style={{fontSize:"60px", fontWeight:"bold", fontFamily:"Rubik", color:"white"}}>Private Coaching<br /></span>
+                    <span style={{fontSize:"30px", fontWeight:"normal", fontFamily:"Rubik", color:"white"}}>
+                        Elevate your skills with personalized <span style={{color:'red', fontWeight:"bold"}}>AFL</span> private coaching. Tailored sessions offer focused skill enhancement, strategy development, and individualized attention<br /></span>
+                        <Link to="/private" className="" style={{}}>
+                            <Button className="mt-3" size={mediaQueries.mobile?"sm":"lg"} style={{color:"#46768E", backgroundColor:"white", border:"transparent", fontWeight:"bold"}}>View Available Sessions</Button>
+                        </Link>
+                </div>
+            </div>
+          </div>
         </div>
-    )
+      );
 }
 
 

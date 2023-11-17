@@ -4,12 +4,15 @@ import { campController } from "../Controllers/campController";
 import { privateController } from "../Controllers/privateController";
 import { stripeController } from "../Controllers/stripeController";
 import {tokenController} from "../util/randomToken";
+import { managerController } from "../Controllers/managerController";
+import { parentController } from "../Controllers/parentController";
+import { coachController } from "../Controllers/coachController"
 const express = require("express");
 
 //setup server
 const app = express();
 app.use(cors({
-    origin: "https://aflkids-frontend.onrender.com" //this will be the site name so that only it can access the API
+    origin: process.env.FRONT_URL //this will be the site name so that only it can access the API
 }));
 
 const PORT = process.env.PORT || 3000;
@@ -29,6 +32,9 @@ app.use(express.json());
 // CAMP ROUTES //
 app.get("/camps", campController.getCamps);
 app.post("/camps", campController.addCamp);
+app.post("/updatecampstatus", campController.changeArchive)
+app.post("/deletecamp", campController.deleteCamp)
+app.post("/updatecamp", campController.updateCamp)
 
 // PRIVATE ROUTES //
 app.get("/PrivateTimes", privateController.getCoachTimes);
@@ -39,6 +45,18 @@ app.post("/checkTokens", tokenController.checkToken);
 
 // STRIPE ROUTES //
 app.post('/create-checkout-session', stripeController.createSession);
+
+// MANAGER LOGIN ROUTE //
+app.post('/managercheckpassword', managerController.checkPassword)
+// app.post('/managercheckpassword', managerController.addPassword)
+
+// PARENTS ROUTES //
+app.get("/Parents", parentController.getParents)
+
+// COACH ROUTES //
+app.post("/Coaches", coachController.addCoach)
+app.get("/Coaches", coachController.getCoaches)
+app.post("/deleteCoach", coachController.deleteCoach)
 
 
 
