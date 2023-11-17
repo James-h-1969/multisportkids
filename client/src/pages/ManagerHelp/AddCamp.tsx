@@ -47,7 +47,7 @@ export default function AddCamp({setShowingAddCamp}:AddCampProps){
             body: JSON.stringify(newCamp),
           };
 
-        const response = fetch("http://localhost:3000/camps", requestOptions)
+        const response = fetch("https://aflkids-backend.onrender.com/camps", requestOptions)
 
         location.reload();
     }

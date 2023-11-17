@@ -21,7 +21,7 @@ export default function CoachSection(){
             body: JSON.stringify(newCoach),
           };
 
-        const response = fetch("http://localhost:3000/Coaches", requestOptions)
+        const response = fetch("https://aflkids-backend.onrender.com/Coaches", requestOptions)
 
         location.reload();
     }
@@ -37,13 +37,13 @@ export default function CoachSection(){
             body: JSON.stringify(update),
         };
 
-        const response = fetch("http://localhost:3000/deleteCoach", requestOptions)
+        const response = fetch("https://aflkids-backend.onrender.com/deleteCoach", requestOptions)
         location.reload();
     }
 
     useEffect(() => {
         async function fetchCoaches() {
-          const response = await fetch(`http://localhost:3000/Coaches`);
+          const response = await fetch(`https://aflkids-backend.onrender.com/Coaches`);
           const coaches = await response.json();
           setCoaches(coaches);
         }

@@ -12,7 +12,7 @@ export default function ParentSection(){
 
     useEffect(() => {
         async function fetchParents() {
-          const response = await fetch(`http://localhost:3000/Parents`);
+          const response = await fetch(`https://aflkids-backend.onrender.com/Parents`);
           const parents = await response.json();
           let parent_sections = []
           let current_parent_Section = []
