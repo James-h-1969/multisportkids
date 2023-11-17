@@ -1,5 +1,4 @@
 import { Button, Form } from "react-bootstrap";
-import { CampType } from "../../types/campType";
 import { useState } from "react";
 import { locations } from "../../types/campType";
 
@@ -47,7 +46,7 @@ export default function AddCamp({setShowingAddCamp}:AddCampProps){
             body: JSON.stringify(newCamp),
           };
 
-        const response = fetch("https://aflkids-backend.onrender.com/camps", requestOptions)
+        fetch("https://aflkids-backend.onrender.com/camps", requestOptions)
 
         location.reload();
     }

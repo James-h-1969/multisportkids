@@ -52,7 +52,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(newCamp),
           };
 
-        const response = fetch("https://aflkids-backend.onrender.com/updatecamp", requestOptions);
+        fetch("https://aflkids-backend.onrender.com/updatecamp", requestOptions);
         location.reload();
 
     }
@@ -146,7 +146,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(update),
         };
 
-        const response = fetch("https://aflkids-backend.onrender.com/deletecamp", requestOptions)
+        fetch("https://aflkids-backend.onrender.com/deletecamp", requestOptions)
         location.reload();
     }
 

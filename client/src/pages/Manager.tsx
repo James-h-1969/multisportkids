@@ -4,8 +4,6 @@ import { Button } from "react-bootstrap"
 import { useState, useEffect } from "react"
 import "./manager.css"
 import { CampType } from "../types/campType";
-import ShowKids from "./ManagerHelp/ShowKids";
-import { Child, Kids } from "../types/kidsType";
 import DisplayCamp from "./ManagerHelp/DisplayCamp";
 import CoachSection from "./ManagerHelp/CoachSection";
 import ParentSection from "./ManagerHelp/ParentSection";

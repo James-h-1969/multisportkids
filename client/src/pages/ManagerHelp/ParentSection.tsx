@@ -57,7 +57,7 @@ export default function ParentSection(){
                     <div style={{position:"absolute", left: "40vh"}}>Email</div>
                     <div style={{position:"absolute", left: "80vh", paddingRight:"70vh"}}>Phone Number</div>
                 </div>
-                {parentsSections[parentsIndex].map((value: Parent, index) => (
+                {parentsSections[parentsIndex].map((value: Parent) => (
                     <div className="d-flex mt-3 p-1">
                         <div>{value.parentname}</div>
                         <div style={{position:"absolute", left: "40vh"}}>{value.email}</div>

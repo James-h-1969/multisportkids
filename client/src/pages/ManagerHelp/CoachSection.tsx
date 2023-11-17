@@ -21,7 +21,7 @@ export default function CoachSection(){
             body: JSON.stringify(newCoach),
           };
 
-        const response = fetch("https://aflkids-backend.onrender.com/Coaches", requestOptions)
+        fetch("https://aflkids-backend.onrender.com/Coaches", requestOptions)
 
         location.reload();
     }
@@ -37,7 +37,7 @@ export default function CoachSection(){
             body: JSON.stringify(update),
         };
 
-        const response = fetch("https://aflkids-backend.onrender.com/deleteCoach", requestOptions)
+        fetch("https://aflkids-backend.onrender.com/deleteCoach", requestOptions)
         location.reload();
     }
 
@@ -72,7 +72,7 @@ export default function CoachSection(){
                         </Form>
                     </div>
                 </div>
-                {coaches.slice().reverse().map((value, index) => (
+                {coaches.slice().reverse().map((value) => (
                     <div style={{ width: "100px", height: "130px" }}>
                     <div className="rounded-circle mb-2" style={{ backgroundImage:`url(${value.imgName})`, backgroundSize: "cover",
                         backgroundPosition: "center",width: "100px", height: "100px", position: "relative", backgroundColor: value.imgName === "" ? "grey":"" }}>
