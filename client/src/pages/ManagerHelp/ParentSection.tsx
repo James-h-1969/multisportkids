@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { Parent } from "../../types/parentType"
 import { Button } from "react-bootstrap";
 import "../manager.css"
+import { ColorScheme } from "../../style";
 
 
 export default function ParentSection(){
@@ -12,8 +13,11 @@ export default function ParentSection(){
 
     useEffect(() => {
         async function fetchParents() {
-          const response = await fetch(`https://aflkids-backend.onrender.com/Parents`);
+          const response = await fetch(`http://localhost:3000/Parents`);
           const parents = await response.json();
+          if (parents.length === 0){
+            return
+          }
           let parent_sections = []
           let current_parent_Section = []
           for (let i = 0; i < parents.length; i++){
@@ -43,13 +47,13 @@ export default function ParentSection(){
     
     return(
         <div className="mb-5">
-            <Button className="ms-3" onClick={() => setShowingParents(!showingParents)} style={{backgroundColor:"#46768E", border:"transparent"}}>{!showingParents ? "View Parents":"Hide Parents"}</Button>
+            <Button className="ms-3" onClick={() => setShowingParents(!showingParents)} style={{backgroundColor:ColorScheme.defaultColor, border:"transparent"}}>{!showingParents ? "View Parents":"Hide Parents"}</Button>
             {showingParents?
             <>
             <div className="d-flex gap-2 ms-3 mt-3">
-                <div onClick={() => updateIndex(-1)} className="need_hover rounded-circle" style={{width:"40px", height:"40px", backgroundColor:"#46768E", color:"white", textAlign:"center"}}>{"<"}</div>
-                <div onClick={() => updateIndex(1)} className="need_hover rounded-circle" style={{width:"40px", height:"40px", backgroundColor:"#46768E", color:"white", textAlign:"center"}}>{">"}</div>
-                <div>{parentsIndex+1}/{parentsSections.length}</div>
+                <div onClick={() => updateIndex(-1)} className="need_hover rounded-circle" style={{width:"40px", height:"40px", backgroundColor:ColorScheme.defaultColor, color:"white", textAlign:"center"}}>{"<"}</div>
+                <div onClick={() => updateIndex(1)} className="need_hover rounded-circle" style={{width:"40px", height:"40px", backgroundColor:ColorScheme.defaultColor, color:"white", textAlign:"center"}}>{">"}</div>
+                <div>{parentsIndex+1}/{parentsSections.length+1}</div>
             </div>
             <div className="mb-1 ms-3">
                 <div className="d-flex mt-3 p-1" style={{fontWeight:"bold"}}>
@@ -57,13 +61,13 @@ export default function ParentSection(){
                     <div style={{position:"absolute", left: "40vh"}}>Email</div>
                     <div style={{position:"absolute", left: "80vh", paddingRight:"70vh"}}>Phone Number</div>
                 </div>
-                {parentsSections[parentsIndex].map((value: Parent) => (
+                {parentsSections.length > 0 ? parentsSections[parentsIndex].map((value: Parent) => (
                     <div className="d-flex mt-3 p-1">
                         <div>{value.parentname}</div>
                         <div style={{position:"absolute", left: "40vh"}}>{value.email}</div>
                         <div style={{position:"absolute", left: "80vh"}}>{value.phone}</div>
                     </div>
-                ))
+                )):<></>
                 }
             </div></>:<></>
             }

@@ -8,6 +8,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import useMediaQueries from "media-queries-in-react";
+import { ColorScheme } from "../../../style";
 
 type CampboxProps = {
     name: string,
@@ -37,39 +38,12 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
         mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
       });  
     
-    //this function checks whether the coupon is a valid coupon (async because it is fetching data)
-    async function isValidCode(id: number, token: string){
-        const response = await fetch('https://aflkids-backend.onrender.com/checkTokens', { //make a post request with the info in the body. handle in backend
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: id, token: token }),
-        });
-        return response.ok
-    }
 
     // this function handles when all the details are inputted and the user wants to add it to the cart
     async function handleAddingCart(){
         let ID = 0;
-        let day = "";
-        if (couponInput.length > 0){
-            if (selectedOption == "Day One" || selectedOption == "Day Two"){
-                setValidCode(true)
-                setCouponInput("");
-                return;
-            }
-            //chekc whether it is a valid code
-            let isValid = await isValidCode(11, couponInput);
-            if (isValid){ //only check if both days have been selected
-                ID = 17 //change this to be the ID of the new cheap object
-            } else { //not a valid code
-                setValidCode(true)
-                setCouponInput("");
-                return;
-            }
-            //if it is not then exit
-        } else if (selectedOption == "Day One" || selectedOption == "Day Two"){ // check whether a single option has been selected
+        let day = "";  
+        if (selectedOption == "Day One" || selectedOption == "Day Two"){ // check whether a single option has been selected
             ID = 16; // ID of one day
             if (selectedOption == "Day One"){
                 day = "1";
@@ -106,7 +80,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
     const isButtonDisabled = !(childName && childAge && club  && (selectedOption != "Choose Days"));
     
     return(
-        <div className="m-3 pb-4 " style={{backgroundColor:"rgb(70, 118, 142)", fontFamily:"Rubik", borderRadius:"15px", paddingLeft:mediaQueries.mobile?"0px":"30px", paddingRight:mediaQueries.mobile?"10px":"30px"}}>
+        <div className="m-3 pb-4 " style={{backgroundColor:ColorScheme.defaultColor, fontFamily:"Rubik", borderRadius:"15px", paddingLeft:mediaQueries.mobile?"0px":"30px", paddingRight:mediaQueries.mobile?"10px":"30px", color:"white"}}>
             <div className="ps-4 w-10 d-flex justify-content-between" style={{paddingTop:mediaQueries.mobile?"17px":"30px"}}>
                 <div className="text-center d-flex flex-column" style={{width:"50%"}}>
                     <span className="mb-2" style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"15px":"30px", color:"white"}}>{name}</span>

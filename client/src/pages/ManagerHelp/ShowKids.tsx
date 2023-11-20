@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap"
 import { Kids, Child } from "../../types/kidsType"
 import { useState } from "react"
 import "../manager.css"
+import { ColorScheme } from "../../style"
 
 export default function ShowKids({kids}:Kids){
     const [showKids, setShowKids] = useState(false);
@@ -78,7 +79,7 @@ export default function ShowKids({kids}:Kids){
 
     return(
         <>
-            <Button onClick={() => setShowKids(!showKids)} style={{backgroundColor:"#46768E", border:"transparent"}}>{ !showKids? <>Show Kids</>:<>Hide Kids</>}</Button>
+            <Button onClick={() => setShowKids(!showKids)} style={{backgroundColor:ColorScheme.defaultColor, border:"transparent"}}>{ !showKids? <>Show Kids</>:<>Hide Kids</>}</Button>
         { !showKids? <></>:<div className="p-3">
             <div className="d-flex mt-3 p-1" style={{fontWeight:"bold"}}>
                 <div>Name</div>

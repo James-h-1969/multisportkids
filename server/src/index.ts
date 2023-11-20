@@ -1,12 +1,9 @@
 const cors = require("cors");
 const mongoose = require("mongoose");
 import { campController } from "../Controllers/campController";
-import { privateController } from "../Controllers/privateController";
 import { stripeController } from "../Controllers/stripeController";
-import {tokenController} from "../util/randomToken";
 import { managerController } from "../Controllers/managerController";
 import { parentController } from "../Controllers/parentController";
-import { coachController } from "../Controllers/coachController"
 const express = require("express");
 
 //setup server
@@ -17,7 +14,9 @@ app.use(cors({
 
 const PORT = process.env.PORT || 3000;
 
-const db = mongoose.connect(process.env.MONGO_URL!).then(()=>{ //connects the backend to the database at mongo db
+const dbName = "AllSportKids"
+
+const db = mongoose.connect(process.env.MONGO_URL+ dbName!).then(()=>{ //connects the backend to the database at mongo db
     console.log(`Listening on Port: ${PORT}`);
     app.listen(PORT);
 });
@@ -36,13 +35,6 @@ app.post("/updatecampstatus", campController.changeArchive)
 app.post("/deletecamp", campController.deleteCamp)
 app.post("/updatecamp", campController.updateCamp)
 
-// PRIVATE ROUTES //
-app.get("/PrivateTimes", privateController.getCoachTimes);
-app.post("/PrivateTimes", privateController.setCoachTimes);
-
-// TOKEN ROUTES //
-app.post("/checkTokens", tokenController.checkToken);
-
 // STRIPE ROUTES //
 app.post('/create-checkout-session', stripeController.createSession);
 
@@ -53,10 +45,6 @@ app.post('/managercheckpassword', managerController.checkPassword)
 // PARENTS ROUTES //
 app.get("/Parents", parentController.getParents)
 
-// COACH ROUTES //
-app.post("/Coaches", coachController.addCoach)
-app.get("/Coaches", coachController.getCoaches)
-app.post("/deleteCoach", coachController.deleteCoach)
 
 
 

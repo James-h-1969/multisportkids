@@ -1,9 +1,5 @@
 import { Request, Response } from "express";
-const bcrypt = require("bcryptjs");
 import Camp from "../Models/Camp";
-import Coach from "../Models/Coach";
-import generateHashedTokens, {hashedTokensType} from "../util/randomToken";
-import Tokens from "../Models/Tokens";
 import Product from "../Models/Product";
 import { ses, senderEmail } from "../util/emails";
 
@@ -88,66 +84,7 @@ async function addChildToCamp(name:string, id:number, details:Object, index:numb
     }
 }
 
-async function makeTokenForPlan(id:number, customerEmail:string){
-    //create 5 tokens
-    const [hashedTokens, newTokens] = await generateHashedTokens(5, 8);
-    //add them onto corresponding database
-    const typeOfToken = (id == 9) ? "singleTokens":"groupTokens";
-    let filter = { };
-    hashedTokens.forEach(async (token) => {
-        let update = { $push: { [typeOfToken]: token } };
-        const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
-    })  
-    //add them to email details.   
-    const tokenString = newTokens.join(", ");
-    const subject = (id == 9) ? "AFLKIDS 5x 1 on 1 Session Tokens":"AFLKIDS 5x Group Session Tokens";
-    const params = {
-        Destination: {
-            ToAddresses: [customerEmail, "Tomoleary@AFLKids.com.au"]
-        },
-        Message: {
-            Body: {
-                Html: { Data: `Thanks for purchasing! <br /><br />Use these five codes at any point in the next 6 months by inputting when you are booking a session. Keep them and cross off each one as you use it. <br />They are <br /><br />${tokenString}<br /><br /> Thanks, <br />AFLKIDS` }
-            },
-            Subject: { Data: subject }
-        },
-        Source: senderEmail
-    };
 
-    try {
-        const result = await ses.sendEmail(params).promise();
-        console.log(`Email sent to ${customerEmail}. Message ID: ${result.MessageId}`);
-    } catch (error) {
-        console.error(`Error sending email to ${customerEmail}:`, error);
-    }
-}
-
-async function useTokenForPlan(token:string, id:number){
-    const typeOfToken = (id == 14) ? "singleTokens":"groupTokens";
-    
-    let filter = {};
-
-    const allHashedTokens:Array<hashedTokensType> = await Tokens.find();
-    const ActualTokens:hashedTokensType = allHashedTokens[0];
-    let searching = [""];
-
-    if (id == 14){
-        searching = ActualTokens.singleTokens;
-    } else {
-        searching = ActualTokens.groupTokens;
-    }
-    
-    let indexer = 0;
-    for (let i = 0; i < searching.length; i++){
-        let isMatch = await bcrypt.compareSync(token?token:"", searching[i]);
-        if (isMatch){
-            indexer = i;
-        }     
-    }
-
-    const update = { $pull: { [typeOfToken]: searching[indexer] } };
-    const updatedToken = await Tokens.findOneAndUpdate(filter, update, { new:true, runValidators:true});
-}
 
 export const stripeController = {
     createSession: async (req: Request, res: Response) => { //function for handling when a payment session is beginning
@@ -215,10 +152,6 @@ export const stripeController = {
                 while (index < val.details.length){            
                     if (val.id == 11 || val.id == 16 || val.id == 17){ //holiday camp 2 day or 1 day
                         const addingCamp = await addChildToCamp(val.details[index].purchaseName[0], val.id, val.details[index], index, val.details[index].purchaseName[1]);
-                    } else if (val.id == 9 || val.id == 10){ //buying tokens
-                        const makingTokensForPlan = await makeTokenForPlan(val.id, customerEmail);                   
-                    } else if (val.id == 14 || val.id == 15){ //using tokens
-                        const usingTokensForPlan = await useTokenForPlan(val.details[index].purchaseName[3], val.id);
                     }
                     index++;
                     }
@@ -243,7 +176,7 @@ export const stripeController = {
                   Body: {
                       Html: { Data: `${customerEmail} just purchased <br /><br />${theyBought}<br /><br />Good stuff.` }
                   },
-                  Subject: { Data: "AFLKIDS PURCHASE!" }
+                  Subject: { Data: "MULTISPORTKIDS PURCHASE!" }
               },
               Source: senderEmail
             };

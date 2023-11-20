@@ -4,6 +4,7 @@ import { Button, Form } from "react-bootstrap"
 import { useState} from "react"
 import ShowKids from "./ShowKids";
 import { locations } from "../../types/campType";
+import { ColorScheme } from "../../style";
 
 type displayCampType = {
     val: CampType
@@ -53,7 +54,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(newCamp),
           };
 
-        fetch("https://aflkids-backend.onrender.com/updatecamp", requestOptions);
+        fetch("http://localhost:3000/updatecamp", requestOptions);
         location.reload();
 
     }
@@ -131,7 +132,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(update),
         };
 
-        const response = await fetch("https://aflkids-backend.onrender.com/updatecampstatus", requestOptions);
+        const response = await fetch("http://localhost:3000/updatecampstatus", requestOptions);
         if (response.ok){
             console.log("Successfully Update the status of the camp.")
         }
@@ -156,13 +157,12 @@ export default function DisplayCamp({val}: displayCampType) {
     return(
         <div className="p-3 m-3" style={{backgroundColor:"#D3D3D3", borderRadius:"15px"}}>
                     <span style={{fontWeight:"normal", fontFamily:"Rubik", fontSize:"20px"}}>{val.name}</span>
-                    {/* <div className="circle" style={{backgroundColor:"red", position:"absolute", right:"3vw"}} onClick={() => deleteCamp(val.name)}><div className="plus">-</div></div> */}
                     <div style={{ position: "relative", right: "100px", display: "flex", flexDirection: "column", alignItems: "flex-end", justifyContent: "center", height: "100%" }}>
                         <div style={{ fontWeight: "bold", fontSize: "20px" }}>{val.Location}</div>
                         <div style={{ fontWeight: "bold" }}>{val.date}</div>
                         <div>{val.times}</div>
                         <div className="mb-3">{val.ages}</div>
-                        <Button onClick={() => setIsUpdating(true)}style={{backgroundColor:"#46768E", border:"transparent", width:"200px", marginBottom:"20px"}}>Edit</Button>
+                        <Button onClick={() => setIsUpdating(true)}style={{backgroundColor:ColorScheme.defaultColor, border:"transparent", width:"200px", marginBottom:"20px"}}>Edit</Button>
                         <Button className="bg-danger" style={{border:"transparent", width:"200px"}} onClick={() => deleteCamp()}>Delete Camp</Button>
                         { isUpdating ? <div style={{position:"absolute", width:"400px", height:"500px", backgroundColor:"grey", borderRadius:"10px", padding:"20px", zIndex:"100"}}>
             <div className="circle" onClick={() => setIsUpdating(false)}><div className="plus">x</div>
@@ -224,7 +224,7 @@ export default function DisplayCamp({val}: displayCampType) {
                         <div className="pb-1" style={{fontWeight:"bold"}}>
                             Kids: {getChildList(val.kidsDay1, val.kidsDay2).length}
                         </div>
-                        <Button onClick={() => changeArchive(val.name, !val.archived)} style={{marginRight:"20px", backgroundColor:"#46768E", border:"transparent"}}>Change Status</Button>
+                        <Button onClick={() => changeArchive(val.name, !val.archived)} style={{marginRight:"20px", backgroundColor:ColorScheme.defaultColor, border:"transparent"}}>Change Status</Button>
                         <ShowKids kids={getChildList(val.kidsDay1, val.kidsDay2)}/>
                     </div>
     )

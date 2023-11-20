@@ -5,8 +5,8 @@ import { useState, useEffect } from "react"
 import "./manager.css"
 import { CampType } from "../types/campType";
 import DisplayCamp from "./ManagerHelp/DisplayCamp";
-import CoachSection from "./ManagerHelp/CoachSection";
 import ParentSection from "./ManagerHelp/ParentSection";
+import { ColorScheme } from "../style";
 
 export default function Manager(){
     const [camps, setCamps] = useState<CampType[]>([]);
@@ -15,7 +15,7 @@ export default function Manager(){
 
     useEffect(() => {
         async function fetchCamps() {
-          const response = await fetch(`https://aflkids-backend.onrender.com/camps`);
+          const response = await fetch(`http://localhost:3000/camps`);
           const newCamps = await response.json();
           setCamps(newCamps);
         }
@@ -31,7 +31,7 @@ export default function Manager(){
         {isLoggedIn ? <>
         <span className="text-center ps-5 me-5" style={{width:"100vw", fontWeight:"bold", fontFamily:"Rubik", fontSize:"70px"}}>Welcome, Tom O'leary</span>
         <Link to="/">
-            <Button style={{backgroundColor:"#46768E", border:"transparent"}}>Back to AFLKids</Button>
+            <Button style={{backgroundColor:ColorScheme.defaultColor, border:"transparent"}}>Back to MultiSportKids</Button>
         </Link>
 
         <div className="ps-5 pt-3">
@@ -46,15 +46,12 @@ export default function Manager(){
                 ))}
             </div>
             <div>
-                <CoachSection />                
-            </div>  
-            <div>
                 <div className="ps-3"><h1 style={{width:"20vw", fontWeight:"bold", fontFamily:"Rubik", fontSize:"40px"}}>Parents</h1></div>
                 <ParentSection />
             </div>  
         </div></>:<><span className="text-center ps-5 me-5" style={{width:"100vw", fontWeight:"bold", fontFamily:"Rubik", fontSize:"70px"}}>Nice Try</span>
         <Link to="/">
-            <Button style={{backgroundColor:"#46768E", border:"transparent"}}>Back to AFLKids</Button>
+            <Button style={{backgroundColor:ColorScheme.defaultColor, border:"transparent"}}>Back to MultiSportKids</Button>
         </Link></>}
         
         </>
