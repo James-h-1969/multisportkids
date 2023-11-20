@@ -12,8 +12,7 @@ import Manager from './pages/Manager';
 
 
 function App() {
-
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     const isLogged = sessionStorage.getItem('isLoggedin') === 'True';

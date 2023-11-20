@@ -41,9 +41,7 @@ function Home({ manageLogged}:HomeProps){
             <div style={{backgroundColor:"#46768E"}}>
                 <img src={ball} style={{position:"absolute", left:"65%", top:"30vh", width:mediaQueries.mobile?"20%":"", height:mediaQueries.mobile?"7vh":"", zIndex:"100"}}/>
                 <div className="triangle"></div>
-                {/* <HomeQuotes /> */}
                 <HomeDeals />
-                {/* <div className="triangle" style={{backgroundColor:"#46768E"}}></div> */}
             </div>
             <Footer />
             {manageLogged ? 
