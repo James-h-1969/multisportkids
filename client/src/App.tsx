@@ -18,6 +18,7 @@ function App() {
   useEffect(() => {
     const isLogged = sessionStorage.getItem('isLoggedin') === 'True';
     setLoggedIn(isLogged);
+    console.log(isLogged);
   }, []);
 
 
