@@ -11,6 +11,7 @@ type displayCampType = {
 
 export default function DisplayCamp({val}: displayCampType) {
     const [isUpdating, setIsUpdating] = useState(false);
+    const [archived, setIsArchived] = useState(val.archived);
 
     const [newName, setNewName] = useState("");
     const [newcampAgeRange, setnewCampAgeRange] = useState("");
@@ -120,7 +121,7 @@ export default function DisplayCamp({val}: displayCampType) {
 
     async function changeArchive(name: string, archived: boolean){
         const update = {name_: name, archived_:archived}
-
+        setIsArchived(archived);
         const requestOptions: RequestInit = {
             method: 'POST',
             headers: {
@@ -130,9 +131,10 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(update),
         };
 
-        const response = fetch("https://aflkids-backend.onrender.com/updatecampstatus", requestOptions)
-        console.log(response)
-        window.location.reload();
+        const response = await fetch("https://aflkids-backend.onrender.com/updatecampstatus", requestOptions);
+        if (response.ok){
+            console.log("Successfully Update the status of the camp.")
+        }
     }
 
     async function deleteCamp() {
@@ -217,7 +219,7 @@ export default function DisplayCamp({val}: displayCampType) {
                     </div>
                     <div className="d-flex">
                         <div className="pb-1">
-                            {!val.archived ? <div style={{color:"green"}}>Active</div>:<div style={{color:"red"}}>Archived</div>}</div>
+                            {!archived ? <div style={{color:"green"}}>Active</div>:<div style={{color:"red"}}>Archived</div>}</div>
                         </div>
                         <div className="pb-1" style={{fontWeight:"bold"}}>
                             Kids: {getChildList(val.kidsDay1, val.kidsDay2).length}
