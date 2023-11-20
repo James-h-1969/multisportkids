@@ -132,7 +132,7 @@ export default function DisplayCamp({val}: displayCampType) {
 
         const response = fetch("https://aflkids-backend.onrender.com/updatecampstatus", requestOptions)
         console.log(response)
-        location.reload();
+        window.location.reload();
     }
 
     async function deleteCamp() {
