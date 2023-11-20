@@ -47,7 +47,7 @@ function Home({ manageLogged}:HomeProps){
             <div className="d-flex justify-content-center gap-5">
                 <Link to="/manager" className="d-flex justify-content-center gap-5 mb-3" style={{ textDecoration: 'none' }}>
                     <Button style={{ fontWeight: "normal", fontFamily: "Rubik", backgroundColor: ColorScheme.defaultColor, border: "transparent" }}>
-                        Manage AFLKids
+                        Manage MultiSportKids
                     </Button>
                 </Link>
                 <Button onClick={() => logOut()} style={{ fontWeight: "normal", fontFamily: "Rubik", backgroundColor: ColorScheme.defaultColor, border: "transparent", height:"80%" }}>
