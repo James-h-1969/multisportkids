@@ -74,7 +74,8 @@ export default function DisplayCamp({val}: displayCampType) {
                 childClub: child1.childClub || "",
                 day1: true,
                 day2: false,
-                parent: child1.parent 
+                parent: child1.parent,
+                sports: []
             };
     
             kiddies.push(kid);
@@ -91,7 +92,8 @@ export default function DisplayCamp({val}: displayCampType) {
                     childClub: child2.childClub || "",
                     day1: false,
                     day2: true,
-                    parent: child2.parent 
+                    parent: child2.parent,
+                    sports: []
                 };
     
                 kiddies.push(kid);
@@ -110,7 +112,8 @@ export default function DisplayCamp({val}: displayCampType) {
                     childClub: child2.childClub || "",
                     day1: true,
                     day2: true,
-                    parent: child2.parent 
+                    parent: child2.parent,
+                    sports: []
                 };
     
                 kiddies.push(kid);
@@ -149,7 +152,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(update),
         };
 
-        fetch("https://aflkids-backend.onrender.com/deletecamp", requestOptions)
+        fetch("http://localhost:3000/deletecamp", requestOptions)
         location.reload();
     }
 

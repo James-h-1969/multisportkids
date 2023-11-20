@@ -8,6 +8,7 @@ export type Child = {
     day1: boolean,
     day2: boolean,
     parent: Parent
+    sports: Array<string>
 }
  
 export type Kids = { //this is the type of multiple kids together

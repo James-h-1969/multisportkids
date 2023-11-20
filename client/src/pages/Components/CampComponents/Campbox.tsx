@@ -9,6 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import useMediaQueries from "media-queries-in-react";
 import { ColorScheme } from "../../../style";
+import "../../manager.css"
 
 type CampboxProps = {
     name: string,
@@ -31,12 +32,43 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
     const [comments, setComments] = useState('');
     const [selectedOption, setSelectedOption] = useState('Choose Days');
     const [couponInput, setCouponInput] = useState("");
-    const [validCode, setValidCode] = useState(false);
-
+    const [isPressed, setIsPressed] = useState<Array<boolean>>([false, false, false,false, false, false,false, false, false, false]);
 
     const mediaQueries = useMediaQueries({ 
         mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
-      });  
+    }); 
+
+    
+      
+    const sports1 = ["Tennis", "Soccer", "AFL", "Netball", "Cricket"]
+    const sports2 = ["Basketball", "Hockey", "Athletics", "Touch Footy", "Tee ball"]
+
+    const ShowSport: React.FC<{ value: string; index: number }> = ({ value, index }) => {
+        function updatePressed(val:boolean){
+            let newArray = [...isPressed];
+            newArray[index] = val;
+            setIsPressed(newArray);
+        }
+        
+        return(
+            <div className="p-1 need_hover" onClick={() => updatePressed(!isPressed[index])} style={{color:"white", zIndex:"100", backgroundColor:!isPressed[index] ? "rgb(200, 180, 120)":"grey", width:"100px", borderRadius:"10px"}}>
+                {value}
+            </div>
+        )
+    }
+
+    function getSportsThatHaveBeenSelected(){
+        let finalArray = [];
+        for (let i = 0; i < isPressed.length; i++){
+            if (isPressed[i]){
+                if (i < 5){
+                    finalArray.push(sports1[i])
+                } else {
+                    finalArray.push(sports2[i])
+                }
+            }
+        }
+    }
     
 
     // this function handles when all the details are inputted and the user wants to add it to the cart
@@ -59,6 +91,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
             childComments: comments,
             childClub: club,
             purchaseName: [name, day],
+            sports: getSportsThatHaveBeenSelected,
         }
         addToCart(ID, 1, Customdetails);
         location.reload();
@@ -77,7 +110,17 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
     const firstDate = [brokenDate[0], brokenDate.slice(-2).join(" ")].join(" ");
     const secondDate = [brokenDate[2], brokenDate.slice(-2).join(" ")].join(" ");
 
-    const isButtonDisabled = !(childName && childAge && club  && (selectedOption != "Choose Days"));
+    function howManyTrue(){
+        let counter = 0;
+        for (let i = 0; i < isPressed.length; i++){
+            if (isPressed[i]){
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    const isButtonDisabled = !(childName && childAge && club  && (selectedOption != "Choose Days") && howManyTrue() >= 5);
     
     return(
         <div className="m-3 pb-4 " style={{backgroundColor:ColorScheme.defaultColor, fontFamily:"Rubik", borderRadius:"15px", paddingLeft:mediaQueries.mobile?"0px":"30px", paddingRight:mediaQueries.mobile?"10px":"30px", color:"white"}}>
@@ -99,11 +142,7 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                 <div className="d-flex">
                     <div className="p-2" style={{width:"100%"}}>
                         <div className="pb-2 " style={{textAlign:"center", fontSize:mediaQueries.mobile?"10px":"20px", paddingTop:mediaQueries.mobile?"15px":"30px"}}>
-                            Our camps are run by Senior AFL players who have been through the Swans Academy, 
-                            played VFL, play AFLW or play Premier Division AFL. 
-                            We are a tackle free, and we separate players into groups by age and gender to 
-                            ensure skills are being matched. Namely, players from ages 5-8 will split from players aged 9-13
-                            participating in two seperate camps.
+                            
                         </div>
                         <div className="d-flex justify-content-between" style={{marginTop:mediaQueries.mobile?"30px":"50px"}}>
                             <div className="" style={{textAlign:"center", fontSize:mediaQueries.mobile?"10px":"25px"}}>
@@ -184,8 +223,6 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             style={{fontSize:mediaQueries.mobile?"5px":"15px"}}
                                         />
                                         </Form.Group>
-                                        {/*This will show a warning if an incorrect code is inputted */}
-                                        {validCode ? <a style={{color:"red"}}>Please input a valid code</a>:<></>}
                                         {!mediaQueries.mobile?<>
                                         <div className="mt-5 d-flex justify-content-around">
                                             <div>
@@ -208,6 +245,19 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                             <Dropdown.Item eventKey="Day One">Day One ({firstDate})</Dropdown.Item>
                                             <Dropdown.Item eventKey="Day Two">Day Two ({secondDate})</Dropdown.Item>
                                         </DropdownButton></>:<></>}
+                                        <div className="mt-3">
+                                        Select which sports your kid would like to play (Must choose at least 5)
+                                        </div>
+                                        <div className="d-flex justify-content-between mt-3 mb-3">
+                                            {sports1.map((value: string, index) => (
+                                                <ShowSport key={index} value={value} index={index} />
+                                            ))}
+                                        </div>
+                                        <div className="d-flex justify-content-between mt-3 mb-3">
+                                            {sports2.map((value: string, index) => (
+                                                <ShowSport key={index} value={value} index={index+5} />
+                                            ))}
+                                        </div>
                                         <Button
                                             className="mt-3"
                                             style={{ backgroundColor: "white", color: "black", width: "100%", fontSize:mediaQueries.mobile?"10px":'30px' }}

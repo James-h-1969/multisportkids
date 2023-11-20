@@ -14,6 +14,7 @@ type details = {
     childComments: string,
     childClub: string,
     purchaseName: string
+    sports: Array<string>
 }
 
 interface CartItem {
@@ -29,7 +30,7 @@ export function Cart({isOpen}:CartProps){
 
     async function handleCheckoutButton(){
         closeCart();
-        fetch('https://aflkids-backend.onrender.com/create-checkout-session', {
+        fetch('http://localhost:3000/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
