@@ -30,7 +30,7 @@ function App() {
           <Route path="/finished" element={<Success />} />
           <Route path="/camps" element={<Camps />} />
           <Route path="/private" element={<Private />} />
-          {loggedIn ? <Route path="/manager" element={<Manager />} /> : null}
+          <Route path="/manager" element={<Manager />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </CartProvider>

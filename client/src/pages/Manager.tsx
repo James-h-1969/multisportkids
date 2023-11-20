@@ -13,6 +13,7 @@ import ParentSection from "./ManagerHelp/ParentSection";
 export default function Manager(){
     const [camps, setCamps] = useState<CampType[]>([]);
     const [showingAddCamp, setshowingAddCamp] = useState(false);
+    const [isLogged, setIsLogged] = useState(false);
 
     useEffect(() => {
         async function fetchCamps() {
@@ -21,11 +22,16 @@ export default function Manager(){
           setCamps(newCamps);
         }
         fetchCamps();
+        const isLoggedIn = sessionStorage.getItem('isLoggedin') === 'True';
+        setIsLogged(isLoggedIn);
       }, [])
 
 
     
     return(
+
+        <>
+        { isLogged ? 
         <>
         <span className="text-center ps-5 me-5" style={{width:"100vw", fontWeight:"bold", fontFamily:"Rubik", fontSize:"70px"}}>Welcome, Tom O'leary</span>
         <Link to="/">
@@ -51,6 +57,10 @@ export default function Manager(){
                 <ParentSection />
             </div>  
         </div>
+        </>:<><span className="text-center ps-5 me-5" style={{width:"100vw", fontWeight:"bold", fontFamily:"Rubik", fontSize:"70px"}}>Nice Try</span>
+        <Link to="/">
+            <Button style={{backgroundColor:"#46768E", border:"transparent"}}>Back to AFLKids</Button>
+        </Link></>}
         </>
     )
 }
