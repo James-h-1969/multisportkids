@@ -1,5 +1,6 @@
 import { Form, Button } from "react-bootstrap";
 import { useState } from "react";
+import { ColorScheme } from "../../style";
 
 
 export default function ManagerLogin(){
@@ -59,7 +60,7 @@ export default function ManagerLogin(){
                     style={{fontSize:"15px"}}
                     />
                 </Form.Group>
-                <Button type="submit" style={{fontWeight:"normal", fontFamily:"Rubik", backgroundColor:"#46768E", border:"transparent", width:"300px"}}>Login</Button>
+                <Button type="submit" style={{fontWeight:"normal", fontFamily:"Rubik", backgroundColor:ColorScheme.defaultColor, border:"transparent", width:"300px"}}>Login</Button>
             </Form>    
             { incorrect ?
             <div className="d-flex justify-content-center mb-5 gap-5" style={{color:"red"}}>
