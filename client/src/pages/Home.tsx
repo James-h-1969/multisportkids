@@ -30,16 +30,15 @@ function Home({ manageLogged}:HomeProps){
         <>
             <NavBar />
             <div className="ps-3" style={{marginTop:"110px", marginLeft:mediaQueries.mobile?"0px":"30px"}}>
-                <h1><span className="mt-5" style={{fontSize:mediaQueries.mobile?"30px":"70px", fontWeight:"bold", fontFamily:"Rubik"}}>Helping kids reach their{!mediaQueries.mobile?<br />:<></>} full <span style={{color:"#46768E"}}>AFL</span> potential</span></h1>
+                <h1><span className="mt-5" style={{fontSize:mediaQueries.mobile?"30px":"70px", fontWeight:"bold", fontFamily:"Rubik"}}>Delivering quality Holiday Camps{!mediaQueries.mobile?<br />:<></>} for <span style={{color:"#46768E"}}>Kids</span></span></h1>
             </div>
             <div className="ps-3">
-                <a><span className="" style={{fontSize:mediaQueries.mobile?"20px":"30px", paddingLeft:mediaQueries.mobile?"0px":"30px", fontWeight:"bold", fontFamily:"Rubik"}}>AFL Holiday Camps, classes, and personal coaching</span></a>
+                <a><span className="" style={{fontSize:mediaQueries.mobile?"20px":"30px", paddingLeft:mediaQueries.mobile?"0px":"30px", fontWeight:"bold", fontFamily:"Rubik"}}>Fun, safe environment to learn sport</span></a>
             </div>
-            <Link to="/private" className="mb-5 ms-3" style={{paddingLeft:mediaQueries.mobile?"0px":"30px"}}>
+            <Link to="/camps" className="mb-5 ms-3" style={{paddingLeft:mediaQueries.mobile?"0px":"30px"}}>
                 <Button className="mt-3" size={mediaQueries.mobile?"sm":"lg"} style={{backgroundColor:"#46768E", border:"transparent", fontWeight:"bold"}}>Book now</Button>
             </Link>
             <div style={{backgroundColor:"#46768E"}}>
-                <img src={ball} style={{position:"absolute", left:"65%", top:"30vh", width:mediaQueries.mobile?"20%":"", height:mediaQueries.mobile?"7vh":"", zIndex:"100"}}/>
                 <div className="triangle"></div>
                 <HomeDeals />
             </div>

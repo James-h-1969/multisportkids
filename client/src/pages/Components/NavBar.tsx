@@ -26,10 +26,7 @@ export default function NavBar() {
             <Nav className="ms-auto">
               <Nav.Link className="nav-link-custom" href="/">Home</Nav.Link>
               <Nav.Link className="nav-link-custom" href="/camps">Holiday Camps</Nav.Link>
-              <Nav.Link className="nav-link-custom" href="/private">Private Coaching</Nav.Link>
-              {/* <Nav.Link className="nav-link-custom" href="/development">Academy Preparation</Nav.Link> */}
-              {/* <Nav.Link className="nav-link-custom" href="/merch">Merch</Nav.Link> */}
-              <Nav.Link className="nav-link-custom" href="/contact">Our Team</Nav.Link>
+              {/* <Nav.Link className="nav-link-custom" href="/contact">Our Team</Nav.Link> */}
             </Nav>
           </Navbar.Collapse>
           { (cartQuantity > 0) ? 
@@ -94,10 +91,10 @@ export default function NavBar() {
         <Nav className="ms-auto" style={{fontSize:"12px", border:"3px solid light grey"}}>
               <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/">Home</Nav.Link>
               <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/camps">Holiday Camps</Nav.Link>
-              <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/private">Private Coaching</Nav.Link>
+              {/* <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/private">Private Coaching</Nav.Link> */}
               {/* <Nav.Link className="nav-link-custom" href="/development">Academy Preparation</Nav.Link> */}
-              <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/merch">Merch</Nav.Link>
-              <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/contact">Our Team</Nav.Link>
+              {/* <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/merch">Merch</Nav.Link> */}
+              {/* <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/contact">Our Team</Nav.Link> */}
           </Nav>
       </Navbar.Collapse>
     </Navbar>
