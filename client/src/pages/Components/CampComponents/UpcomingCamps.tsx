@@ -21,7 +21,7 @@ function UpcomingCamps() {
   
   useEffect(() => {
     async function fetchCamps() {
-      const response = await fetch(`http://localhost:3000/camps`);
+      const response = await fetch(`https://multisportkids-backend.onrender.com/camps`);
       const newCamps = await response.json();
       let activeCamps: CampType[] = [];
       for (let i = 0; i < newCamps.length; i++){ //only show the camps that havnt been archived
@@ -33,8 +33,6 @@ function UpcomingCamps() {
     }
     fetchCamps();
   }, [])
-
-  //"https://aflkids-backend.onrender.com/camps";
 
 
   const mediaQueries = useMediaQueries({ 

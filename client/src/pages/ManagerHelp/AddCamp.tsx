@@ -45,7 +45,7 @@ export default function AddCamp({setShowingAddCamp}:AddCampProps){
             body: JSON.stringify(newCamp),
           };
 
-        fetch("http://localhost:3000/camps", requestOptions)
+        fetch("https://multisportkids-backend.onrender.com/camps", requestOptions)
 
         location.reload();
     }

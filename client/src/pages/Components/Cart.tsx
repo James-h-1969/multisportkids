@@ -30,7 +30,7 @@ export function Cart({isOpen}:CartProps){
 
     async function handleCheckoutButton(){
         closeCart();
-        fetch('http://localhost:3000/create-checkout-session', {
+        fetch('https://multisportkids-backend.onrender.com/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

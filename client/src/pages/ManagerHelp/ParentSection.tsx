@@ -13,7 +13,7 @@ export default function ParentSection(){
 
     useEffect(() => {
         async function fetchParents() {
-          const response = await fetch(`http://localhost:3000/Parents`);
+          const response = await fetch(`https://multisportkids-backend.onrender.com/Parents`);
           const parents = await response.json();
           if (parents.length === 0){
             return

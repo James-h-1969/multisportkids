@@ -37,7 +37,7 @@ export default function ManagerLogin(){
             body: JSON.stringify(passBody),
           };
 
-        const response = await fetch("http://localhost:3000/managercheckpassword", requestOptions);
+        const response = await fetch("https://multisportkids-backend.onrender.com/managercheckpassword", requestOptions);
         if (response.ok){
             console.log("Correct Password");
             sessionStorage.setItem('isLoggedin', "True");

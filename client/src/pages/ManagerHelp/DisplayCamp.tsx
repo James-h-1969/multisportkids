@@ -54,7 +54,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(newCamp),
           };
 
-        fetch("http://localhost:3000/updatecamp", requestOptions);
+        fetch("https://multisportkids-backend.onrender.com/updatecamp", requestOptions);
         location.reload();
 
     }
@@ -135,7 +135,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(update),
         };
 
-        const response = await fetch("http://localhost:3000/updatecampstatus", requestOptions);
+        const response = await fetch("https://multisportkids-backend.onrender.com/updatecampstatus", requestOptions);
         if (response.ok){
             console.log("Successfully Update the status of the camp.")
         }
@@ -152,7 +152,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(update),
         };
 
-        fetch("http://localhost:3000/deletecamp", requestOptions)
+        fetch("https://multisportkids-backend.onrender.com/deletecamp", requestOptions)
         location.reload();
     }
 

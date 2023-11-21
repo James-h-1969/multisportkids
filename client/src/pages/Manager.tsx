@@ -15,7 +15,7 @@ export default function Manager(){
 
     useEffect(() => {
         async function fetchCamps() {
-          const response = await fetch(`http://localhost:3000/camps`);
+          const response = await fetch(`https://multisportkids-backend.onrender.com/camps`);
           const newCamps = await response.json();
           setCamps(newCamps);
         }
