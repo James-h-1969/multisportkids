@@ -1,7 +1,6 @@
 import Camps from './pages/Camps';
 import Home from './pages/Home';
 import { Route, Routes } from 'react-router-dom';
-import Contact from './pages/Contact';
 import { CartProvider } from './pages/context/cartContext';
 import Success from './pages/Success';
 import { useState, useEffect } from 'react';
