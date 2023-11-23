@@ -43,7 +43,6 @@
     position: absolute;
     height: 0;
     width: 0;
-    border-top: 200px solid white;
     border-right: 98.5vw solid transparent;
     z-index: 10;
 }

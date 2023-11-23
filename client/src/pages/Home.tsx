@@ -35,8 +35,9 @@ function Home({ manageLogged}:HomeProps){
 
     // Initialize the variable with the current viewport width
     viewportWidth = window.innerWidth;
+    const height = mediaQueries.mobile? 70:200
 
-    const angle = Math.atan(200/viewportWidth) * 180 / Math.PI;
+    const angle = Math.atan(height/viewportWidth) * 180 / Math.PI;
 
     return (
         <>
@@ -45,18 +46,18 @@ function Home({ manageLogged}:HomeProps){
             <div className="ps-3" style={{marginTop:"110px", marginLeft:mediaQueries.mobile?"0px":"30px"}}>
                 <h1><span className="mt-5" style={{fontSize:mediaQueries.mobile?"30px":"70px", fontWeight:"bold", fontFamily:"Rubik", color:ColorScheme.defaultColor}}>Discover, Play, Grow - <br /> </span><span style={{fontSize:mediaQueries.mobile?"30px":"70px", fontWeight:"bold", fontFamily:"Rubik", color:ColorScheme.secondaryColor}}>Where champions are born!</span></h1>
             </div>
-            <div className="ps-5">
+            <div className="" style={{paddingLeft:mediaQueries.mobile?"1rem":"5rem"}}>
                 <a><span className="" style={{fontSize:mediaQueries.mobile?"20px":"30px", fontWeight:"bold", fontFamily:"Rubik"}}>Fun, safe environment to learn sport and meet new friends.< br/> For all ages and abilities!</span></a>
             </div>
             <Link to="/camps" className="mb-5 ms-3" style={{paddingLeft:mediaQueries.mobile?"0px":"30px"}}>
                 <Button className="mt-3" size={mediaQueries.mobile?"sm":"lg"} style={{backgroundColor:ColorScheme.defaultColor, border:"transparent", fontWeight:"bold"}}>Book now</Button>
             </Link>
             <div style={{backgroundColor:ColorScheme.defaultColor}}>
-                <div style={{ transform: `rotate(-${angle}deg)`, position: "absolute", left: "5%", top: "57vh", zIndex: "100", fontWeight:"bold", fontSize:"35px" }}>
+                <div style={{ transform: `rotate(-${angle}deg)`, position: "absolute", left: "5%", top: mediaQueries.mobile?"40vh":"57vh", zIndex: "100", fontWeight:"bold", fontSize:mediaQueries.mobile?"10px":"35px" }}>
                     <span style={{color:ColorScheme.secondaryColor}}>10 different Sports</span> <span style={{color:ColorScheme.defaultColor}}>|</span> <span style={{color:ColorScheme.secondaryColor}}>Elite Level Coaches</span> <span style={{color:ColorScheme.defaultColor}}>|</span> <span style={{color:ColorScheme.secondaryColor}}>Improve motor Skills</span> <span style={{color:ColorScheme.defaultColor}}>|</span> <span style={{color:ColorScheme.secondaryColor}}>In-depth reports</span>
                 </div>
 
-                <div className="triangle"></div>
+                <div className="triangle" style={{borderTop: mediaQueries.mobile?"70px solid white":"200px solid white"}}></div>
                 <HomeDeals />
             </div>
             <ConFooter />
