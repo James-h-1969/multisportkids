@@ -22,12 +22,16 @@ type Locations = {
 };
 
 export const locations: Locations = {
-    "Weldon": {
+    "Weldon Oval": {
         address: "Curl Curl, 2099",
         locPic: "/assets/weldon.png"
     }, 
-    "Gore Hill": {
+    "Gore Hill Oval": {
         address: "St Leonards, 2065",
         locPic: "/assets/gore.png"
-    }
+    },
+    "Naremburn Oval": {
+        address: "Naremburn, 2065",
+        locPic: "/assets/naremburn.png"
+    }   
 }

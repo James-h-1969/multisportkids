@@ -1,7 +1,7 @@
 //IMPORTS
 import { Container, Nav, Navbar, Image, Button } from "react-bootstrap";
 import "./Components.css";
-import logo from "/assets/allsportkids.png";
+import logo from "/assets/allsportkidsLogo.jpeg";
 import { useCart } from "../context/cartContext";
 import useMediaQueries from "media-queries-in-react";
 import { Link } from "react-router-dom";
@@ -26,6 +26,7 @@ export default function NavBar() {
             <Nav className="ms-auto">
               <Nav.Link className="nav-link-custom" href="/">Home</Nav.Link>
               <Nav.Link className="nav-link-custom" href="/camps">Holiday Camps</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="/sports">Our Sports</Nav.Link>
               {/* <Nav.Link className="nav-link-custom" href="/contact">Our Team</Nav.Link> */}
             </Nav>
           </Navbar.Collapse>
@@ -91,6 +92,7 @@ export default function NavBar() {
         <Nav className="ms-auto" style={{fontSize:"12px", border:"3px solid light grey"}}>
               <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/">Home</Nav.Link>
               <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/camps">Holiday Camps</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="/sports">Our Sports</Nav.Link>
               {/* <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/private">Private Coaching</Nav.Link> */}
               {/* <Nav.Link className="nav-link-custom" href="/development">Academy Preparation</Nav.Link> */}
               {/* <Nav.Link className="nav-link-custom" style={{padding:"10px"}} href="/merch">Merch</Nav.Link> */}

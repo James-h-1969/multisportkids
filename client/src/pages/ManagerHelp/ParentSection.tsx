@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Parent } from "../../types/parentType"
 import { Button } from "react-bootstrap";
 import "../manager.css"
-import { ColorScheme } from "../../style";
+import { ColorScheme, backendLink } from "../../globalVar";
 
 
 export default function ParentSection(){
@@ -13,7 +13,7 @@ export default function ParentSection(){
 
     useEffect(() => {
         async function fetchParents() {
-          const response = await fetch(`https://multisportkids-backend.onrender.com/Parents`);
+          const response = await fetch(`${backendLink}/Parents`);
           const parents = await response.json();
           if (parents.length === 0){
             return

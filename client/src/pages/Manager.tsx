@@ -6,7 +6,7 @@ import "./manager.css"
 import { CampType } from "../types/campType";
 import DisplayCamp from "./ManagerHelp/DisplayCamp";
 import ParentSection from "./ManagerHelp/ParentSection";
-import { ColorScheme } from "../style";
+import { ColorScheme, backendLink } from "../globalVar";
 
 export default function Manager(){
     const [camps, setCamps] = useState<CampType[]>([]);
@@ -15,7 +15,7 @@ export default function Manager(){
 
     useEffect(() => {
         async function fetchCamps() {
-          const response = await fetch(`https://multisportkids-backend.onrender.com/camps`);
+          const response = await fetch(`${backendLink}/camps`);
           const newCamps = await response.json();
           setCamps(newCamps);
         }

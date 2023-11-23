@@ -1,6 +1,6 @@
 import { Form, Button } from "react-bootstrap";
 import { useState } from "react";
-import { ColorScheme } from "../../style";
+import { ColorScheme, backendLink } from "../../globalVar";
 
 
 export default function ManagerLogin(){
@@ -37,7 +37,7 @@ export default function ManagerLogin(){
             body: JSON.stringify(passBody),
           };
 
-        const response = await fetch("https://multisportkids-backend.onrender.com/managercheckpassword", requestOptions);
+        const response = await fetch(`${backendLink}/managercheckpassword`, requestOptions);
         if (response.ok){
             console.log("Correct Password");
             sessionStorage.setItem('isLoggedin', "True");

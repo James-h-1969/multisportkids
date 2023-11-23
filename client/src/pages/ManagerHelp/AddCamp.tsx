@@ -1,6 +1,11 @@
 import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import { locations } from "../../types/campType";
+import { backendLink } from "../../globalVar";
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import useMediaQueries from "media-queries-in-react";
 
 type AddCampProps = {
     setShowingAddCamp: (showing: boolean) => void
@@ -13,6 +18,10 @@ export default function AddCamp({setShowingAddCamp}:AddCampProps){
     const [campDate, setCampDate] = useState("");
     const [campTimes, setCampTimes] = useState("");
     const [campLocation, setCampLocation] = useState("");
+
+    const mediaQueries = useMediaQueries({ 
+        mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
+    }); 
 
     async function addTheCamp(e:React.FormEvent<HTMLFormElement>){        
         e.preventDefault()
@@ -45,10 +54,16 @@ export default function AddCamp({setShowingAddCamp}:AddCampProps){
             body: JSON.stringify(newCamp),
           };
 
-        fetch("https://multisportkids-backend.onrender.com/camps", requestOptions)
+        fetch(`${backendLink}/camps`, requestOptions)
 
         location.reload();
     }
+
+    const handleOptionSelect = (eventKey: string | null) => {
+        if (eventKey) {
+          setCampLocation(eventKey);
+        }
+      };
 
     return(
         <div className="p-3" style={{position:"absolute", width:"400px", height:"500px", backgroundColor:"grey", borderRadius:"15px", left:"30vw", zIndex:'100'}}>
@@ -93,15 +108,18 @@ export default function AddCamp({setShowingAddCamp}:AddCampProps){
                     style={{fontSize:"15px"}}
                     />
                 </Form.Group>
-                <Form.Group className="d-flex mb-3" controlId="formBasicPassword">
-                    <Form.Label style={{ width: "60%", marginRight:"20px",fontWeight:"normal", fontFamily:"Rubik" }}>Camp Location</Form.Label>
-                    <Form.Control
-                    placeholder="Enter Camp Location (Weldon/Gore)"
-                    value={campLocation}
-                    onChange={(e) => setCampLocation(e.target.value)}
-                    style={{fontSize:"15px"}}
-                    />
-                </Form.Group>
+                Select Location
+                <DropdownButton
+                    as={ButtonGroup}
+                    size={mediaQueries.mobile?"sm":"lg"}
+                    title={campLocation}
+                    onSelect={handleOptionSelect}
+                    variant="secondary"
+                    style = {{width:mediaQueries.mobile?"20%":'100%', paddingTop:"20px", marginBottom:"20px"}}
+                >
+                    <Dropdown.Item eventKey="Weldon Oval">Weldon Oval</Dropdown.Item>
+                    <Dropdown.Item eventKey="Naremburn Oval">Naremburn Oval</Dropdown.Item>
+                </DropdownButton>
                 <Button type="submit">Add Camp</Button>
             </Form>
         </div>

@@ -5,6 +5,7 @@ import { CartProvider } from './pages/context/cartContext';
 import Success from './pages/Success';
 import { useState, useEffect } from 'react';
 import Manager from './pages/Manager';
+import Sports from './pages/Sports';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/finished" element={<Success />} />
           <Route path="/camps" element={<Camps />} />
           <Route path="/manager" element={<Manager />} />
+          <Route path="/sports" element={<Sports />} />
           {/* <Route path="/contact" element={<Contact />} /> */}
         </Routes>
       </CartProvider>

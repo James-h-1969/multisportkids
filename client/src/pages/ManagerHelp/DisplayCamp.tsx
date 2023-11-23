@@ -4,7 +4,7 @@ import { Button, Form } from "react-bootstrap"
 import { useState} from "react"
 import ShowKids from "./ShowKids";
 import { locations } from "../../types/campType";
-import { ColorScheme } from "../../style";
+import { ColorScheme, backendLink } from "../../globalVar";
 
 type displayCampType = {
     val: CampType
@@ -54,7 +54,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(newCamp),
           };
 
-        fetch("https://multisportkids-backend.onrender.com/updatecamp", requestOptions);
+        fetch(`${backendLink}updatecamp`, requestOptions);
         location.reload();
 
     }
@@ -75,7 +75,6 @@ export default function DisplayCamp({val}: displayCampType) {
                 day1: true,
                 day2: false,
                 parent: child1.parent,
-                sports: []
             };
     
             kiddies.push(kid);
@@ -93,7 +92,6 @@ export default function DisplayCamp({val}: displayCampType) {
                     day1: false,
                     day2: true,
                     parent: child2.parent,
-                    sports: []
                 };
     
                 kiddies.push(kid);
@@ -113,7 +111,6 @@ export default function DisplayCamp({val}: displayCampType) {
                     day1: true,
                     day2: true,
                     parent: child2.parent,
-                    sports: []
                 };
     
                 kiddies.push(kid);
@@ -135,7 +132,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(update),
         };
 
-        const response = await fetch("https://multisportkids-backend.onrender.com/updatecampstatus", requestOptions);
+        const response = await fetch(`${backendLink}/updatecampstatus`, requestOptions);
         if (response.ok){
             console.log("Successfully Update the status of the camp.")
         }
@@ -152,7 +149,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(update),
         };
 
-        fetch("https://multisportkids-backend.onrender.com/deletecamp", requestOptions)
+        fetch(`${backendLink}/deletecamp`, requestOptions)
         location.reload();
     }
 

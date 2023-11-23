@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap"
 import { Kids, Child } from "../../types/kidsType"
 import { useState } from "react"
 import "../manager.css"
-import { ColorScheme } from "../../style"
+import { ColorScheme } from "../../globalVar"
 
 export default function ShowKids({kids}:Kids){
     const [showKids, setShowKids] = useState(false);

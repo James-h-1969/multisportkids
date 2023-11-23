@@ -1,6 +1,6 @@
 import useMediaQueries from "media-queries-in-react";
 import campPhoto from "/assets/CampPhotos/IMG_2368.jpg"
-import { ColorScheme } from "../../../style";
+import { ColorScheme } from "../../../globalVar";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./home.css"
@@ -14,20 +14,20 @@ function HomeDeals(){
 
     
       return (
-        <div style={{ height: "100vh", marginBottom: "100px", position: "relative" }}>
-          <div style={{ backgroundColor: ColorScheme.defaultColor, width: "100%", position: "absolute", zIndex: 6, opacity: 0.5,  height:"100vh" }}></div>
+        <div style={{ height: "80vh", marginBottom: "100px", position: "relative" }}>
+          <div style={{ backgroundColor: ColorScheme.defaultColor, width: "100%", position: "absolute", zIndex: 6, opacity: 0.7,  height:"80vh" }}></div>
           <div style={{ overflow: "hidden" }}>
-            <img src={campPhoto} style={{ width: "98.5vw", zIndex: 5, position: "absolute", height:"100vh"}} alt="Camp Photo" />
+            <img src={campPhoto} style={{ width: "98.5vw", zIndex: 5, position: "absolute", height:"80vh"}} alt="Camp Photo" />
           </div>
           <div className="d-flex justify-content-start">
-            <div className="d-flex flex-column" style={{ width: "300px", zIndex: 30, marginTop:"300px", marginLeft:"100px" }}>
-              <div className="linkbox">
+            <div className="d-flex flex-column ps-5" style={{ width: "300px", zIndex: 30, marginTop:"240px", marginLeft:"120px" }}>
+              <div className="linkbox" >
                 <Link to={"/camps"}>
-                    <img src={campPhoto} style={{ width: "400px", paddingBottom:"30px" }} alt="Camp Photo" />
+                    <img src={campPhoto} style={{ width: "300px", paddingBottom:"30px" }} alt="Camp Photo" />
                 </Link>
               </div>
             </div>
-            <div className="" style={{ zIndex: 30, marginTop:"350px", marginLeft:"200px", paddingRight:"100px" }}>
+            <div className="" style={{ zIndex: 30, marginTop:"230px", marginLeft:"200px", paddingRight:"100px" }}>
                 <span style={{fontSize:"60px", fontWeight:"bold", fontFamily:"Rubik", color:"white"}}>Holiday Camps<br /></span>
                 <span style={{fontSize:"30px", fontWeight:"normal", fontFamily:"Rubik", color:"white"}}>
                     Experience the ultimate holiday camps for kids!  Join us for fun-filled days of skill development, teamwork, and excitement in a safe and supportive environment. 
