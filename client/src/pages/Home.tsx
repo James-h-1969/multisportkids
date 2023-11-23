@@ -46,7 +46,7 @@ function Home({ manageLogged}:HomeProps){
             <div className="ps-3" style={{marginTop:"110px", marginLeft:mediaQueries.mobile?"0px":"30px"}}>
                 <h1><span className="mt-5" style={{fontSize:mediaQueries.mobile?"30px":"70px", fontWeight:"bold", fontFamily:"Rubik", color:ColorScheme.defaultColor}}>Discover, Play, Grow - <br /> </span><span style={{fontSize:mediaQueries.mobile?"30px":"70px", fontWeight:"bold", fontFamily:"Rubik", color:ColorScheme.secondaryColor}}>Where champions are born!</span></h1>
             </div>
-            <div className="" style={{paddingLeft:mediaQueries.mobile?"1rem":"5rem"}}>
+            <div className="" style={{paddingLeft:mediaQueries.mobile?"1rem":"3rem"}}>
                 <a><span className="" style={{fontSize:mediaQueries.mobile?"20px":"30px", fontWeight:"bold", fontFamily:"Rubik"}}>Fun, safe environment to learn sport and meet new friends.< br/> For all ages and abilities!</span></a>
             </div>
             <Link to="/camps" className="mb-5 ms-3" style={{paddingLeft:mediaQueries.mobile?"0px":"30px"}}>
