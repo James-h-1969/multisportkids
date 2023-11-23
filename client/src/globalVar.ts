@@ -5,5 +5,5 @@ export const ColorScheme = {
 }
 
 // LINKS
-export const backendLink = "http://localhost:3000" // if doing dev work
-// export const backendLink = "https://multisportkids-backend.onrender.com" // if live
+// export const backendLink = "http://localhost:3000" // if doing dev work
+export const backendLink = "https://multisportkids-backend.onrender.com" // if live
