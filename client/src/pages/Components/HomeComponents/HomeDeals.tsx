@@ -14,10 +14,10 @@ function HomeDeals(){
 
     
       return (
-        <div style={{ height: mediaQueries.mobile?"300px":"80vh", marginBottom: mediaQueries.mobile?"40px":"100px", position: "relative" }}>
-          <div style={{ backgroundColor: ColorScheme.defaultColor, width: "100%", position: "absolute", zIndex: 6, opacity: 0.7,  height:mediaQueries.mobile?"300px":"80vh" }}></div>
+        <div style={{ height: mediaQueries.mobile?"270px":"80vh", marginBottom: mediaQueries.mobile?"40px":"100px", position: "relative" }}>
+          <div style={{ backgroundColor: ColorScheme.defaultColor, width: "100%", position: "absolute", zIndex: 6, opacity: 0.7,  height:mediaQueries.mobile?"270px":"80vh" }}></div>
           <div style={{ overflow: "hidden" }}>
-            <img src={campPhoto} style={{ width: "98.5vw", zIndex: 5, position: "absolute", height:mediaQueries.mobile?"300px":"80vh"}} alt="Camp Photo" />
+            <img src={campPhoto} style={{ width: "98.5vw", zIndex: 5, position: "absolute", height:mediaQueries.mobile?"270px":"80vh"}} alt="Camp Photo" />
           </div>
           <div className="d-flex justify-content-start">
             <div className="d-flex flex-column" style={{ width:mediaQueries.mobile?"120px": "300px", zIndex: 30, marginTop:mediaQueries.mobile?"100px":"240px", marginLeft:mediaQueries.mobile?"2rem":"5rem" }}>

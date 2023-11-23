@@ -9,7 +9,7 @@ export default function ConFooter() {
         mobile: "(max-width: 768px)", // Adjust max-width for mobile screens
     }); 
     return(
-        <div className="d-flex justify-content-center gap-5 pb-5" style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"2vw":"30px", width:"100vw"}}>
+        <div className="d-flex justify-content-center gap-5" style={{fontWeight:"bold", fontSize:mediaQueries.mobile?"2.5vw":"30px", width:"100vw"}}>
             <div><Envelope />Tomoleary@allsportkids.com.au</div>
             <div><Telephone />+61 448 408 920</div>
             <Link to="https://www.instagram.com/allsportkids_/"><Image src="/assets/instagram.png" style={{width:mediaQueries.mobile?"20px":"50px", height:mediaQueries.mobile?"20px":"50px"}}/></Link>

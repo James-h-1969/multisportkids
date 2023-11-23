@@ -56,11 +56,11 @@ function Home({ manageLogged}:HomeProps){
             <div
                 style={{
                 position: 'absolute',
-                left: '5%',
+                left: '2%',
                 transform: `rotate(-${angle}deg)`,
                 zIndex: '100',
                 fontWeight: 'bold',
-                fontSize: mediaQueries.mobile ? '10px' : '35px',
+                fontSize: mediaQueries.mobile ? '2.5vw' : '35px',
                 color: ColorScheme.secondaryColor,
                 }}
             >
