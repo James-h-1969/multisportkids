@@ -1,7 +1,7 @@
 //IMPORTS
 import { Container, Nav, Navbar, Image, Button } from "react-bootstrap";
 import "./Components.css";
-import logo from "/assets/allsportkidsLogo.jpeg";
+import logo from "/assets/SocialMedia/allsportkidsLogo.jpeg";
 import { useCart } from "../context/cartContext";
 import useMediaQueries from "media-queries-in-react";
 import { Link } from "react-router-dom";

@@ -9,7 +9,7 @@ const express = require("express");
 //setup server
 const app = express();
 app.use(cors({
-    origin: process.env.FRONT_URL //this will be the site name so that only it can access the API
+    origin: [process.env.FRONT_URL_RENDER, process.env.FRONT_URL_DOMAIN] //this will be the site name so that only it can access the API
 }));
 
 const PORT = process.env.PORT || 3000;

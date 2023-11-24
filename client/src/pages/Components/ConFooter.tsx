@@ -12,7 +12,7 @@ export default function ConFooter() {
         <div className="d-flex justify-content-center" style={{fontWeight:"bold", gap:mediaQueries.mobile?"1rem":"5rem", fontSize:mediaQueries.mobile?"2.5vw":"30px", width:"100vw", marginBottom:mediaQueries.mobile?"0px":"50px"}}>
             <div><Envelope />Tomoleary@allsportkids.com.au</div>
             <div><Telephone />+61 448 408 920</div>
-            <Link to="https://www.instagram.com/allsportkids_/"><Image src="/assets/instagram.png" style={{width:mediaQueries.mobile?"20px":"50px", height:mediaQueries.mobile?"20px":"50px"}}/></Link>
+            <Link to="https://www.instagram.com/allsportkids_/"><Image src="/assets/SocialMedia/instagram.png" style={{width:mediaQueries.mobile?"20px":"50px", height:mediaQueries.mobile?"20px":"50px"}}/></Link>
             {/* <Link to=""><Image src="/assets/facebook.png" style={{width:"50px", height:"50px"}}/></Link> */}
         </div>
     )

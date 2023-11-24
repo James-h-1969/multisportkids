@@ -21,17 +21,18 @@ type Locations = {
     [key: string]: Location; // Index signature allowing any string as key
 };
 
+// TO ADD: ACCRON OVAL
 export const locations: Locations = {
     "Weldon Oval": {
         address: "Curl Curl, 2099",
-        locPic: "/assets/weldon.png"
+        locPic: "/assets/Locations/weldon.png"
     }, 
     "Gore Hill Oval": {
         address: "St Leonards, 2065",
-        locPic: "/assets/gore.png"
+        locPic: "/assets/Locations/gore.png"
     },
     "Naremburn Oval": {
         address: "Naremburn, 2065",
-        locPic: "/assets/naremburn.png"
+        locPic: "/assets/Locations/naremburn.png"
     }   
 }

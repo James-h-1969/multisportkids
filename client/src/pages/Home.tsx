@@ -36,8 +36,9 @@ function Home({ manageLogged}:HomeProps){
     // Initialize the variable with the current viewport width
     viewportWidth = window.innerWidth;
     const height = mediaQueries.mobile? 70:200
-
     const angle = Math.atan(height/viewportWidth) * 180 / Math.PI;
+
+    // FIND SOME WAY OF MAKING THE TEXT FIT INTO A CERTAIN LENGTH
 
     return (
         <>
