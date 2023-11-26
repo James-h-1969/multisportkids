@@ -41,12 +41,12 @@ const storeItems = new Map([
     [8, { priceInCents: 23000, name: "6 on 1 Private"}],
     [9, { priceInCents: 37500, name: "1 on 1 Private Plan"}],
     [10, { priceInCents: 50000, name: "Group Private Plan"}],
-    [11, { priceInCents: 15000, name: "Holiday Camp"}], 
+    [11, { priceInCents: 12500, name: "Holiday Camp"}], 
     [12, { priceInCents: 4000, name: "1 Academy Prep Session"}],
     [13, { priceInCents: 13000, name: "4 Academy Prep Sessions"}],
     [14, { priceInCents: 50, name: "1 on 1 Private (Plan)"}],
     [15, { priceInCents: 50, name: "Group Private (Plan)"}],
-    [16, { priceInCents: 10000, name: "Holiday Camp (1 day)"}], 
+    [16, { priceInCents: 8000, name: "Holiday Camp (1 day)"}], 
     [17, { priceInCents: 5500, name:"Discounted Camp"}]
 ])
 

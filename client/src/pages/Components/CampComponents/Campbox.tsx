@@ -183,10 +183,10 @@ function Campbox ({name, Location, ages, date, times, Price, address, locPic, in
                                         {!mediaQueries.mobile?<>
                                         <div className="mt-5 d-flex justify-content-around">
                                             <div>
-                                            Both Days<br/><span style={{fontSize:mediaQueries.mobile?"20px":"50px"}}>$150</span>
+                                            Both Days<br/><span style={{fontSize:mediaQueries.mobile?"20px":"50px"}}>$125</span>
                                             </div>
                                             <div>
-                                                One Day<br/><span style={{fontSize:mediaQueries.mobile?"20px":"50px"}}>$100</span>
+                                                One Day<br/><span style={{fontSize:mediaQueries.mobile?"20px":"50px"}}>$80</span>
                                             </div>
                                         </div>
                                         Select which days you want to join (Select both for the full experience)
