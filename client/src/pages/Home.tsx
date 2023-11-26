@@ -70,6 +70,21 @@ function Home({ manageLogged}:HomeProps){
 
             <div className="triangle" style={{ borderTop: mediaQueries.mobile ? '70px solid white' : '200px solid white' }}></div>
             <HomeDeals />
+            <div className="d-flex justify-content-center ps-5 pe-5 mt-5 mb-5">
+                <div>
+                    "At AllSport Kids, our mission is to ignite a passion for sports and physical 
+                    activity in children aged 4-11. By experiencing and discover a wide range of sports, 
+                    children develop gross motor skills and coordination to benefit their future. Our program 
+                    is developed and coached by athletes that have excelled in their field aged 19-22, providing 
+                    a fresh perspective on their sport. We have found that children respond well to young 
+                    adults and see coaches as a positive mentor. Following the camp we will provide personalised 
+                    reports to help parents understand their child's strengthens and enjoyment in various sports. 
+                    The report will also include potential clubs for registration and their details. These sports 
+                    include Soccer, Touch, Basketball, Cricket, Netball, AFL, Tennis, Athletics, Tee Ball and Hockey.
+                     AllSport Kids offers an exciting opportunity for young learners to engage in physical activity,
+                      develop new skills, and make lasting friendships." - Tom O'leary, Head Coach
+                </div>
+            </div>
             </div>
             <ConFooter />
             {!mediaQueries.mobile && (
