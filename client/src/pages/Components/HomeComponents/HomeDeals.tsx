@@ -14,10 +14,10 @@ function HomeDeals(){
 
     
       return (
-        <div style={{ height: mediaQueries.mobile?"270px":"80vh", marginBottom: mediaQueries.mobile?"40px":"100px", position: "relative" }}>
-          <div style={{ backgroundColor: ColorScheme.defaultColor, width: "100%", position: "absolute", zIndex: 6, opacity: 0.7,  height:mediaQueries.mobile?"270px":"80vh" }}></div>
+        <div style={{ height: mediaQueries.mobile?"270px":"100vh", marginBottom: mediaQueries.mobile?"40px":"100px", position: "relative" }}>
+          <div style={{ backgroundColor: ColorScheme.defaultColor, width: "100%", position: "absolute", zIndex: 6, opacity: 0.7,  height:mediaQueries.mobile?"270px":"100vh" }}></div>
           <div style={{ overflow: "hidden" }}>
-            <img src={campPhoto} style={{ width: "98.5vw", zIndex: 5, position: "absolute", height:mediaQueries.mobile?"270px":"80vh"}} alt="Camp Photo" />
+            <img src={campPhoto} style={{ width: "98.5vw", zIndex: 5, position: "absolute", height:mediaQueries.mobile?"270px":"100vh"}} alt="Camp Photo" />
           </div>
           <div className="d-flex justify-content-start">
             <div className="d-flex flex-column" style={{ width:mediaQueries.mobile?"120px": "300px", zIndex: 30, marginTop:mediaQueries.mobile?"100px":"240px", marginLeft:mediaQueries.mobile?"2rem":"5rem" }}>
@@ -37,6 +37,21 @@ function HomeDeals(){
                   </Link>
             </div>
           </div>
+            <div className="d-flex justify-content-center ps-5 pe-5 mt-5 mb-5" style={{color:"white", fontSize:"20px", fontWeight:"bold"}}>
+                <div>
+                    "At AllSport Kids, our mission is to ignite a passion for sports and physical 
+                    activity in children aged 4-11. By experiencing and discover a wide range of sports, 
+                    children develop gross motor skills and coordination to benefit their future. Our program 
+                    is developed and coached by athletes that have excelled in their field aged 19-22, providing 
+                    a fresh perspective on their sport. We have found that children respond well to young 
+                    adults and see coaches as a positive mentor. Following the camp we will provide personalised 
+                    reports to help parents understand their child's strengthens and enjoyment in various sports. 
+                    The report will also include potential clubs for registration and their details. These sports 
+                    include Soccer, Touch, Basketball, Cricket, Netball, AFL, Tennis, Athletics, Tee Ball and Hockey.
+                     AllSport Kids offers an exciting opportunity for young learners to engage in physical activity,
+                      develop new skills, and make lasting friendships." - Tom O'leary, Head Coach
+                </div>
+            </div>
         </div>
       );
 }
