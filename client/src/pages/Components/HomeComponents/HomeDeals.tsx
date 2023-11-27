@@ -36,8 +36,7 @@ function HomeDeals(){
                       <Button className="mt-3" size={mediaQueries.mobile?"sm":"lg"} style={{color:ColorScheme.defaultColor, backgroundColor:"white", border:"transparent", fontWeight:"bold", fontSize:mediaQueries.mobile?"10px":""}}>View Upcoming Camps</Button>
                   </Link>
             </div>
-          </div>
-            <div className="d-flex justify-content-center ps-5 pe-5 mt-5 mb-5" style={{color:"white", fontSize:"20px", fontWeight:"bold"}}>
+              <div className="d-flex justify-content-center ps-5 pe-5 mt-5 mb-5" style={{color:"white", fontSize:"20px", fontWeight:"bold"}}>
                 <div>
                     "At AllSport Kids, our mission is to ignite a passion for sports and physical 
                     activity in children aged 4-11. By experiencing and discover a wide range of sports, 
@@ -52,6 +51,7 @@ function HomeDeals(){
                       develop new skills, and make lasting friendships." - Tom O'leary, Head Coach
                 </div>
             </div>
+          </div>
         </div>
       );
 }
