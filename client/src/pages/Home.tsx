@@ -8,6 +8,8 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import ConFooter from "./Components/ConFooter";
 
+const FONT_SIZE_DIVIDER = 650;
+
 
 
 
@@ -38,7 +40,7 @@ function Home({ manageLogged}:HomeProps){
     const height = mediaQueries.mobile? 70:200
     const angle = Math.atan(height/viewportWidth) * 180 / Math.PI;
 
-    // FIND SOME WAY OF MAKING THE TEXT FIT INTO A CERTAIN LENGTH
+    const fontSize: number = viewportWidth / FONT_SIZE_DIVIDER;
 
     return (
         <>
@@ -61,7 +63,7 @@ function Home({ manageLogged}:HomeProps){
                 transform: `rotate(-${angle}deg)`,
                 zIndex: '100',
                 fontWeight: 'bold',
-                fontSize: mediaQueries.mobile ? '2.5vw' : '35px',
+                fontSize: mediaQueries.mobile? "2.5vw":`${fontSize}vw`,
                 color: ColorScheme.secondaryColor,
                 }}
             >

@@ -54,7 +54,7 @@ export default function DisplayCamp({val}: displayCampType) {
             body: JSON.stringify(newCamp),
           };
 
-        fetch(`${backendLink}updatecamp`, requestOptions);
+        fetch(`${backendLink}/updatecamp`, requestOptions);
         location.reload();
 
     }
@@ -136,6 +136,7 @@ export default function DisplayCamp({val}: displayCampType) {
         if (response.ok){
             console.log("Successfully Update the status of the camp.")
         }
+        location.reload();
     }
 
     async function deleteCamp() {
